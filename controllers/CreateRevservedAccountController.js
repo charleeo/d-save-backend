@@ -1,0 +1,61 @@
+const axios = require('axios')
+const models = require('../models');
+const authenticateGateWay = require('../middleware/authenticate_gateway')
+const winston = require('winston')
+async function createAReserveAccount(req, res){
+  try{
+  let token = await authenticateGateWay.authenticateGateWay();
+ 
+  const config = {
+    headers: {
+      'Content-type':'application/json',
+       Authorization: `Bearer ${token}` }
+};
+
+const userInfo = await models.User.findOne({where:{id:req.userData.userId}});
+
+
+// Check if this user already has a reserved accoutn
+const checkUserAccount = await models.reserved_account.findOne({where:{userId:userInfo.id}});
+
+if(checkUserAccount){
+  return res.status(400).json({
+    Message:"You can't have more than one reserved account"
+  })
+}
+//check ends here
+const contractCode= process.env.MONNIFY_CONTRACT_CODE
+const {
+  accountReference,accountName,currencyCode,customerBvn
+}=req.body; /** This is from input elements */
+
+/** Include the user details in the request body */
+const bodyParams ={
+  accountReference,accountName,currencyCode,contractCode,customerBvn,customerName:userInfo.name, customerEmail:userInfo.email
+}
+
+/** Make axios call to the payment gateway to create the account for the loogin user */
+  const  response= await axios.post( 
+    `/bank-transfer/reserved-accounts`, bodyParams,config
+   )
+
+   /** destructure the callback response from the gateway and include them in the items to save */
+   const {bankName, bankCode, status,accountNumber,collectionChannel,reservationReference} = response.data.responseBody;
+   
+   const itemsToSave = {
+     accountReference,accountName,currencyCode,contractCode,customerBvn,userId:userInfo.id,bankName,bankCode,status, accountNumber,collectionChannel,reservationReference
+    }
+   /** Save the response to my database */
+   const postData = new models.reserved_account(itemsToSave)
+   await postData.save();
+   return res.status(201).json({Message:"Account created successfully",
+   Result:itemsToSave})
+  } catch (error) {
+    console.log(error)
+    res.status(400).json(error)
+  }
+}
+
+module.exports={
+  createAReserveAccount
+}

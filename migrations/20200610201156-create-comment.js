@@ -12,7 +12,13 @@ module.exports = {
         type: Sequelize.TEXT
       },
       postId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {         // User belongsTo Company 1:1
+          model: 'Posts',
+          key: 'id',
+        },
+        onDelete:"CASCADE",
+        onUpdate:'NO ACTION',
       },
       userId: {
         type: Sequelize.INTEGER

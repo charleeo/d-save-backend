@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     userId: DataTypes.INTEGER
   }, {});
   Post.associate = function(models) {
-    // associations can be defined here
+    Post.belongsTo(models.Category, {foreignKey: 'categoryId', as: 'category'})
   };
   return Post;
 };
