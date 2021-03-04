@@ -16,7 +16,10 @@
     "operatorsAliases": 0
   },
   "production": {
-  
+    "username": "ohflmewockxjsn",
+    "password": "password",
+    "database": "d78ke3hoo7m2u1",
+    "host": "3.84.230.64",
       "use_env_variable": "DATABASE_URL",
       "dialect": "postgres",
         "dialectOptions": {
