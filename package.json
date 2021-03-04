@@ -27,13 +27,13 @@
     "multer": "^1.4.2",
     "mysql2": "^2.1.0",
     "nodemailer": "^6.4.18",
-    "nodemon": "^2.0.6",
     "sequelize": "^5.22.3",
+    "sequelize-cli": "^6.2.0",
     "underscore": "^1.12.0",
     "winston": "^3.3.3"
   },
   "devDependencies": {
-    "sequelize-cli": "^6.2.0"
+    "nodemon": "^2.0.6"
   },
   "engines": {
     "node": "14.16.0"
