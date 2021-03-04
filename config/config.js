@@ -29,7 +29,7 @@ const config ={
     // host: db_host,
     // dialect: "mysql",
     // operatorsAliases: 0
-    user_env_variable = db_url
+    use_env_variable = db_url
   }
 }
 module.exports=config
