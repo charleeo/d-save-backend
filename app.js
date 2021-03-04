@@ -17,6 +17,9 @@ app.use(bodyParser.urlencoded({limit: '200mb', extended: true}));
 app.use('/uploads', express.static('uploads'));
 app.use(express.static('public'));
 
+app.get('/',(req,res)=>{
+  res.send("Hello Word")
+})
 app.use("/posts", postsRoute);
 app.use("/user", userRoute);
 app.use("/comments", commentsRoute);
