@@ -4,8 +4,13 @@
   "description": "Mobile wallet built with node and mysql",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "db:migrate:dev": "sequelize db:migrate --env development",
+    "db:migrate:test": "sequelize db:migrate --env test",
+    "db:migrate:production": "sequelize db:migrate --env production",
+    "db:reset": "sequelize db:migrate:undo",
+    "start": "SET NODE_ENV=production && babel-watch server/server.js",
+    "dev": "SET NODE_ENV=development && nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Charles Otaru",
   "license": "ISC",
