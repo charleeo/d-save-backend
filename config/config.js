@@ -4,6 +4,7 @@ const db_username = process.env.DB_USERNAME
 const db_password = process.env.DB_PASSWORD
 const db_database = process.env.DB_DATABASE
 const db_host = process.env.DB_HOST
+db_url = process.env.DATABAE_URL
 const config ={
   development: {
     username: "root",
@@ -22,12 +23,13 @@ const config ={
     operatorsAliases: 0
   },
   production: {
-    username: db_username,
-    password: db_password,
-    database: db_database,
-    host: db_host,
-    dialect: "mysql",
-    operatorsAliases: 0
+    // username: db_username,
+    // password: db_password,
+    // database: db_database,
+    // host: db_host,
+    // dialect: "mysql",
+    // operatorsAliases: 0
+    user_env_variable = db_url
   }
 }
 module.exports=config
