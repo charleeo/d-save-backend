@@ -2,6 +2,7 @@ const axios = require('axios')
 const models = require('../models');
 const authenticateGateWay = require('../middleware/authenticate_gateway')
 const winston = require('winston')
+const randomString = require('../helpers/random_string');
 async function createAReserveAccount(req, res){
   try{
   let token = await authenticateGateWay.authenticateGateWay();
@@ -25,13 +26,13 @@ if(checkUserAccount){
 }
 //check ends here
 const contractCode= process.env.MONNIFY_CONTRACT_CODE
-const {
-  accountReference,accountName,currencyCode,customerBvn
-}=req.body; /** This is from input elements */
+const {  accountName,currencyCode,customerBvn}=req.body; /** This is from input elements */
+
+
 
 /** Include the user details in the request body */
 const bodyParams ={
-  accountReference,accountName,currencyCode,contractCode,customerBvn,customerName:userInfo.name, customerEmail:userInfo.email
+  accountReference:randomString.randomString(),accountName,currencyCode,contractCode,customerBvn,customerName:userInfo.name, customerEmail:userInfo.email
 }
 
 /** Make axios call to the payment gateway to create the account for the loogin user */

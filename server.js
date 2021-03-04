@@ -7,7 +7,8 @@ require('dotenv').config();
 const port = process.env.PORT;
 const server = http.createServer(app);
 
+
 server.listen(port, ()=>{
-  winston.info(`Listening on port ${port}`)
+  winston.info(`Listening on port ${port} `)
 });
 
