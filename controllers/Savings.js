@@ -2,7 +2,7 @@ const Models = require("../models")
 const winston = require('winston')
 const fsPromises = require('fs').promises
 const crypto = require('crypto');
-const { string } = require("joi");
+const sha512= require('js-sha512')
 
 async function receivePayment(req,res){
   const data = req.body;
@@ -20,9 +20,10 @@ async function receivePayment(req,res){
 
 // create hahs
 
-const hash = crypto.createHash('sha512')
-hash.update(stringValue)
+// const hash = crypto.createHash('sha512')
+// hash.update(stringValue)
 // const value = hash.digest('hex')
+const hash = sha512(stringValue);
 winston.info(hash)
 
 }
