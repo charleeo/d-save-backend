@@ -19,7 +19,8 @@ async function receivePayment(req,res){
     key = process.env.MONNIFY_SECRET_KEY
 
 // create hahs
-const hash = crypto.createHmac('sha512', key)
+
+const hash = crypto.createHash('sha512')
 hash.update(stringValue)
 const value = hash.digest('hex')
 winston.info(value)
