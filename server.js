@@ -8,7 +8,8 @@ const port = process.env.PORT;
 const server = http.createServer(app);
 
 
-server.listen(port, ()=>{
+server.listen(port, async ()=>{
+  
   winston.info(`Listening on port ${port} `)
 });
 

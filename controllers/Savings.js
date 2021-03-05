@@ -1,15 +1,11 @@
 const Models = require("../models")
 const winston = require('winston')
-
-const fs  = require('fs');
+const fsPromises = require('fs').promises
 
 async function receivePayment(req,res){
-
-const data = new Uint8Array(Buffer.from(req.body));
-fs.writeFile('savings.txt', data, (err) => {
-  if (err) throw err;
-  winston.info('The file has been saved!');
-});
+  const data = req.body;
+  
+  await fsPromises.writeFile('file.txt', `${data}`)
 }
 
 module.exports= {receivePayment}
