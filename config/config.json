@@ -16,15 +16,13 @@
     "operatorsAliases": 0
   },
   "production": {
-    "username": "ohflmewockxjsn",
-    "password": "password",
-    "database": "d78ke3hoo7m2u1",
-    "host": "3.84.230.64",
-      "use_env_variable": "DATABASE_URL",
-      "dialect": "postgres",
-        "dialectOptions": {
-            "ssl": false
-        }
+    "username": "be0514ac117056",
+    "password": "78b17671",
+    "database": "heroku_5852b14fa4907db",
+    "host": "us-cdbr-east-03.cleardb.com",
+    "use_env_variable": "DATABASE_URL",
+    "dialect": "mysql",
+    "operatorsAliases": 0
 
   }
 }
