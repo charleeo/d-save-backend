@@ -41,10 +41,10 @@ const bodyParams ={
    )
 
    /** destructure the callback response from the gateway and include them in the items to save */
-   const {bankName, bankCode, status,accountNumber,collectionChannel,reservationReference} = response.data.responseBody;
+   const {bankName, bankCode, status,accountNumber,collectionChannel,accountReference} = response.data.responseBody;
    
    const itemsToSave = {
-     accountReference,accountName,currencyCode,contractCode,customerBvn,userId:userInfo.id,bankName,bankCode,status, accountNumber,collectionChannel,reservationReference
+     accountReference,accountName,currencyCode,contractCode,customerBvn,userId:userInfo.id,bankName,bankCode,status, accountNumber,collectionChannel
     }
    /** Save the response to my database */
    const postData = new models.reserved_account(itemsToSave)
