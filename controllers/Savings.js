@@ -14,7 +14,7 @@ async function receivePayment(req,res){
   const amountPaid = data.amountPaid
   const paidOn = data.paidOn
   const clientSecret = process.env.MONNIFY_SECRET_KEY
-  const stringValue=`${clientSecret}|${paymentReference}|${amountPaid}|${paidOn}|${transactionReference}`
+  const stringValue=`${{clientSecret}}|${{paymentReference}}|${{amountPaid}}|${{paidOn}}|${{transactionReference}}`
   // await fsPromises.writeFile('file.txt', `${data}`)
     key = process.env.MONNIFY_SECRET_KEY
 
