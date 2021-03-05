@@ -1,12 +1,14 @@
 const Models = require("../models")
 const winston = require('winston')
-fs = require('fs')
+
+import { writeFile } from 'fs';
 
 async function receivePayment(req,res){
- const responseBody= req.body
- fs.writeFile('response.txt', responseBody, function (err) {
+
+const data = new Uint8Array(Buffer.from(req.body));
+writeFile('savings.txt', data, (err) => {
   if (err) throw err;
-  winston.info(responseBody);
+  winston.info('The file has been saved!');
 });
 }
 
