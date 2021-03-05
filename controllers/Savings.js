@@ -22,8 +22,8 @@ async function receivePayment(req,res){
 
 const hash = crypto.createHash('sha512')
 hash.update(stringValue)
-const value = hash.digest('hex')
-winston.info(value)
+// const value = hash.digest('hex')
+winston.info(hash)
 
 }
 // 3000023360 
