@@ -4,7 +4,7 @@ fs = require('fs')
 
 async function receivePayment(req,res){
  const responseBody= req.body
- fs.writeFile('response.json', responseBody, function (err) {
+ fs.writeFile('response.txt', responseBody, function (err) {
   if (err) throw err;
   winston.info(responseBody);
 });
