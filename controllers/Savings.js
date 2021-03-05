@@ -1,7 +1,7 @@
 const Models = require("../models")
 const winston = require('winston')
 
-import { writeFile } from 'fs';
+const { writeFile } = require('fs');
 
 async function receivePayment(req,res){
 
