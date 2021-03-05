@@ -4,10 +4,11 @@ const fsPromises = require('fs').promises
 
 async function receivePayment(req,res){
   const data = req.body;
-  winston.info({AccountDetails:data.accountDetails})
+  winston.info({data})
   winston.info({AccountPayments:data.accountPayments})
-  await fsPromises.writeFile('file.txt', `${data}`)
+  // `${clientSecret}|${paymentReference}|${amountPaid}|${paidOn}|${transactionReference}`
+  // await fsPromises.writeFile('file.txt', `${data}`)
 }
-3000023360 
+// 3000023360 
 
 module.exports= {receivePayment}
