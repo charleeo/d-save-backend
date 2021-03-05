@@ -7,7 +7,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       }),
-      queryInterface.addColumn('reserved_accounts','accountNumber ',{
+      queryInterface.addColumn('reserved_accounts','accountNumber',{
         type:Sequelize.STRING,
         allowNull:true
       }),
