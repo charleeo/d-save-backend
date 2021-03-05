@@ -7,7 +7,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       }),
-      queryInterface.addColumn('reserved_accounts','accountNumber',{
+      queryInterface.addColumn('reserved_accounts','accountNumber ',{
         type:Sequelize.STRING,
         allowNull:true
       }),
@@ -15,7 +15,7 @@ module.exports = {
         type:Sequelize.STRING,
         allowNull:true
       }),
-      queryInterface.addColumn('reserved_accounts','collectionChanell',{
+      queryInterface.addColumn('reserved_accounts','collectionChannel',{
         type:Sequelize.STRING,
         allowNull:true
       }),
@@ -41,7 +41,7 @@ module.exports = {
       queryInterface.removeColumn('reserved_accounts', 'status'),
       queryInterface.removeColumn('reserved_accounts', 'accountNumber'),
       queryInterface.removeColumn('reserved_accounts', 'bankCode'),
-      queryInterface.removeColumn('reserved_accounts', 'collectionChanell'),
+      queryInterface.removeColumn('reserved_accounts', 'collectionChannel'),
       queryInterface.removeColumn('reserved_accounts', 'reservationReference'),
       
     ]);
