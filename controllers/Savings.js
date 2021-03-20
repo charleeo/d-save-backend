@@ -4,35 +4,31 @@ const crypto = require('crypto')
 require('dotenv').config()
 
 const createHash= async(body,key)=>{
-  console.log(body)
   const {transactionReference,amountPaid,paymentReference,paidOn}=body;
   const text=`${key}|${paymentReference}|${amountPaid}|${paidOn}|${transactionReference}`;
   const hash = crypto.createHash('sha512',key).update(text).digest('hex');
   return hash;
-  
 }
 
 async function receivePayment(req,res){
   const postData = req.body;
+  const key = process.env.MONNIFY_PASSWORD
+  const paymentReference = postData.paymentReference
+  const amountPaid = postData.amountPaid
+  const paidOn  = postData.paidOn
+  const transactionReference = postData.transactionReference
+ const transactionHash = postData.transactionHash
+  const text=`${key}|${paymentReference}|${amountPaid}|${paidOn}|${transactionReference}`
+  const hash = crypto.createHash('sha512',key).update(text).digest('hex');
 
-  const clientSecret = process.env.MONNIFY_PASSWORD
-  console.log(clientSecret)
+//  const hashedString=createHash(postData,clientSecret)
+//  const transactionHash = postData.transactionHash;
 
-//   const paymentReference = postData.paymentReference
-//   const amountPaid = postData.amountPaid
-//   const paidOn  = postData.paidOn
-//   const transactionReference = postData.transactionReference
-//  const transactionHash = postData.transactionHash
-//   const myStringToBeHashed=`${clientSecret}|${paymentReference}|${amountPaid}|${paidOn}|${transactionReference}`
-
- const hashedString=createHash(postData,clientSecret)
- const transactionHash = postData.transactionHash;
  if(crypto.timingSafeEqual(hashedString,transactionHash)){
    winston.info('Continue')
  }else{
    winston.info("The strings do not match")
  }
-
 }
 
 module.exports= {receivePayment}
