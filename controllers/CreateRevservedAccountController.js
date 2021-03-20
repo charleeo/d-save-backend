@@ -2,7 +2,6 @@ const axios = require('axios')
 const models = require('../models');
 const authenticateGateWay = require('../middleware/authenticate_gateway')
 const winston = require('winston')
-const randomString = require('../helpers/random_string');
 async function createAReserveAccount(req, res){
   try{
   let token = await authenticateGateWay.authenticateGateWay();
@@ -26,13 +25,13 @@ if(checkUserAccount){
 }
 //check ends here
 const contractCode= process.env.MONNIFY_CONTRACT_CODE
-const {  accountName,currencyCode,customerBvn}=req.body; /** This is from input elements */
-
-
+const {
+  accountReference,accountName,currencyCode,customerBvn
+}=req.body; /** This is from input elements */
 
 /** Include the user details in the request body */
 const bodyParams ={
-  accountReference:randomString.randomString(),accountName,currencyCode,contractCode,customerBvn,customerName:userInfo.name, customerEmail:userInfo.email
+  accountReference,accountName,currencyCode,contractCode,customerBvn,customerName:userInfo.name, customerEmail:userInfo.email
 }
 
 /** Make axios call to the payment gateway to create the account for the loogin user */
@@ -41,10 +40,10 @@ const bodyParams ={
    )
 
    /** destructure the callback response from the gateway and include them in the items to save */
-   const {bankName, bankCode, status,accountNumber,collectionChannel,accountReference} = response.data.responseBody;
+   const {bankName, bankCode, status,accountNumber,collectionChannel,reservationReference} = response.data.responseBody;
    
    const itemsToSave = {
-     accountReference,accountName,currencyCode,contractCode,customerBvn,userId:userInfo.id,bankName,bankCode,status, accountNumber,collectionChannel
+     accountReference,accountName,currencyCode,contractCode,customerBvn,userId:userInfo.id,bankName,bankCode,status, accountNumber,collectionChannel,reservationReference
     }
    /** Save the response to my database */
    const postData = new models.reserved_account(itemsToSave)

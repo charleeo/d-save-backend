@@ -1,4 +1,3 @@
-
 const winston = require('winston')
 
 const http = require('http');
@@ -7,9 +6,7 @@ require('dotenv').config();
 const port = process.env.PORT;
 const server = http.createServer(app);
 
-
-server.listen(port, async ()=>{
-  
-  winston.info(`Listening on port ${port} `)
+server.listen(port, ()=>{
+  winston.info(`Listening on port ${port}`)
 });
 
