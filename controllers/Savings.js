@@ -1,6 +1,7 @@
 const Models = require("../models")
 const winston = require('winston')
 const crypto = require('crypto')
+const authenticateGateWay=require('../middleware/authenticate_gateway')
 require('dotenv').config()
 
 const createHash= async(body,key)=>{
