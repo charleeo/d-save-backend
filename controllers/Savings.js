@@ -21,7 +21,7 @@ async function receivePayment(req,res){
   // const text=`${key}|${paymentReference}|${amountPaid}|${paidOn}|${transactionReference}`
   // const hash = crypto.createHash('sha512',key).update(text).digest('hex');
 
-   const hash= createHash(postData,key)
+   const hash= await createHash(postData,key)
   const newTransactionHash= Buffer.from(transactionHash)
   const hashed = Buffer.from(hash)
 
