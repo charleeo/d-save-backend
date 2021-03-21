@@ -7,7 +7,8 @@ const createHash= async(body,key)=>{
   const {transactionReference,amountPaid,paymentReference,paidOn}=body;
   const text=`${key}|${paymentReference}|${amountPaid}|${paidOn}|${transactionReference}`;
   const hash = crypto.createHash('sha512',key).update(text).digest('hex');
-  return hash;
+  const hashed = Buffer.from(hash)
+  return hashed;
 }
 
 async function receivePayment(req,res){
@@ -21,12 +22,11 @@ async function receivePayment(req,res){
   // const text=`${key}|${paymentReference}|${amountPaid}|${paidOn}|${transactionReference}`
   // const hash = crypto.createHash('sha512',key).update(text).digest('hex');
 
-   const hash= await createHash(postData,key)
   const newTransactionHash= Buffer.from(transactionHash)
-  const hashed = Buffer.from(hash)
+   const hash= await createHash(postData,key)
 
- if(crypto.timingSafeEqual(hashed,newTransactionHash)){
-   winston.info('Continue')
+ if(crypto.timingSafeEqual(hash,newTransactionHash)){
+   winston.info('Continue from here')
  }else{
    winston.info("The strings do not match")
  }
