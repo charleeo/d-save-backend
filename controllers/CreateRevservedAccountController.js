@@ -6,7 +6,6 @@ const {randomString}= require('../helpers/random_string')
 async function createAReserveAccount(req, res){
   try{
   let token = await authenticateGateWay.authenticateGateWay();
- 
   const config = {
     headers: {
       'Content-type':'application/json',

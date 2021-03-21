@@ -19,7 +19,19 @@ async function receivePayment(req,res){
   const hash= await createHash(postData,key)//calculated here
 
  if(crypto.timingSafeEqual(hash,transactionHash)){//check for equality
-  GET: https://sandbox.monnify.com/api/v2/transactions/{{transactionReference}}
+
+ const endpoint= `https://sandbox.monnify.com/api/v2/transactions/{${postData.transactionReference}}`
+
+ let token = await authenticateGateWay.authenticateGateWay();
+  const config = {
+    headers: {
+      'Content-type':'application/json',
+       Authorization: `Bearer ${token}` }
+};
+
+const  transactionStatus= await axios.get(endpoint,config)
+winston.info(transactionStatus);
+
    winston.info('Continue from here')
    return;
  }else{
