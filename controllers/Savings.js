@@ -14,19 +14,11 @@ const createHash= async(body,key)=>{
 async function receivePayment(req,res){
   const postData = req.body;
   const key = process.env.MONNIFY_PASSWORD
-  const transactionHash = postData.transactionHash
-  // const paymentReference = postData.paymentReference
-  // const amountPaid = postData.amountPaid
-  // const paidOn  = postData.paidOn
-  // const transactionReference = postData.transactionReference
-  // const text=`${key}|${paymentReference}|${amountPaid}|${paidOn}|${transactionReference}`
-  // const hash = crypto.createHash('sha512',key).update(text).digest('hex');
-
-  const newTransactionHash= Buffer.from(transactionHash)
-   const hash= await createHash(postData,key)
-
- if(crypto.timingSafeEqual(hash,newTransactionHash)){
+  const transactionHash =  Buffer.from(postData.transactionHash)//from the gate way
+  const hash= await createHash(postData,key)//calculated here
+ if(crypto.timingSafeEqual(hash,transactionHash)){
    winston.info('Continue from here')
+   return;
  }else{
    winston.info("The strings do not match")
  }
