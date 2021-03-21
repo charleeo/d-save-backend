@@ -32,7 +32,7 @@ async function receivePayment(req,res){
 };
 
 const  transactionStatus= await axios.get(endpoint,config)
-winston.info(transactionStatus);
+winston.info(transactionStatus.responseBody);
 
    winston.info('Continue from here')
    return;
