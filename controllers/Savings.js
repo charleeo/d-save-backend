@@ -32,8 +32,12 @@ async function receivePayment(req,res){
 };
 
 const  transactionStatus= await axios.get(endpoint,config)
-winston.info(transactionStatus.responseBody);
 
+
+const {responseMessage,requestSuccessfull}= transactionStatus
+if(requestSuccessfull ===true && responseMessage==='success'){
+  winston.info('The transaction status is ok')
+}
    winston.info('Continue from here')
    return;
  }else{
