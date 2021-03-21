@@ -13,7 +13,7 @@ const createHash= async(body,key)=>{
 
 async function receivePayment(req,res){
   const postData = req.body;
-  winston.log(postData)
+  winston.info(postData)
   const key = process.env.MONNIFY_PASSWORD
   const transactionHash =  Buffer.from(postData.transactionHash)//from the gate way
   const hash= await createHash(postData,key)//calculated here
