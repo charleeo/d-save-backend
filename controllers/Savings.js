@@ -21,13 +21,13 @@ async function receivePayment(req,res){
 
  if(crypto.timingSafeEqual(hash,transactionHash)){//check for equality
 
- const endpoint= `https://sandbox.monnify.com/api/v2/transations/${postData.transactionReference}`
+ const endpoint= `https://sandbox.monnify.com/api/v2/transactions/${postData.transactionReference}`
 
  let token = await authenticateGateWay.authenticateGateWay();
   const config = {
     headers: {
       'Content-type':'application/json',
-       Authorization: `Bearer ${token}` }
+       Authorization: `Berer ${token}` }
 };
 
 const  transactionStatus= await axios.get(endpoint,config)
