@@ -19,6 +19,7 @@ async function receivePayment(req,res){
   const hash= await createHash(postData,key)//calculated here
 
  if(crypto.timingSafeEqual(hash,transactionHash)){//check for equality
+  GET: https://sandbox.monnify.com/api/v2/transactions/{{transactionReference}}
    winston.info('Continue from here')
    return;
  }else{

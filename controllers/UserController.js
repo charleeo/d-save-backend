@@ -11,7 +11,6 @@ async function signUp(req, res){
     const {name,email,password} = req.body;
     const schema = Joi.object({
         name: Joi.string()
-            .alphanum()
             .min(3)
             .max(30)
             .required(),

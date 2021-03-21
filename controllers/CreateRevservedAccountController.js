@@ -2,6 +2,7 @@ const axios = require('axios')
 const models = require('../models');
 const authenticateGateWay = require('../middleware/authenticate_gateway')
 const winston = require('winston')
+const {randomString}= require('../helpers/random_string')
 async function createAReserveAccount(req, res){
   try{
   let token = await authenticateGateWay.authenticateGateWay();
@@ -18,20 +19,18 @@ const userInfo = await models.User.findOne({where:{id:req.userData.userId}});
 // Check if this user already has a reserved accoutn
 const checkUserAccount = await models.reserved_account.findOne({where:{userId:userInfo.id}});
 
-if(checkUserAccount){
-  return res.status(400).json({
-    Message:"You can't have more than one reserved account"
-  })
+if(checkUserAccount){  return res.status(400).json({ Message:"You can't have more than one reserved account"  })
 }
-//check ends here
+
 const contractCode= process.env.MONNIFY_CONTRACT_CODE
 const {
-  accountReference,accountName,currencyCode,customerBvn
-}=req.body; /** This is from input elements */
+  accountName,customerBvn}=req.body; /** This is from input elements */
+  const accountReference = randomString(30)
+  const currencyCode="NGN"
 
 /** Include the user details in the request body */
 const bodyParams ={
-  accountReference,accountName,currencyCode,contractCode,customerBvn,customerName:userInfo.name, customerEmail:userInfo.email
+  accountReference,accountName,currencyCode, contractCode,customerBvn,customerName:userInfo.name, customerEmail:userInfo.email
 }
 
 /** Make axios call to the payment gateway to create the account for the loogin user */
@@ -52,7 +51,7 @@ const bodyParams ={
    Result:itemsToSave})
   } catch (error) {
     console.log(error)
-    res.status(400).json(error)
+    res.status(400).json(error.message)
   }
 }
 
