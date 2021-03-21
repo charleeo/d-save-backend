@@ -22,7 +22,7 @@ async function receivePayment(req,res){
 
  if(crypto.timingSafeEqual(hash,transactionHash)){//check for equality
 
- const endpoint= `https://sandbox.monnify.com/api/v2/transactions/{${postData.transactionReference}}`
+ const endpoint= `https://sandbox.monnify.com/api/v1/transactions/{${postData.transactionReference}}`
 
  let token = await authenticateGateWay.authenticateGateWay();
   const config = {
