@@ -13,18 +13,17 @@ const createHash= async(body,key)=>{
 async function receivePayment(req,res){
   const postData = req.body;
   const key = process.env.MONNIFY_PASSWORD
-  const paymentReference = postData.paymentReference
-  const amountPaid = postData.amountPaid
-  const paidOn  = postData.paidOn
-  const transactionReference = postData.transactionReference
- const transactionHash = postData.transactionHash
-  const text=`${key}|${paymentReference}|${amountPaid}|${paidOn}|${transactionReference}`
-  const hash = crypto.createHash('sha512',key).update(text).digest('hex');
+  const transactionHash = postData.transactionHash
+  // const paymentReference = postData.paymentReference
+  // const amountPaid = postData.amountPaid
+  // const paidOn  = postData.paidOn
+  // const transactionReference = postData.transactionReference
+  // const text=`${key}|${paymentReference}|${amountPaid}|${paidOn}|${transactionReference}`
+  // const hash = crypto.createHash('sha512',key).update(text).digest('hex');
 
-//  const hashedString=createHash(postData,clientSecret)
-//  const transactionHash = postData.transactionHash;
-const newTransactionHash= Buffer.from(transactionHash)
-const hashed = Buffer.from(hash)
+   const hash= createHash(postData,key)
+  const newTransactionHash= Buffer.from(transactionHash)
+  const hashed = Buffer.from(hash)
 
  if(crypto.timingSafeEqual(hashed,newTransactionHash)){
    winston.info('Continue')
