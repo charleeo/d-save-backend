@@ -15,7 +15,6 @@ const createHash= async(body,key)=>{
 
 async function receivePayment(req,res){
   const postData = req.body;
-  winston.info(postData)
   const key = process.env.MONNIFY_PASSWORD
   const transactionHash =  Buffer.from(postData.transactionHash)//from the gate way
   const hash= await createHash(postData,key)//calculated here
@@ -32,9 +31,9 @@ async function receivePayment(req,res){
 };
 
 const  transactionStatus= await axios.get(endpoint,config)
-1000003298 
-const {responseMessage,requestSuccessful}= transactionStatus
-console.log(responseMessage+' This is the message')
+// 1000003298 
+
+console.log(transactionStatus+' This is the message')
 if(transactionStatus.requestSuccessful && transactionStatus.responseMessage=='success'){
   winston.info('The transaction status is ok')
 }
