@@ -13,10 +13,12 @@ const createHash= async(body,key)=>{
 
 async function receivePayment(req,res){
   const postData = req.body;
+  winston.log(postData)
   const key = process.env.MONNIFY_PASSWORD
   const transactionHash =  Buffer.from(postData.transactionHash)//from the gate way
   const hash= await createHash(postData,key)//calculated here
- if(crypto.timingSafeEqual(hash,transactionHash)){
+
+ if(crypto.timingSafeEqual(hash,transactionHash)){//check for equality
    winston.info('Continue from here')
    return;
  }else{
