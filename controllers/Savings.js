@@ -23,8 +23,10 @@ async function receivePayment(req,res){
 
 //  const hashedString=createHash(postData,clientSecret)
 //  const transactionHash = postData.transactionHash;
+const newTransactionHash= Buffer.from(transactionHash)
+const hashed = Buffer.from(hash)
 
- if(crypto.timingSafeEqual(hash,transactionHash)){
+ if(crypto.timingSafeEqual(hashed,newTransactionHash)){
    winston.info('Continue')
  }else{
    winston.info("The strings do not match")
