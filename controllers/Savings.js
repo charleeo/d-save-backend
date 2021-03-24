@@ -30,7 +30,7 @@ async function receivePayment(req,res){
        Authorization: `Bearer ${token}` }
 };
 
-const  transactionStatus= await axios.get(endpoint,config)
+const  transactionStatus= await axios.get(endpoint,{},config)
 // 1000003298 
 
 console.log(transactionStatus.data.responseBody +' This is the message')
