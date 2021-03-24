@@ -2,7 +2,7 @@ const Models = require("../models")
 const winston = require('winston')
 const crypto = require('crypto')
 const axios =require('axios')
-const authenticateGateWay=require('../middleware/authenticate_gateway')
+const {authenticateGateWay}=require('../middleware/authenticate_gateway')
 require('dotenv').config()
 
 const createHash= async(body,key)=>{
@@ -21,15 +21,15 @@ async function receivePayment(req,res){
 
  if(crypto.timingSafeEqual(hash,transactionHash)){//check for equality
 
- const endpoint= `https://sandbox.monnify.com/api/v2/transactions/${postData.transactionReference}`
+ const endpoint= `v2/transactions/${postData.transactionReference}`
 
- let token = await authenticateGateWay.authenticateGateWay();
+ let token = await authenticateGateWay();
   const config = {
     headers: {
       'Content-type':'application/json',
        Authorization: `Bearer ${token}` }
 };
-
+ console.log(token)
 const  transactionStatus= await axios.get(endpoint,{},config)
 // 1000003298 
 
