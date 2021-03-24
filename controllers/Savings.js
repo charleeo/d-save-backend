@@ -34,7 +34,7 @@ const  transactionStatus= await axios.get(endpoint,config)
 // 1000003298 
 
 console.log(transactionStatus)
-if(transactionStatus.requestSuccessful && transactionStatus.responseMessage=='success'){
+if(transactionStatus.data.requestSuccessful===true && transactionStatus.data.responseMessage==='success'){
   winston.info('The transaction status is ok')
 }
    winston.info('Continue from here')
