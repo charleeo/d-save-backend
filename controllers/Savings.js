@@ -29,11 +29,11 @@ async function receivePayment(req,res){
       'Content-type':'application/json',
        Authorization: `Bearer ${token}` }
 };
- console.log(token)
-const  transactionStatus= await axios.get(endpoint,{},config)
+ 
+const  transactionStatus= await axios.get(endpoint,config)
 // 1000003298 
 
-console.log(transactionStatus.data.responseBody +' This is the message')
+console.log(transactionStatus)
 if(transactionStatus.requestSuccessful && transactionStatus.responseMessage=='success'){
   winston.info('The transaction status is ok')
 }
