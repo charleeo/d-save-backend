@@ -17,7 +17,8 @@ async function receivePayment(req,res){
   const postData = req.body;
   const key = process.env.MONNIFY_PASSWORD
   const transactionHash =  Buffer.from(postData.transactionHash)//from the gate way
-  const hash= await createHash(postData,key)//calculated here
+  const hash= await createHash(postData,key)//calculated here in the app
+  winston.info(postData)
 
  if(crypto.timingSafeEqual(hash,transactionHash)){//check for equality
 
@@ -32,13 +33,9 @@ async function receivePayment(req,res){
  
 const  transactionStatus= await axios.get(endpoint,config)
 // 1000003298 
-
-console.log(transactionStatus)
 if(transactionStatus.data.requestSuccessful===true && transactionStatus.data.responseMessage==='success'){
-  winston.info('The transaction status is ok')
+ 
 }
-   winston.info('Continue from here')
-   return;
  }else{
    winston.info("The strings do not match")
  }
