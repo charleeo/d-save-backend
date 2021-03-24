@@ -34,7 +34,7 @@ async function receivePayment(req,res){
 const  transactionStatus= await axios.get(endpoint,config)
 // 1000003298 
 if(transactionStatus.data.requestSuccessful===true && transactionStatus.data.responseMessage==='success'){
- 
+ res.status(200).send('OK')
 }
  }else{
    winston.info("The strings do not match")
