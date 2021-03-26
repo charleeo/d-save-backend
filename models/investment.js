@@ -14,7 +14,16 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Investment.init({
-    investment_duration: DataTypes.DATE
+      investmentDuration: DataTypes.DATE,
+      interestRate:DataTypes.STRING,
+      expectedInterest:DataTypes.STRING,
+      actualInterest:DataTypes.STRING,
+      liquidatedDate:DataTypes.STRING,
+      liquidationPeriod: DataTypes.STRING,
+      cutomerEmail:DataTypes.STRING,
+      cutomerName:DataTypes.STRING,
+      investmentAmount:DataTypes.DOUBLE,
+      investmentCategory:DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Investment',

@@ -12,8 +12,8 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull:false
       },
-      userId: {
-        type: Sequelize.INTEGER
+      userEmail: {
+        type: Sequelize.STRING
       },
       savingsType: {
         type: Sequelize.INTEGER
