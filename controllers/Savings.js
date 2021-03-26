@@ -110,7 +110,7 @@ if(transactionStatus.data.requestSuccessful===true && transactionStatus.data.res
   customerEmail:postData.customer.email,
   customerName:postData.customer.name,
   transactionHash}
- const depositHistoryTosave=new models.Tosave(completeDataToSave);
+ const depositHistoryTosave=new models.DepositHistory(completeDataToSave);
  
  await depositHistoryTosave.save();
 //  const savingHostory = new models.DepositHistory(depositHistory(postData))
