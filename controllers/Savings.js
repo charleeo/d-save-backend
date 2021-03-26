@@ -18,7 +18,7 @@ async function receivePayment(req,res){
   const key = process.env.MONNIFY_PASSWORD
   const transactionHash =  Buffer.from(postData.transactionHash)//from the gate way
   const hash= await createHash(postData,key)//calculated here in the app
-  winston.info(postData)
+  // winston.info(postData)
 
  if(crypto.timingSafeEqual(hash,transactionHash)){//check for equality
 
@@ -35,6 +35,32 @@ const  transactionStatus= await axios.get(endpoint,config)
 // 1000003298 
 if(transactionStatus.data.requestSuccessful===true && transactionStatus.data.responseMessage==='success'){
  res.status(200).send('OK')
+ const dataToSave = {
+  transactionReference  ,
+  paymentReference ,
+  amountPaid ,
+  totalPayable ,
+  settlementAmount ,
+  paidOn ,
+  paymentStatus ,
+  paymentDescription ,
+  currency ,
+  paymentMethod , 
+  product,
+  cardDetails,
+  accountDetails,
+  accountPayments,
+  transactionHash,
+  customer
+  }=postData;
+ const{customerEmail,customerName}=dataToSave.customer
+ const completeDataToSave = {dataToSave,customerEmail,customerName}
+ winston.info(completeDataToSave)
+ const depositHistory=new Models.deposithistory(completeDataToSave)
+ await depositHistory.save();
+ return res.status(201).json({Message:"Account created successfully",
+   Result:completeDataToSave})
+
 }
  }else{
    winston.info("The strings do not match")
