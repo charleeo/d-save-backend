@@ -8,30 +8,29 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      amount: {
-        type: Sequelize.STRING,
-        allowNull:false
+      cutomerEmail:{
+        type:Sequelize.STRING
       },
-      userEmail: {
-        type: Sequelize.STRING
+      cutomerName:{
+        type:Sequelize.STRING
       },
-      savingsType: {
-        type: Sequelize.INTEGER
-      },
-      savingsDuration: {
-        type: Sequelize.STRING,
-        allowNull:true
-      },
-
-      interest: {
+      investmentAmount:{
         type: Sequelize.DOUBLE
       },
-
-      description: {
-        type: Sequelize.TEXT,
+      investmentCategory:{
+        type: Sequelize.INTEGER
+      },
+      interestRate:{type:Sequelize.STRING},
+      expectedInterest:{type:Sequelize.STRING},
+      actualInterest:{type:Sequelize.STRING},
+      liquidatedDate:{type:Sequelize.STRING},
+      liquidationPeriod:{
+        type:Sequelize.STRING,
         allowNull:true
       },
-
+      investmentDuration: {
+        type: Sequelize.DATE
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

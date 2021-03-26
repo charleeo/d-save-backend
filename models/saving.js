@@ -14,14 +14,16 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Saving.init({
-    amount: DataTypes.STRING,
-    userEmail: DataTypes.STRING,
-    savingsType: DataTypes.INTEGER,
-    description:DataTypes.TEXT,
-    newInterestCount:DataTypes.STRING,
-    timeCountBegins:DataTypes.DATE,
-    savingsDuration:DataTypes.STRING,
-    interest:DataTypes.DOUBLE
+      investmentDuration: DataTypes.DATE,
+      interestRate:DataTypes.STRING,
+      expectedInterest:DataTypes.STRING,
+      actualInterest:DataTypes.STRING,
+      liquidatedDate:DataTypes.STRING,
+      liquidationPeriod: DataTypes.STRING,
+      cutomerEmail:DataTypes.STRING,
+      cutomerName:DataTypes.STRING,
+      investmentAmount:DataTypes.DOUBLE,
+      investmentCategory:DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Saving',
