@@ -35,7 +35,7 @@ const  transactionStatus= await axios.get(endpoint,config)
 // 1000003298 
 if(transactionStatus.data.requestSuccessful===true && transactionStatus.data.responseMessage==='success'){
  res.status(200)
- const dataToSave = {
+ const  {
   transactionReference  ,
   paymentReference ,
   amountPaid ,
@@ -51,8 +51,25 @@ if(transactionStatus.data.requestSuccessful===true && transactionStatus.data.res
   accountDetails,
   accountPayments,
   }=postData;
- const{customerEmail,customerName}=postData.customer
- const completeDataToSave = {dataToSave,customerEmail,customerName,transactionHash}
+
+ const completeDataToSave = {
+  transactionReference  ,
+  paymentReference ,
+  amountPaid ,
+  totalPayable ,
+  settlementAmount ,
+  paidOn ,
+  paymentStatus ,
+  paymentDescription ,
+  currency ,
+  paymentMethod , 
+  product,
+  cardDetails,
+  accountDetails,
+  accountPayments,
+  customerEmail:postData.cutomer.email,
+  customerName:postData.cutomer.name,
+  transactionHash}
  const depositHistory=new models.DepositHistory(completeDataToSave);
  
  await depositHistory.save();
