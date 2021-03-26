@@ -32,28 +32,27 @@ const depositHistory = (data)=>{
 //     customer,
 //     transactionHash
 // }=data
-  const dataToSave = { 
-    transactionReference:data.transactionReference  ,
-    paymentReference:data.paymentReference ,
-    amountPaid: data.amountPaid,
-    totalPayable :data.totalPayable,
-    settlementAmount:data.settlementAmount,
-    paidOn:data.paidOn ,
-    paymentStatus:data.paymentStatus,
-    paymentDescription:data.paymentDescription,
-    currency:data.currency,
-    paymentMethod:data.paymentMethod ,
-    product:JSON.stringify(data.product),
-    cardDetails:JSON.stringify(data.cardDetails), 
-    accountDetails:JSON.stringify(data.accountDetails),
-    accountPayments:JSON.stringify(data.accountPayments),
-    customerEmail:data.customer.email,
-    customerName:data.customer.name,
-    transactionHash:data.transactionHash,
-    amountPaid:data.amountPaid
-  }
-  winston.info(dataToSave.amountPaid)
-  return dataToSave;
+  return{ 
+    transactionReference:transactionReference  ,
+    paymentReference:paymentReference ,
+    amountPaid: amountPaid,
+    totalPayable :totalPayable,
+    settlementAmount:settlementAmount,
+    paidOn:paidOn ,
+    paymentStatus:paymentStatus,
+    paymentDescription:paymentDescription,
+    currency:currency,
+    paymentMethod:paymentMethod ,
+    // product:product,
+    // cardDetails:cardDetails, 
+    // accountDetails:accountDetails,
+    // accountPayments:accountPayments,
+    customerEmail:customer.email,
+    customerName:customer.name,
+    transactionHash:transactionHash,
+    amountPaid:amountPaid
+  }=data
+  
 }
 
 async function receivePayment(req,res){
