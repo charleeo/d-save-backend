@@ -15,7 +15,7 @@ module.exports = {
         type:Sequelize.STRING,
         allowNull:true
       }),
-      queryInterface.addColumn('reserved_accounts','collectionChanell',{
+      queryInterface.addColumn('reserved_accounts','collectionChannel',{
         type:Sequelize.STRING,
         allowNull:true
       }),
@@ -36,11 +36,11 @@ module.exports = {
 
   down: (queryInterface) => {
     return Promise.all([
-      // queryInterface.removeColumn('reserved_accounts', 'bankName'),
-      // queryInterface.removeColumn('reserved_accounts', 'accountName'),
-      // queryInterface.removeColumn('reserved_accounts', 'status'),
-      // queryInterface.removeColumn('reserved_accounts', 'accountNumber'),
-      queryInterface.removeColumn('reserved_accounts', 'collectionChanell'),
+      queryInterface.removeColumn('reserved_accounts', 'bankName'),
+      queryInterface.removeColumn('reserved_accounts', 'accountName'),
+      queryInterface.removeColumn('reserved_accounts', 'status'),
+      queryInterface.removeColumn('reserved_accounts', 'accountNumber'),
+      queryInterface.removeColumn('reserved_accounts', 'collectionChannel'),
       queryInterface.removeColumn('reserved_accounts', 'bankCode'),
       queryInterface.removeColumn('reserved_accounts', 'reservationReference'),
       
