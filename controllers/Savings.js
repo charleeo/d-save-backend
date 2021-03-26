@@ -13,6 +13,46 @@ const createHash= async(body,key)=>{
   return hashed;
 }
 
+const depositHistory= async(data)=>{
+ const{
+    transactionReference  ,
+    paymentReference ,
+    amountPaid ,
+    totalPayable ,
+    settlementAmount ,
+    paidOn ,
+    paymentStatus ,
+    paymentDescription ,
+    currency ,
+    paymentMethod , 
+    product,
+    cardDetails,
+    accountDetails,
+    accountPayments,
+    customer,
+    transactionHash
+}=data
+  const dataToSave = {    transactionReference  ,
+    paymentReference ,
+    amountPaid ,
+    totalPayable ,
+    settlementAmount ,
+    paidOn ,
+    paymentStatus ,
+    paymentDescription ,
+    currency ,
+    paymentMethod ,
+    product:JSON.stringify(product),
+    cardDetails:JSON.stringify(cardDetails), 
+    accountDetails:JSON.stringify(accountDetails),
+    accountPayments:JSON.stringify(accountPayments),
+    customerEmail:customer.email,
+    customerName:customer.name,
+    transactionHash
+  }
+  return dataToSave;
+}
+
 async function receivePayment(req,res){
   const postData = req.body;
   const key = process.env.MONNIFY_PASSWORD
@@ -73,7 +113,10 @@ if(transactionStatus.data.requestSuccessful===true && transactionStatus.data.res
  const depositHistory=new models.DepositHistory(completeDataToSave);
  
  await depositHistory.save();
- const allDeposits = await models.DepositHistory.findAll();
+//  const savingHostory = new models.DepositHistory(depositHistory(postData))
+//  const allDeposits = await models.DepositHistory.findAll();
+//  await savingHostory.save();
+ winston.info(depositHistory(postData))
  winston.info(allDeposits);
  return res.status(201).send({Message:"Account created successfully",
    Result:completeDataToSave})
