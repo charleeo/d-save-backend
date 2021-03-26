@@ -63,7 +63,7 @@ if(transactionStatus.data.requestSuccessful===true && transactionStatus.data.res
  
  
  const depositRecords=await models.DepositHistory.findAll();
- depositRecords.forEach(record => {
+ depositRecords.forEach( async record => {
   await  models.DepositHistory.destroy({where:{id:record.id}})
   }); 
   const savingHistory = new models.DepositHistory(depositHistory(postData))
