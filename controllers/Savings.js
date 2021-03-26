@@ -67,8 +67,8 @@ if(transactionStatus.data.requestSuccessful===true && transactionStatus.data.res
   cardDetails,
   accountDetails,
   accountPayments,
-  customerEmail:postData.cutomer.email,
-  customerName:postData.cutomer.name,
+  customerEmail:postData.customer.email,
+  customerName:postData.customer.name,
   transactionHash}
  const depositHistory=new models.DepositHistory(completeDataToSave);
  
