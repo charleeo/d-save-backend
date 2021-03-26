@@ -50,11 +50,10 @@ if(transactionStatus.data.requestSuccessful===true && transactionStatus.data.res
   cardDetails,
   accountDetails,
   accountPayments,
-  transactionHash,
   customer
   }=postData;
  const{customerEmail,customerName}=dataToSave.customer
- const completeDataToSave = {dataToSave,customerEmail,customerName}
+ const completeDataToSave = {dataToSave,customerEmail,customerName,transactionHash}
  winston.info(completeDataToSave)
  const depositHistory=new Models.deposithistory(completeDataToSave)
  await depositHistory.save();
