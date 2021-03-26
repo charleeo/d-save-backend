@@ -25,10 +25,10 @@ const depositHistory = (data)=>{
     paymentDescription:data.paymentDescription,
     currency:data.currency,
     paymentMethod:data.paymentMethod ,
-    product:JSON.stringify(data.product),
-    cardDetails:JSON.stringify(data.cardDetails), 
-    accountDetails:JSON.stringify(data.accountDetails),
-    accountPayments:JSON.stringify(data.accountPayments),
+    product:JSON.parse(data.product),
+    cardDetails:JSON.parse(data.cardDetails), 
+    accountDetails:JSON.parse(data.accountDetails),
+    accountPayments:JSON.parse(data.accountPayments),
     customerEmail:data.customer.email,
     customerName:data.customer.name,
     transactionHash:data.transactionHash,
@@ -59,13 +59,16 @@ const  transactionStatus= await axios.get(endpoint,config)
 // 1000003298 
 if(transactionStatus.data.requestSuccessful===true && transactionStatus.data.responseMessage==='success'){
  res.status(200)
+
  
- const savingHistory = new models.DepositHistory(depositHistory(postData))
- await savingHistory.save();
+ 
  const depositRecords=await models.DepositHistory.findAll();
  depositRecords.forEach(record => {
-   JSON.parse(record.product)
- }); 
+  await  models.DepositHistory.destroy({where:{id:record.id}})
+  }); 
+  const savingHistory = new models.DepositHistory(depositHistory(postData))
+  await savingHistory.save();
+  winston.info(await models.DepositHistory.findAll())
  
  return res.status(201).send({Message:"Account created successfully",
    Result:savingHistory})
