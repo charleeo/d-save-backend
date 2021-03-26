@@ -28,7 +28,7 @@ const depositHistory = (data)=>{
     product:`${data.product.type}, ${data.product.reference}`,
     cardDetails:data.cardDetails, 
     accountDetails:data.accountDetails.accountNumber,
-    accountPayments:data.accountDetails.accountName,
+    accountPayments:data.accountPayments.accountName,
     customerEmail:data.customer.email,
     customerName:data.customer.name,
     transactionHash:data.transactionHash,
