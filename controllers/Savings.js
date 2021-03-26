@@ -1,4 +1,4 @@
-const Models = require("../models")
+const models = require("../models")
 const winston = require('winston')
 const crypto = require('crypto')
 const axios =require('axios')
@@ -50,12 +50,11 @@ if(transactionStatus.data.requestSuccessful===true && transactionStatus.data.res
   cardDetails,
   accountDetails,
   accountPayments,
-  customer
   }=postData;
- const{customerEmail,customerName}=dataToSave.customer
+ const{customerEmail,customerName}=postData.customer
  const completeDataToSave = {dataToSave,customerEmail,customerName,transactionHash}
  winston.info(completeDataToSave)
- const depositHistory=new Models.deposithistory(completeDataToSave)
+ const depositHistory=new models.deposithistory(completeDataToSave)
  await depositHistory.save();
  return res.status(201).json({Message:"Account created successfully",
    Result:completeDataToSave})
