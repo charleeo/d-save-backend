@@ -34,7 +34,7 @@ async function receivePayment(req,res){
 const  transactionStatus= await axios.get(endpoint,config)
 // 1000003298 
 if(transactionStatus.data.requestSuccessful===true && transactionStatus.data.responseMessage==='success'){
- res.status(200).send('OK')
+ res.status(200)
  const dataToSave = {
   transactionReference  ,
   paymentReference ,
@@ -53,8 +53,8 @@ if(transactionStatus.data.requestSuccessful===true && transactionStatus.data.res
   }=postData;
  const{customerEmail,customerName}=postData.customer
  const completeDataToSave = {dataToSave,customerEmail,customerName,transactionHash}
- winston.info(completeDataToSave)
- const depositHistory=new models.DepositHistory(completeDataToSave)
+ const depositHistory=new models.DepositHistory(completeDataToSave);
+ winston.info(amountPaid)
  await depositHistory.save();
  return res.status(201).json({Message:"Account created successfully",
    Result:completeDataToSave})
