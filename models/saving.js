@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   };
   Saving.init({
     amount: DataTypes.STRING,
-    userId: DataTypes.INTEGER,
+    userEmail: DataTypes.STRING,
     savingsType: DataTypes.INTEGER,
     description:DataTypes.TEXT,
     newInterestCount:DataTypes.STRING,

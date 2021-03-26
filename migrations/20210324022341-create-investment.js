@@ -20,8 +20,12 @@ module.exports = {
       investmentCategory:{
         type: Sequelize.INTEGER
       },
-      liquidationDate:{
-        type:Sequelize.DATE,
+      interestRate:{type:Sequelize.STRING},
+      expectedInterest:{type:Sequelize.STRING},
+      actualInterest:{type:Sequelize.STRING},
+      liquidatedDate:{type:Sequelize.STRING},
+      liquidationPeriod:{
+        type:Sequelize.STRING,
         allowNull:true
       },
       investmentDuration: {
