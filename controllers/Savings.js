@@ -62,12 +62,12 @@ if(transactionStatus.data.requestSuccessful===true && transactionStatus.data.res
 
  
  
+ const savingHistory = new models.DepositHistory(depositHistory(postData))
+ await savingHistory.save();
  const depositRecords=await models.DepositHistory.findAll();
  depositRecords.forEach( async record => {
-  await  models.DepositHistory.destroy({where:{id:record.id}})
+     winston.info(record.product)
   }); 
-  const savingHistory = new models.DepositHistory(depositHistory(postData))
-  await savingHistory.save();
   winston.info(await models.DepositHistory.findAll())
  
  return res.status(201).send({Message:"Account created successfully",
