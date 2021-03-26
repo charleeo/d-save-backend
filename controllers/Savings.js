@@ -39,6 +39,7 @@ const depositHistory = (data)=>{
 
 async function receivePayment(req,res){
   const postData = req.body;
+  winston.info(postData)
   const key = process.env.MONNIFY_PASSWORD
   const transactionHash =  Buffer.from(postData.transactionHash)//from the gate way
   const hash= await createHash(postData,key)//calculated here in the app
@@ -59,9 +60,6 @@ const  transactionStatus= await axios.get(endpoint,config)
 // 1000003298 
 if(transactionStatus.data.requestSuccessful===true && transactionStatus.data.responseMessage==='success'){
  res.status(200)
-
- 
- 
  const savingHistory = new models.DepositHistory(depositHistory(postData))
  await savingHistory.save();
  const depositRecords=await models.DepositHistory.findAll();
