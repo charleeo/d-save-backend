@@ -54,9 +54,11 @@ if(transactionStatus.data.requestSuccessful===true && transactionStatus.data.res
  const{customerEmail,customerName}=postData.customer
  const completeDataToSave = {dataToSave,customerEmail,customerName,transactionHash}
  const depositHistory=new models.DepositHistory(completeDataToSave);
- winston.info(amountPaid)
+ 
  await depositHistory.save();
- return res.status(201).json({Message:"Account created successfully",
+ const allDeposits = models.DepositHistory.findAll();
+ winston.info(allDeposits);
+ return res.status(201).send({Message:"Account created successfully",
    Result:completeDataToSave})
 
 }

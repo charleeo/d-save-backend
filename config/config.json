@@ -23,6 +23,5 @@
     "use_env_variable": "DATABASE_URL",
     "dialect": "mysql",
     "operatorsAliases": 0
-
   }
 }
