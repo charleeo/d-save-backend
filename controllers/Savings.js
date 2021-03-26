@@ -52,7 +52,7 @@ const depositHistory = (data)=>{
     transactionHash:data.transactionHash,
     amountPaid:data.amountPaid
   }
-  winston.info(amountPaid)
+  winston.info(dataToSave.amountPaid)
   return dataToSave;
 }
 
