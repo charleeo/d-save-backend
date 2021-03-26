@@ -50,6 +50,7 @@ const depositHistory = (data)=>{
     customerName:customer.name,
     transactionHash
   }
+  winston.info(amountPaid)
   return dataToSave;
 }
 
@@ -75,48 +76,11 @@ const  transactionStatus= await axios.get(endpoint,config)
 // 1000003298 
 if(transactionStatus.data.requestSuccessful===true && transactionStatus.data.responseMessage==='success'){
  res.status(200)
- const  {
-  transactionReference  ,
-  paymentReference ,
-  amountPaid ,
-  totalPayable ,
-  settlementAmount ,
-  paidOn ,
-  paymentStatus ,
-  paymentDescription ,
-  currency ,
-  paymentMethod , 
-  product,
-  cardDetails,
-  accountDetails,
-  accountPayments,
-  }=postData;
-
- const completeDataToSave = {
-  transactionReference  ,
-  paymentReference ,
-  amountPaid ,
-  totalPayable ,
-  settlementAmount ,
-  paidOn ,
-  paymentStatus ,
-  paymentDescription ,
-  currency ,
-  paymentMethod , 
-  product:JSON.stringify(product),
-  cardDetails,
-  accountDetails:JSON.stringify(accountDetails),
-  accountPayments:JSON.stringify(accountPayments),
-  customerEmail:postData.customer.email,
-  customerName:postData.customer.name,
-  transactionHash}
- const depositHistoryTosave=new models.DepositHistory(completeDataToSave);
  
- await depositHistoryTosave.save();
-//  const savingHostory = new models.DepositHistory(depositHistory(postData))
-//  const allDeposits = await models.DepositHistory.findAll();
-//  await savingHostory.save();
- winston.info(depositHistory(postData))
+ const savingHistory = new models.DepositHistory(depositHistory(postData))
+ await savingHistory.save();
+ const allDeposits = await models.DepositHistory.findAll();
+
  winston.info(allDeposits);
  return res.status(201).send({Message:"Account created successfully",
    Result:completeDataToSave})
