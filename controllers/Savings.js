@@ -49,7 +49,8 @@ const depositHistory = (data)=>{
     accountPayments:JSON.stringify(data.accountPayments),
     customerEmail:data.customer.email,
     customerName:data.customer.name,
-    transactionHash:data.transactionHash
+    transactionHash:data.transactionHash,
+    amountPaid:data.amountPaid
   }
   winston.info(amountPaid)
   return dataToSave;
