@@ -14,41 +14,42 @@ const createHash= async(body,key)=>{
 }
 
 const depositHistory = (data)=>{
- const{
-    transactionReference  ,
-    paymentReference ,
-    amountPaid ,
-    totalPayable ,
-    settlementAmount ,
-    paidOn ,
-    paymentStatus ,
-    paymentDescription ,
-    currency ,
-    paymentMethod , 
-    product,
-    cardDetails,
-    accountDetails,
-    accountPayments,
-    customer,
-    transactionHash
-}=data
-  const dataToSave = {    transactionReference  ,
-    paymentReference ,
-    amountPaid ,
-    totalPayable ,
-    settlementAmount ,
-    paidOn ,
-    paymentStatus ,
-    paymentDescription ,
-    currency ,
-    paymentMethod ,
-    product:JSON.stringify(product),
-    cardDetails:JSON.stringify(cardDetails), 
-    accountDetails:JSON.stringify(accountDetails),
-    accountPayments:JSON.stringify(accountPayments),
-    customerEmail:customer.email,
-    customerName:customer.name,
-    transactionHash
+//  const{
+//     transactionReference  ,
+//     paymentReference ,
+//     amountPaid ,
+//     totalPayable ,
+//     settlementAmount ,
+//     paidOn ,
+//     paymentStatus ,
+//     paymentDescription ,
+//     currency ,
+//     paymentMethod , 
+//     product,
+//     cardDetails,
+//     accountDetails,
+//     accountPayments,
+//     customer,
+//     transactionHash
+// }=data
+  const dataToSave = { 
+    transactionReference:data.transactionReference  ,
+    paymentReference:data.paymentReference ,
+    amountPaid: data.amountPaid,
+    totalPayable :data.totalPayable,
+    settlementAmount:data.settlementAmount,
+    paidOn:data.paidOn ,
+    paymentStatus:data.paymentStatus,
+    paymentDescription:data.paymentDescription,
+    currency:data.currency,
+    paymentMethod:data.paymentMethod ,
+    product:JSON.stringify(data.product),
+    cardDetails:JSON.stringify(data.cardDetails), 
+    accountDetails:JSON.stringify(data.accountDetails),
+    accountPayments:JSON.stringify(data.accountPayments),
+    customerEmail:data.customer.email,
+    customerName:data.customer.name,
+    transactionHash:data.transactionHash
   }
   winston.info(amountPaid)
   return dataToSave;
