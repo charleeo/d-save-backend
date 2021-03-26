@@ -13,7 +13,7 @@ const createHash= async(body,key)=>{
   return hashed;
 }
 
-const depositHistory= async(data)=>{
+const depositHistory = (data)=>{
  const{
     transactionReference  ,
     paymentReference ,
@@ -110,9 +110,9 @@ if(transactionStatus.data.requestSuccessful===true && transactionStatus.data.res
   customerEmail:postData.customer.email,
   customerName:postData.customer.name,
   transactionHash}
- const depositHistory=new models.DepositHistory(completeDataToSave);
+ const depositHistoryTosave=new models.Tosave(completeDataToSave);
  
- await depositHistory.save();
+ await depositHistoryTosave.save();
 //  const savingHostory = new models.DepositHistory(depositHistory(postData))
 //  const allDeposits = await models.DepositHistory.findAll();
 //  await savingHostory.save();
