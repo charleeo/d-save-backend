@@ -63,10 +63,10 @@ if(transactionStatus.data.requestSuccessful===true && transactionStatus.data.res
   paymentDescription ,
   currency ,
   paymentMethod , 
-  product:product.toString(),
+  product:JSON.stringify(product),
   cardDetails,
-  accountDetails:accountDetails.toString(),
-  accountPayments:accountPayments.toString(),
+  accountDetails:JSON.stringify(accountDetails),
+  accountPayments:JSON.stringify(accountPayments),
   customerEmail:postData.customer.email,
   customerName:postData.customer.name,
   transactionHash}
