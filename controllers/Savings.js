@@ -6,8 +6,6 @@ const {authenticateGateWay}=require('../middleware/authenticate_gateway')
 const {depositHistory,createHash} = require('./depositHostory')
 require('dotenv').config()
 
-
-
 async function receivePayment(req,res){
   const postData = req.body;
   const key = process.env.MONNIFY_PASSWORD
@@ -35,4 +33,4 @@ if(transactionStatus.data.requestSuccessful===true && transactionStatus.data.res
    winston.info("The strings do not match")
  }
 }
-module.exports= {receivePayment}
+module.exports= receivePayment
