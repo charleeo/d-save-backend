@@ -28,5 +28,8 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Investment',
   });
+  Investment.associate = function(models) {
+    Investment.belongsTo(models.Category, {foreignKey: 'categoryId', as: 'category'})
+  };
   return Investment;
 };

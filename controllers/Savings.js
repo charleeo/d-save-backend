@@ -3,22 +3,17 @@ const winston = require('winston')
 const crypto = require('crypto')
 const axios =require('axios')
 const {authenticateGateWay}=require('../middleware/authenticate_gateway')
-const depositHistory = require('./depositHostory')
+const {depositHistory,createHash} = require('./depositHostory')
 require('dotenv').config()
 
-const createHash= async(body,key)=>{
-  const {transactionReference,amountPaid,paymentReference,paidOn}=body;
-  const text=`${key}|${paymentReference}|${amountPaid}|${paidOn}|${transactionReference}`;
-  const hash = crypto.createHash('sha512',key).update(text).digest('hex');
-  const hashed = Buffer.from(hash)
-  return hashed;
-}
+
 
 async function receivePayment(req,res){
   const postData = req.body;
   const key = process.env.MONNIFY_PASSWORD
   const transactionHash =  Buffer.from(postData.transactionHash)//from the gate way
   const hash= await createHash(postData,key)//calculated here in the app
+
  if(crypto.timingSafeEqual(hash,transactionHash)){//check for equality
  const endpoint= `v2/transactions/${postData.transactionReference}`
  let token = await authenticateGateWay();

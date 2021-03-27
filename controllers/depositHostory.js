@@ -22,4 +22,12 @@ const depositHistory = (data)=>{
   return dataToSave;
 }
 
-module.exports= depositHistory
+const createHash= async(body,key)=>{
+  const {transactionReference,amountPaid,paymentReference,paidOn}=body;
+  const text=`${key}|${paymentReference}|${amountPaid}|${paidOn}|${transactionReference}`;
+  const hash = crypto.createHash('sha512',key).update(text).digest('hex');
+  const hashed = Buffer.from(hash)
+  return hashed;
+}
+
+module.exports= {depositHistory,createHash}
