@@ -11,11 +11,6 @@ module.exports = {
         type:Sequelize.STRING,
         allowNull:true
       }),
-  
-      queryInterface.addColumn('investments','reservationReference',{
-        type:Sequelize.STRING,
-        allowNull:true
-      }),
       queryInterface.addColumn('investments','paidOn',{
         type:Sequelize.STRING,
         allowNull:true
@@ -32,9 +27,7 @@ module.exports = {
       queryInterface.removeColumn('investments', 'transactionHash'),
       queryInterface.removeColumn('investments', 'transactionReference'),
       queryInterface.removeColumn('investments', 'paidOn'),
-      queryInterface.removeColumn('investments', 'settlementAmount'),
-      queryInterface.removeColumn('investments', 'reservationReference'),
-      
+      queryInterface.removeColumn('investments', 'settlementAmount')      
     ]);
   },
 };

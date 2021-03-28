@@ -28,16 +28,7 @@ if(transactionStatus.data.requestSuccessful===true && transactionStatus.data.res
  res.status(200)
  const savingHistory = new models.DepositHistory(depositHistory(postData))
  await savingHistory.save();
- const amountPaid = postData.amountPaid
- if(amountPaid <= plans.savings){
-  //  Do somethind for the savings table
- }else if(amountPaid > plans.savings  && amountPaid <=plans.bronze ){
-  //  Investment category wil be bronze
- }else if(amountPaid > plans.bronze && amountPaid <= plans.silver){
-  //  Investment category will be silver
- }else if(amountPaid > plans.silver){
-  //  Investment category will be gold
- }
+ 
  return res.status(201).send({Message:"Account created successfully",
    Result:savingHistory})
 }
