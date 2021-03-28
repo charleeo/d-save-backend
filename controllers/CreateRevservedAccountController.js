@@ -5,7 +5,7 @@ const winston = require('winston')
 const {randomString}= require('../helpers/random_string')
 async function createAReserveAccount(req, res){
   try{
-  let token = await authenticateGateWay.authenticateGateWay();
+  let token = await authenticateGateWay();
   const config = {
     headers: {
       'Content-type':'application/json',
@@ -53,7 +53,4 @@ const bodyParams ={
     res.status(400).json(error.message)
   }
 }
-
-module.exports={
-  createAReserveAccount
-}
+module.exports={ createAReserveAccount}

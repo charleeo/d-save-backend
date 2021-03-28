@@ -18,4 +18,4 @@ async function authenticateGateWay(){
     }
 }
 
-module.exports={ authenticateGateWay}
+module.exports=authenticateGateWay

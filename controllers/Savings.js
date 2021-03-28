@@ -2,9 +2,11 @@ const models = require("../models")
 const winston = require('winston')
 const crypto = require('crypto')
 const axios =require('axios')
-const {authenticateGateWay}=require('../middleware/authenticate_gateway')
+const authenticateGateWay=require('../middleware/authenticate_gateway')
 const {depositHistory,createHash} = require('./depositHostory')
 require('dotenv').config()
+
+const plans={savings:5000,bronze:15000,silver:25000,gold:40000}
 
 async function receivePayment(req,res){
   const postData = req.body;
@@ -25,7 +27,17 @@ const  transactionStatus= await axios.get(endpoint,config)
 if(transactionStatus.data.requestSuccessful===true && transactionStatus.data.responseMessage==='success'){
  res.status(200)
  const savingHistory = new models.DepositHistory(depositHistory(postData))
- await savingHistory.save(); 
+ await savingHistory.save();
+ const amountPaid = postData.amountPaid
+ if(amountPaid <= plans.savings){
+  //  Do somethind for the savings table
+ }else if(amountPaid > plans.savings  && amountPaid <=plans.bronze ){
+  //  Investment category wil be bronze
+ }else if(amountPaid > plans.bronze && amountPaid <= plans.silver){
+  //  Investment category will be silver
+ }else if(amountPaid > plans.silver){
+  //  Investment category will be gold
+ }
  return res.status(201).send({Message:"Account created successfully",
    Result:savingHistory})
 }
