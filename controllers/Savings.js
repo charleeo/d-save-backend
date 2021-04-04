@@ -2,11 +2,10 @@ const models = require("../models")
 const winston = require('winston')
 const crypto = require('crypto')
 const axios =require('axios')
-const authenticateGateWay=require('../middleware/authenticate_gateway')
+const authenticateGateWay=require('../middleware/authenticate_gateway');
+const savingsObject = require('../helpers/depsoits')
 const {depositHistory,createHash} = require('./depositHostory')
 require('dotenv').config()
-
-const plans={savings:5000,bronze:15000,silver:25000,gold:40000}
 
 async function receivePayment(req,res){
   const postData = req.body;
@@ -28,9 +27,8 @@ if(transactionStatus.data.requestSuccessful===true && transactionStatus.data.res
  res.status(200)
  const savingHistory = new models.DepositHistory(depositHistory(postData))
  await savingHistory.save();
- 
- return res.status(201).send({Message:"Account created successfully",
-   Result:savingHistory})
+ await savingsObject(postData)
+ return ;
 }
  }else{
    winston.info("The strings do not match")
