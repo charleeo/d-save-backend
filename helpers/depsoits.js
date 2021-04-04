@@ -15,7 +15,8 @@ const savingsObject= async(params)=>{
    let date = new Date();
    let minLiquidationMonths = date.setUTCMonth(date.getUTCMonth()+6);
    let minLiquidationWeeks =  new Date().getTime()+(7*24*60*60*1000);//7 days added to current time/date
-   let data={investmentDuration,interestRate, expectedInterest,actualInterest,    liquidatedDate, liquidationPeriod,cutomerEmail:customer.email,cutomerName:customer.name,investmentAmount:amountPaid, investmentCategory,transactionReference,paidOn,transactionHash}
+   let investmentDuration;
+   let data={investmentDuration,interestRate,expectedInterest,actualInterest,    liquidatedDate, liquidationPeriod,cutomerEmail:customer.email,cutomerName:customer.name,investmentAmount:amountPaid, investmentCategory,transactionReference,paidOn,transactionHash}
    data.liquidatedDate = formatTimeStamp(minLiquidationMonths)
   
    if(amountPaid <= plans.bronze){

@@ -8,9 +8,7 @@ const server = http.createServer(app);
 server.listen(port, ()=>{
   winston.info(`Listening on port ${port}`)
 });
-const formatTimeStamp=(timeStamp)=>{
-  return new Date(timeStamp)
-}
+
 
 
 
