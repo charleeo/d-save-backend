@@ -28,7 +28,7 @@ const savingsObject= async(params)=>{
   
    if(amountPaid <= plans.bronze){
     //  Do somethind for the savings table
-    data.investmentDuration= new Date(oneWeekTime);
+    data.investmentDuration= formatTimeStamp(minLiquidationWeeks)
     data.interestRate=0;
     data.investmentCategory=1;
     data.liquidatedDate=formatTimeStamp(minLiquidationWeeks)
