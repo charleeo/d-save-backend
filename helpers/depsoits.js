@@ -16,6 +16,13 @@ const savingsObject= async(params)=>{
    let minLiquidationMonths = date.setUTCMonth(date.getUTCMonth()+6);
    let minLiquidationWeeks =  new Date().getTime()+(7*24*60*60*1000);//7 days added to current time/date
    let investmentDuration;
+   let interestRate;
+   let expectedInterest;
+   let actualInterest;
+   let liquidationPeriod;
+   let liquidatedDate;
+   
+
    let data={investmentDuration,interestRate,expectedInterest,actualInterest,    liquidatedDate, liquidationPeriod,cutomerEmail:customer.email,cutomerName:customer.name,investmentAmount:amountPaid, investmentCategory,transactionReference,paidOn,transactionHash}
    data.liquidatedDate = formatTimeStamp(minLiquidationMonths)
   
@@ -42,6 +49,7 @@ const savingsObject= async(params)=>{
     const investItems = models.Investment(data);
     await investItems.save()
   }
+  console.log(data.interestRate)
   winston.info(data)
   return data
 }
