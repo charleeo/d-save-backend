@@ -32,7 +32,7 @@ const savingsObject= async(params)=>{
     data.interestRate=0;
     data.investmentCategory=1;
     data.liquidatedDate=formatTimeStamp(minLiquidationWeeks)
-    const savingsItem= models.Saving(data)
+    const savingsItem= new models.Saving(data)
     await savingsItem.save()
   }else{
   
@@ -46,7 +46,7 @@ const savingsObject= async(params)=>{
       data.interestRate=15;
     }
     data.investmentDuration= new Date(fourMonthsTime);
-    const investItems = models.Investment(data);
+    const investItems = new models.Investment(data);
     await investItems.save()
   }
   console.log(data.interestRate)
