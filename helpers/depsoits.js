@@ -1,4 +1,4 @@
-const { array } = require('joi');
+const winston = require('winston/lib/winston/config');
 const models = require('../models/index');
 
 // function diff_months(dt2, dt1){
@@ -41,7 +41,7 @@ const savingsObject= async(params)=>{
     const investItems = models.Investment(data);
     await investItems.save()
   }
-  console.log(data)
+  winston.info(data)
   return data
 }
 
