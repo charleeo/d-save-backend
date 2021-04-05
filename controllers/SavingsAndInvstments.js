@@ -9,8 +9,8 @@ const savings = async (req,res)=>{
 
 const investments = async (req,res)=>{
   const allInvestments = await models.InvestmentsDetails.findAll();
-  if(allInvestments !== [])return res.status(200).json({Investments:allInvestments})
-  else res.status(202).json("No record found")
+  if(allInvestments.lenght !== '')return res.status(200).json({Investments:allInvestments})
+  else return res.status(202).json("No record found")
 }
 
 module.exports = {savings,investments}

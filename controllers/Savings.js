@@ -3,7 +3,7 @@ const winston = require('winston')
 const crypto = require('crypto')
 const axios =require('axios')
 const authenticateGateWay=require('../middleware/authenticate_gateway');
-const savingsObject = require('../helpers/depsoits')
+const savingsObject = require('./depsoits')
 const {depositHistory,createHash} = require('./depositHostory')
 require('dotenv').config()
 
