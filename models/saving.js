@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       interestRate:DataTypes.STRING,
       expectedInterest:DataTypes.STRING,
       actualInterest:DataTypes.STRING,
-      liquidatedDate:DataTypes.STRING,
+      liquidatedDate:DataTypes.DATE,
       liquidationPeriod: DataTypes.STRING,
       cutomerEmail:DataTypes.STRING,
       cutomerName:DataTypes.STRING,
