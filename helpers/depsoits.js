@@ -42,7 +42,7 @@ const savingsObject= async(params)=>{
     }
     data.investmentDuration = data.liquidationPeriod= formatTimeStamp(minLiquidationMonths);
     
-    const investItems = new models.Investment(data);
+    const investItems = new models.InvestmentsDetails(data);
    return await investItems.save()
   }
 }
