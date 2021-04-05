@@ -12,7 +12,7 @@ module.exports = {
         allowNull:true
       }),
   
-      queryInterface.addColumn('savings','reservationReference',{
+      queryInterface.addColumn('savings','transactionReference',{
         type:Sequelize.STRING,
         allowNull:true
       }),
@@ -33,7 +33,7 @@ module.exports = {
       queryInterface.removeColumn('savings', 'transactionReference'),
       queryInterface.removeColumn('savings', 'paidOn'),
       queryInterface.removeColumn('savings', 'settlementAmount'),
-      queryInterface.removeColumn('savings', 'reservationReference'),
+      queryInterface.removeColumn('savings', 'transactionReference'),
       
     ]);
   },
