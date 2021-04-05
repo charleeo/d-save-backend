@@ -9,6 +9,8 @@ const userRoute = require('./routes/user');
 const commentsRoute = require('./routes/comments');
 const imageRoute = require('./routes/images');
 const gatewayRoute = require('./routes/acount_info');
+const savingsAndInvestments = require('./routes/savings_and_Investments');
+
 const app = express();
 
 
@@ -25,4 +27,5 @@ app.use("/user", userRoute);
 app.use("/comments", commentsRoute);
 app.use("/images", imageRoute);
 app.use('/gateway',gatewayRoute)
+app.use('/savings-investmnts',savingsAndInvestments)
 module.exports = app;
