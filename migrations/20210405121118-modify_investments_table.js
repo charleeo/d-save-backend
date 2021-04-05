@@ -25,10 +25,10 @@ module.exports = {
 
   down: (queryInterface) => {
     return Promise.all([
-      // queryInterface.removeColumn('investments', 'transactionHash'),
-      // queryInterface.removeColumn('investments', 'transactionReference'),
-      // queryInterface.removeColumn('investments', 'paidOn'),
-      // queryInterface.removeColumn('investments', 'settlementAmount'),      
+      queryInterface.removeColumn('investments', 'transactionHash'),
+      queryInterface.removeColumn('investments', 'transactionReference'),
+      queryInterface.removeColumn('investments', 'paidOn'),
+      queryInterface.removeColumn('investments', 'settlementAmount'),      
     ]);
   },
 };
