@@ -24,6 +24,10 @@ module.exports = (sequelize, DataTypes) => {
       cutomerName:DataTypes.STRING,
       investmentAmount:DataTypes.DOUBLE,
       investmentCategory:DataTypes.INTEGER,
+      transactionHash:DataTypes.STRING,
+      transactionReference:DataTypes.STRING,
+      paidOn:DataTypes.STRING,
+      settlementAmount:DataTypes.DOUBLE,
   }, {
     sequelize,
     modelName: 'Investment',
