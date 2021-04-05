@@ -29,10 +29,10 @@ if(transactionStatus.data.requestSuccessful===true && transactionStatus.data.res
  const savingHistory = new models.DepositHistory(depositHistory(postData))
  await savingHistory.save();
  await savingsObject(postData)
-//  const investments = await models.Investment.findAll();
-//  const saves = await models.Saving.findAll();
-//  winston.info(investments)
-//  winston.info(saves)
+ const investments = await models.Investment.findAll();
+ const saves = await models.Saving.findAll();
+ winston.info(investments)
+ winston.info(saves)
  return res.json('Saved') ;
 }
  }else{
