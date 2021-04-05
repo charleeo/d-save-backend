@@ -27,7 +27,7 @@ module.exports = {
       queryInterface.removeColumn('investments', 'transactionHash'),
       queryInterface.removeColumn('investments', 'transactionReference'),
       queryInterface.removeColumn('investments', 'paidOn'),
-      queryInterface.removeColumn('investments', 'settlementAmount')      
+      // queryInterface.removeColumn('investments', 'settlementAmount')      
     ]);
   },
 };

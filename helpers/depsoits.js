@@ -1,11 +1,6 @@
 const winston = require('winston');
 const models = require('../models/index');
 
-// function diff_months(dt2, dt1){
-//  var diff =(dt2.getTime() - dt1.getTime()) / 1000;
-//  diff /= (60 * 60 * 24 * 30);
-//  return Math.abs(Math.round(diff));
-// }
 const formatTimeStamp=(timeStamp)=>{
   return new Date(timeStamp)
 }
