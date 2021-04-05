@@ -27,6 +27,7 @@ const savingsObject= async(params)=>{
     data.interestRate=0;
     data.investmentCategory=1;
     data.liquidatedDate=formatTimeStamp(minLiquidationWeeks)
+    data.actualInterest = 0;
     const savingsItem= new models.Saving(data)
    return await savingsItem.save()
   }else{
@@ -35,10 +36,12 @@ const savingsObject= async(params)=>{
       //  Investment category will be silver
       data.investmentCategory = 2;
       data.interestRate=10;
+      data.actualInterest = parseInt((amountPaid) *(data.interestRate/100))
     }else if(amountPaid > plans.silver){
       //  Investment category will be gold
       data.investmentCategory = 3;
       data.interestRate=15;
+      data.actualInterest = parseInt((amountPaid) *(data.interestRate/100))
     }
     data.investmentDuration = data.liquidationPeriod= formatTimeStamp(minLiquidationMonths);
     
