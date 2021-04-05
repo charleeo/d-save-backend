@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'Investment',
   });
   Investment.associate = function(models) {
-    Investment.belongsTo(models.Category, {foreignKey: 'categoryId', as: 'category'})
+    Investment.belongsTo(models.Category, {foreignKey: 'investmentCategory', as: 'category'})
   };
   return Investment;
 };
