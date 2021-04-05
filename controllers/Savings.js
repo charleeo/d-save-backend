@@ -29,7 +29,7 @@ if(transactionStatus.data.requestSuccessful===true && transactionStatus.data.res
  const savingHistory = new models.DepositHistory(depositHistory(postData))
  await savingHistory.save();
  await savingsObject(postData)
- const investments = await models.Investment.findAll();
+ const investments = await models.InvestmentsDetails.findAll();
  const saves = await models.Saving.findAll();
  winston.info(investments)
  winston.info(saves)
