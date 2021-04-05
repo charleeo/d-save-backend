@@ -27,5 +27,5 @@ app.use("/user", userRoute);
 app.use("/comments", commentsRoute);
 app.use("/images", imageRoute);
 app.use('/gateway',gatewayRoute)
-app.use('/savings-investmnts',savingsAndInvestments)
+app.use('/savings-investments',savingsAndInvestments)
 module.exports = app;
