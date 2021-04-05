@@ -24,11 +24,16 @@ async function receivePayment(req,res){
 const  transactionStatus= await axios.get(endpoint,config)
 // 1000003298 
 if(transactionStatus.data.requestSuccessful===true && transactionStatus.data.responseMessage==='success'){
+
  res.status(200)
  const savingHistory = new models.DepositHistory(depositHistory(postData))
  await savingHistory.save();
  await savingsObject(postData)
- res.json('Saved') ;
+ const investments = await models.Investment.findAll();
+ const saves = await models.Saving.findAll();
+ winston.info(investments)
+ winston.info(saves)
+ return res.json('Saved') ;
 }
  }else{
    winston.info("The strings do not match")
