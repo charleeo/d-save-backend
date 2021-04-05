@@ -9,7 +9,7 @@ const savings = async (req,res)=>{
 
 const investments = async (req,res)=>{
   const allInvestments = await models.Investment.findAll();
-  if(allInvestments !== [])return res.status(200).json({Investments:allSavings})
+  if(allInvestments !== [])return res.status(200).json({Investments:allInvestments})
   else res.status(202).json("No record found")
 }
 
