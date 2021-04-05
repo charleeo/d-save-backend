@@ -23,7 +23,7 @@ const savingsObject= async(params)=>{
    let liquidatedDate;
    let investmentCategory;
 
-   let data={investmentDuration,interestRate,expectedInterest,actualInterest,    liquidatedDate, liquidationPeriod,cutomerEmail:customer.email,cutomerName:customer.name,investmentAmount:amountPaid, investmentCategory,transactionReference,paidOn,transactionHash}
+   let data={investmentDuration,interestRate,expectedInterest,actualInterest,    liquidatedDate, liquidationPeriod,cutomerEmail:customer.email,cutomerName:customer.name,investmentAmount:amountPaid, investmentCategory,transactionReference,paidOn,transactionHash,settlementAmount}
    data.liquidatedDate = formatTimeStamp(minLiquidationMonths)
   
    if(amountPaid <= plans.bronze){
@@ -33,7 +33,7 @@ const savingsObject= async(params)=>{
     data.investmentCategory=1;
     data.liquidatedDate=formatTimeStamp(minLiquidationWeeks)
     const savingsItem= new models.Saving(data)
-    await savingsItem.save()
+   return await savingsItem.save()
   }else{
   
    if(amountPaid > plans.bronze && amountPaid <= plans.silver){
@@ -47,11 +47,8 @@ const savingsObject= async(params)=>{
     }
     data.investmentDuration= new Date(fourMonthsTime);
     const investItems = new models.Investment(data);
-    await investItems.save()
+   return await investItems.save()
   }
-  console.log(data.interestRate)
-  winston.info(data)
-  return data
 }
 
 module.exports = savingsObject
