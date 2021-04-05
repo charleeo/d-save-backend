@@ -12,7 +12,7 @@ module.exports = {
         allowNull:true
       }),
   
-      queryInterface.addColumn('investments','reservationReference',{
+      queryInterface.addColumn('investments','transactionReference',{
         type:Sequelize.STRING,
         allowNull:true
       }),
@@ -26,7 +26,7 @@ module.exports = {
   down: (queryInterface) => {
     return Promise.all([
       queryInterface.removeColumn('investments', 'transactionHash'),
-      queryInterface.removeColumn('investments', 'reservationReference'),
+      queryInterface.removeColumn('investments', 'transactionReference'),
       queryInterface.removeColumn('investments', 'paidOn'),
       queryInterface.removeColumn('investments', 'settlementAmount'),      
     ]);
