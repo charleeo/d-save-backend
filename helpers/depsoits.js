@@ -1,4 +1,4 @@
-const winston = require('winston/lib/winston/config');
+const winston = require('winston');
 const models = require('../models/index');
 
 // function diff_months(dt2, dt1){
