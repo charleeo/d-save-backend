@@ -34,7 +34,7 @@ module.exports = {
       transactionReference:{type:Sequelize.STRING},
       transactionHash:{type:Sequelize.STRING},
       settlementAmount:{type:Sequelize.DOUBLE},
-      paidOn:{type:Sequelize.DATE},
+      paidOn:{type:Sequelize.STRING},
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

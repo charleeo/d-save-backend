@@ -20,7 +20,7 @@ const savingsObject= async(params)=>{
 
    let data={investmentDuration,interestRate,expectedInterest,actualInterest,    liquidatedDate, liquidationPeriod,cutomerEmail:customer.email,cutomerName:customer.name,investmentAmount:amountPaid, investmentCategory,transactionReference,paidOn,transactionHash,settlementAmount}
    data.liquidatedDate = formatTimeStamp(minLiquidationMonths)
-  
+  console.log(data.paidOn)
    if(amountPaid <= plans.bronze){
     //  Do somethind for the savings table
     data.investmentDuration= formatTimeStamp(minLiquidationWeeks)
@@ -45,6 +45,7 @@ const savingsObject= async(params)=>{
     const investItems = new models.InvestmentsDetails(data);
    return await investItems.save()
   }
+  
 }
 
 module.exports = savingsObject

@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     investmentCategory:DataTypes.INTEGER,
     transactionHash:DataTypes.STRING,
     transactionReference:DataTypes.STRING,
-    paidOn:DataTypes.DATE,
+    paidOn:DataTypes.STRING,
     settlementAmount:DataTypes.DOUBLE,
   }, {
     sequelize,
