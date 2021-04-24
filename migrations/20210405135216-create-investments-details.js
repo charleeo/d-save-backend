@@ -8,10 +8,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      cutomerEmail:{
+      customerEmail:{
         type:Sequelize.STRING
       },
-      cutomerName:{
+      customerName:{
         type:Sequelize.STRING
       },
       investmentAmount:{

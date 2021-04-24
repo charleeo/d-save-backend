@@ -23,8 +23,8 @@ const individualSavings= async(req,res)=>{
 
 const individualInvestments= async(req,res)=>{
   const email = req.params.email
- const individualSaves = await models.InvestmentsDetails.findAll({where:{customerEmail:email}});
- if(individualSaves.length >0)return res.status(200).json({message:individualSaves});
+ const individualInvests = await models.InvestmentsDetails.findAll({where:{customerEmail:email}});
+ if(individualInvests.length >0)return res.status(200).json({message:individualInvests});
  else return res.status(404).json({message:"No record found"})
 }
 
