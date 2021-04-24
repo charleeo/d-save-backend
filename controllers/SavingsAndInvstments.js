@@ -14,7 +14,7 @@ const investments = async (req,res)=>{
 }
 
 const individualSavings= async(req,res)=>{
-  const email = req.params
+  const email = req.params.email
  const individualSaves = await models.Saving.findAll({where:{customerEmail:email}});
  if(individualSaves.length >0)return res.status(200).json({message:individualSaves});
  else return res.status(404).json({message:"No record found"})
@@ -22,7 +22,7 @@ const individualSavings= async(req,res)=>{
 
 
 const individualInvestments= async(req,res)=>{
-  const email = req.params
+  const email = req.params.email
  const individualSaves = await models.InvestmentsDetails.findAll({where:{customerEmail:email}});
  if(individualSaves.length >0)return res.status(200).json({message:individualSaves});
  else return res.status(404).json({message:"No record found"})
