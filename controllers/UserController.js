@@ -76,7 +76,7 @@ async function verifyEmail(req,res,next){
     const decodedToken= jwt.verify(token,secret)
     const response=  await user.update( {status:1},{where:{id:user.id}});
     if(response){
-        res.status(202).json({Message:"Your email has been verified",TokenInfo:decodedToken})
+        res.status(202).json({message:"Your email has been verified",TokenInfo:decodedToken})
     }
     next();
   }
