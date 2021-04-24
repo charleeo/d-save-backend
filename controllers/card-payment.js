@@ -11,7 +11,7 @@ if(postData.transactionStatus==='SUCCESS'){
  const savingHistory = new models.DepositHistory(depositHistory(postData))
  await savingHistory.save();
  await savingsObject(postData);
- return res.status(201).json('Saved') ;
+ return res.status(201).json({message:"Your deposit was recieved by us"}) ;
 }
  
 }
