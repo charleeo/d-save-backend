@@ -1,12 +1,11 @@
 const express = require('express');
-const GateWay =  require('../controllers/CreateRevservedAccountController');
 const checkAuth = require('../middleware/check-auth')
-const receivePayment = require('../controllers/Savings');
+const {reservedAccount, reservedAccounts} = require('../controllers/ReservedAccount');
+
 
 const router = express.Router()
 
-router.post('/reserve-account', checkAuth.checkAuth,  GateWay.createAReserveAccount);
-
-router.post('/savings',   receivePayment);
+router.get('/accounts-all',reservedAccounts);
+router.get('/account-details/:id',reservedAccount)
 
 module.exports=router

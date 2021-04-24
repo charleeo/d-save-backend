@@ -5,7 +5,9 @@ const Joi = require('joi');
 const mailObject = require('../helpers/nodemailer');
 const {secret, port}= require('../startups/config');
 const _ = require('underscore');
-const winston = require('winston');
+const {emailVerificationObject,forgotPasswordObjects }  = require('../helpers/mailObjects')
+ const {text,html,subject} = emailVerificationObject
+ const {textF,htmlF,subjectF} = forgotPasswordObjects
 
 async function signUp(req, res){
     const {name,email,password} = req.body;
@@ -21,12 +23,12 @@ async function signUp(req, res){
    const {error,value}= schema.validate({ name,email,password});
    if(error){
       return res.status(400).json({
-           Error: error.details[0].message
+           error: error.details[0].message
        })
    } 
   const checkUser= await models.User.findOne({where:{email}});
     if(checkUser){
-        return  res.status(409).json("Email already exists!" );
+        return  res.status(409).json({error:"Email already exists!"} );
     }
     const salt = await bcryptjs.genSalt(10);
     const hash= await bcryptjs.hash(password, salt);
@@ -39,7 +41,7 @@ async function signUp(req, res){
     });
     /**Send mail to registered users */
     const url = `http://127.0.0.1:${port}/user/verify-account/${email}/${token}`
-    await mailObject.sendMail(email,url)
+    await mailObject.sendMail(email,url,subject,text,html)
 }
 
 async function login(req, res){
@@ -47,17 +49,17 @@ async function login(req, res){
     try{      
      if(!email || !password){
          return res.status(400).json({
-            Error: "Please ensure that all fields are filled"
+            error: "Please ensure that all fields are filled"
          })
      }
     const user = await models.User.findOne({where:{email}});
      if(user === null){
-         return  res.status(400).json("Invalid credentials here!");
+         return  res.status(400).json({error:"Invalid credential "});
      }  
      const validPassword = await bcryptjs.compare(password, user.password); 
-     if(!validPassword){return res.status(400).send("Invalid credentials here again!")}
-     const token =  jwt.sign({userId: user.id, email},secret,{expiresIn:'30days'});
-     res.header('auth-token', token).json({message:"Login success",token}) 
+     if(!validPassword){return res.status(400).send({error:"Invalid credentials"})}
+     const token =  jwt.sign({userId: user.id, email,name:user.name},secret,{expiresIn:'3hours'});
+     res.header('auth-token', token).json({message:"Login was successfull",token}) 
     }catch(error){
         res.status(500).json(error)
     }
@@ -88,21 +90,35 @@ async function verifyEmail(req,res,next){
 const resendToken= async(req,res)=>{
     email = req.params.email;
     user = await models.User.findOne({where:{email}});
-    if(!user)return res.status(404).json({Message:"You don't have record with us. Please visit the register Link to create an account"});
+    if(!user)return res.status(404).json({error:"You don't have record with us. Please visit the register Link to create an account"});
     const token = jwt.sign({
         email
       }, secret, { expiresIn: '4hrs'});
     const url = `http://127.0.0.1:${port}/user/verify-account/${email}/${token}`
     const messageInfo = await mailObject.sendMail(email,url);
     if(messageInfo !== undefined){return res.status(200).json({Message:"Please check your mail for the verification link"})}
-    else return res.status(500).json({Message:"Something must have gone wrong. please try again later",messageInfo})
+    else return res.status(500).json({error:"Something must have gone wrong. please try again later",messageInfo})
+}
+
+
+const sendPasswordEmail= async(req,res)=>{
+    email = req.body.email;
+    user = await models.User.findOne({where:{email}});
+    if(!user)return res.status(404).json({error:"You don't have record with us. Please visit the register Link to create an account"});
+    const token = jwt.sign({
+        email
+      }, secret, { expiresIn: '4hrs'});
+    const url = `http://127.0.0.1:${port}/user/reset-password/${email}/${token}`
+    const messageInfo = await mailObject.sendMail(email,url,subjectF,textF,htmlF);
+    if(messageInfo !== undefined){return res.status(200).json({message:"Please check your mail for the verification link"})}
+    else return res.status(500).json({error:"Something must have gone wrong. please try again later",messageInfo})
 }
 
 async function allUser(req,res){
     try {
         const users = await models.User.findAll({attributes:['email','name','id']});
         if(!users){
-            return res.status(404).json({Message:"No user is found"})
+            return res.status(404).json({message:"No user is found"})
         }
         return res.status(200).json(users);
     } catch (error) {
@@ -115,9 +131,9 @@ async function userDetails(req,res){
     try{
         const user = await models.User.findOne({where:{id}});
         if(!user){
-            return res.status(404).json({Message:"No user is found with " +id})
+            return res.status(404).json({message:"No user is found with " +id})
         }
         return res.status(200).json(user)
     }catch (error) { res.status(500).json({error})  }
 }
-module.exports = {signUp,login,verifyEmail,resendToken,allUser,userDetails }
+module.exports = {signUp,login,verifyEmail,resendToken,allUser,userDetails,sendPasswordEmail}

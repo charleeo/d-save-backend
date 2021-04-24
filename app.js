@@ -8,8 +8,10 @@ const postsRoute = require('./routes/posts');
 const userRoute = require('./routes/user');
 const commentsRoute = require('./routes/comments');
 const imageRoute = require('./routes/images');
-const gatewayRoute = require('./routes/acount_info');
+const gatewayInfo = require('./routes/gateway_info');
 const savingsAndInvestments = require('./routes/savings_and_Investments');
+const reservedAccountDetails = require("./routes/acount_info");
+const forReact = require('./routes/for_react')
 
 const app = express();
 
@@ -26,6 +28,8 @@ app.use("/posts", postsRoute);
 app.use("/user", userRoute);
 app.use("/comments", commentsRoute);
 app.use("/images", imageRoute);
-app.use('/gateway',gatewayRoute)
+app.use('/gateway',gatewayInfo)
 app.use('/savings-investments',savingsAndInvestments)
+app.use('/reserved-account', reservedAccountDetails)
+app.use('/keys',forReact)
 module.exports = app;
