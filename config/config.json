@@ -16,12 +16,13 @@
     "operatorsAliases": 0
   },
   "production": {
-    "username": "b0b44e50ed684e",
-    "password": "8504c772",
-    "database": "heroku_1ba835b75b41fbf",
+    "username": "bcc9264b4b5914:516e4c7",
+    "password": "516e4c7d",
+    "database": "heroku_9b0b051dfc40dc9",
     "host": "us-cdbr-east-03.cleardb.com",
     "use_env_variable": "DATABASE_URL",
     "dialect": "mysql",
     "operatorsAliases": 0
   }
 }
+
