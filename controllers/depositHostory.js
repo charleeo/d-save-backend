@@ -20,7 +20,6 @@ const depositHistory = (data)=>{
     transactionHash:data.transactionHash,
     amountPaid:data.amountPaid
   }
-  console.log(customerEmail)
   return dataToSave;
 }
 
