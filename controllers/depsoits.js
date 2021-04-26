@@ -21,7 +21,7 @@ const savingsObject= async(params)=>{
    let data={investmentDuration,interestRate,expectedInterest,actualInterest,    liquidatedDate, liquidationPeriod,cutomerEmail:customer.email,cutomerName:customer.name,investmentAmount:amountPaid, investmentCategory,transactionReference,paidOn,transactionHash,settlementAmount}
    data.liquidatedDate = formatTimeStamp(minLiquidationMonths)
 
-   console.log('email '+ cutomerEmail)
+   
 
    if(amountPaid <= plans.bronze){
     //  Do somethind for the savings table
