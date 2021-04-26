@@ -54,4 +54,4 @@ const savingsObjectOnline= async(params)=>{
   
 }
 
-module.exports = savingsObject
+module.exports = savingsObjectOnline
