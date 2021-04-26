@@ -9,6 +9,7 @@ require('dotenv').config()
 
 async function receivePayment(req,res){
   const postData = req.body;
+  console.log(postData)
   const key = process.env.MONNIFY_PASSWORD
   const transactionHash =  Buffer.from(postData.transactionHash)//from the gate way
   const hash= await createHash(postData,key)//calculated here in the app
@@ -22,8 +23,9 @@ async function receivePayment(req,res){
        Authorization: `Bearer ${token}` }
 };
 const  transactionStatus= await axios.get(endpoint,config)
-// 1000003298 
+
 if(transactionStatus.data.requestSuccessful===true && transactionStatus.data.responseMessage==='success'){
+  // 5000728971 
 
  res.status(200)
  const savingHistory = new models.DepositHistory(depositHistory(postData))
