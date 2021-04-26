@@ -13,12 +13,12 @@ const depositHistory = (data)=>{
     paymentMethod:data.paymentMethod ,
     product:`${data.product.type}, ${data.product.reference}`,
     cardDetails:data.cardDetails, 
+    accountDetails:data.accountDetails.accountNumber,
+    accountPayments:data.accountPayments.accountName,
     customerEmail:data.customer.email,
     customerName:data.customer.name,
     transactionHash:data.transactionHash,
     amountPaid:data.amountPaid
-    accountDetails:data.accountDetails.accountNumber,
-    accountPayments:data.accountPayments.accountName,
   }
   return dataToSave;
 }
