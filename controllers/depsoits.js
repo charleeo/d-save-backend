@@ -7,6 +7,7 @@ const formatTimeStamp=(timeStamp)=>{
 const savingsObject= async(params)=>{
   const plans={bronze:5000,silver:25000};
    const {transactionHash,customer, transactionReference,paidOn,amountPaid,settlementAmount} =params;
+   console.log(customer)
    let date = new Date();
    let minLiquidationMonths = date.setUTCMonth(date.getUTCMonth()+6);
    let minLiquidationWeeks =  new Date().getTime()+(7*24*60*60*1000);//7 days added to current time/date

@@ -29,7 +29,7 @@ if(transactionStatus.data.requestSuccessful===true && transactionStatus.data.res
  const savingHistory = new models.DepositHistory(depositHistory(postData))
  await savingHistory.save();
  await savingsObject(postData);
- return res.json('Saved') ;
+ return res.json({message:"We have received your savings"}) ;
 }
  }else{
    winston.info("The strings do not match")

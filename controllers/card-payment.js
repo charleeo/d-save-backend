@@ -6,7 +6,6 @@ require('dotenv').config()
 
 async function receiveCardPayment(req,res){
   const postData = req.body;
-  console.log({'data':postData})
 if(postData.transactionStatus==='SUCCESS'){
  const savingHistory = new models.DepositHistory(depositHistory(postData))
  await savingHistory.save();
