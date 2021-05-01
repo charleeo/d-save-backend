@@ -14,7 +14,7 @@ async function authenticateGateWay(){
     });
     return (response.data.responseBody.accessToken)
     } catch (error) {
-      console.log(error.message)
+      console.log(error)
     }
 }
 
