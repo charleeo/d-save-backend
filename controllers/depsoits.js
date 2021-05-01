@@ -18,8 +18,9 @@ const savingsObject= async(params)=>{
    let liquidationPeriod;
    let liquidatedDate;
    let investmentCategory;
+   const {name,email} = customer;
 
-   let data={investmentDuration,interestRate,expectedInterest,actualInterest,    liquidatedDate, liquidationPeriod,cutomerEmail:customer.email,cutomerName:customer.name,investmentAmount:amountPaid, investmentCategory,transactionReference,paidOn,transactionHash,settlementAmount}
+   let data={investmentDuration,interestRate,expectedInterest,actualInterest,    liquidatedDate, liquidationPeriod,customerEmail:email,customerName:name,investmentAmount:amountPaid, investmentCategory,transactionReference,paidOn,transactionHash,settlementAmount}
    data.liquidatedDate = formatTimeStamp(minLiquidationMonths)
 
    

@@ -9,7 +9,6 @@ require('dotenv').config()
 
 async function receivePayment(req,res){
   const postData = req.body;
-  console.log(postData)
   const key = process.env.MONNIFY_PASSWORD
   const transactionHash =  Buffer.from(postData.transactionHash)//from the gate way
   const hash= await createHash(postData,key)//calculated here in the app

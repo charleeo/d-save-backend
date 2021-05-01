@@ -1,5 +1,4 @@
 const models = require("../models")
-const winston = require('winston')
 const savingsObjectOnline = require('./depsoits_online')
 const {depositHistoryOnline} = require('./depositHostory_online')
 require('dotenv').config()
@@ -11,7 +10,7 @@ if(postData.transactionStatus==='SUCCESS'){
  await savingHistory.save();
  await savingsObjectOnline(postData);
  return res.status(201).json({message:"Your deposit was recieved by us"}) ;
-}
+  }
  
 }
 module.exports= receiveCardPayment
