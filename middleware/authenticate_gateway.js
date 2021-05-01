@@ -10,7 +10,7 @@ async function authenticateGateWay(){
         headers: {
             Authorization: auth(),
         },
-        data    
+            
     });
     return (response.data.responseBody.accessToken)
     } catch (error) {
