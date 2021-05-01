@@ -11,7 +11,8 @@ const imageRoute = require('./routes/images');
 const gatewayInfo = require('./routes/gateway_info');
 const savingsAndInvestments = require('./routes/savings_and_Investments');
 const reservedAccountDetails = require("./routes/acount_info");
-const forReact = require('./routes/for_react')
+const forReact = require('./routes/for_react');
+const transfer = require('./routes/transfer_routes')
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use('/uploads', express.static('uploads'));
 app.use(express.static('public'));
 
 app.use("/posts", postsRoute);
+app.use("/disburse", transfer);
 app.use("/user", userRoute);
 app.use("/comments", commentsRoute);
 app.use("/images", imageRoute);

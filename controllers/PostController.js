@@ -7,14 +7,11 @@ async function save(req, res){
     const post = {
         title, content, categoryId,userId: req.userData.userId
     }
-    
     const schema = Joi.object({
         content:Joi.string().min(10).required(),
         title:Joi.string().required().min(4).max(225),
         categoryId:Joi.number().required()
     })
-
-
    let cat_id=  await models.Category.findByPk(categoryId) ; 
     
     if(!cat_id){
@@ -33,8 +30,7 @@ async function save(req, res){
 
 async function show(req, res){
     const id = req.params.id||req.body.id;
-
-   const postID=  await models.Post.findOne({
+    const postID=  await models.Post.findOne({
     where: {id}, include: ['category']
   })
         if(postID){
