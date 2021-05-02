@@ -3,10 +3,8 @@ require('dotenv').config()
 axios.defaults.baseURL = "https://sandbox.monnify.com/api/";
 const username = process.env.MONNIFY_SECRET_KEY;
 const password = process.env.MONNIFY_PASSWORD;
-
 async function authenticateGateWay(){
-
-    try {
+  try {
   const response=  await  axios.post(
         `v1/auth/login/`,
         {},
