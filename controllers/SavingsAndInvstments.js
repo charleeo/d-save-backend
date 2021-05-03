@@ -28,4 +28,17 @@ const individualInvestments= async(req,res)=>{
  else return res.status(404).json({message:"No record found"})
 }
 
-module.exports = {savings,investments,individualSavings,individualInvestments}
+const getInvestmentsSummary = async(req,res)=>{
+  const summary = await models.investmentRecords.findAll();
+  if(summary) return res.status(200).json({message:summary});
+  else return res.status(404).json({message:"No record found"})
+}
+
+module.exports = 
+{
+  savings,
+  investments,
+  individualSavings,
+  individualInvestments,
+  getInvestmentsSummary
+}

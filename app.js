@@ -12,7 +12,8 @@ const gatewayInfo = require('./routes/gateway_info');
 const savingsAndInvestments = require('./routes/savings_and_Investments');
 const reservedAccountDetails = require("./routes/acount_info");
 const forReact = require('./routes/for_react');
-const transfer = require('./routes/transfer_routes')
+const transfer = require('./routes/transfer_routes');
+const investmentSummary = require('./routes/investment_summary')
 
 const app = express();
 
@@ -30,8 +31,9 @@ app.use("/disburse", transfer);
 app.use("/user", userRoute);
 app.use("/comments", commentsRoute);
 app.use("/images", imageRoute);
-app.use('/gateway',gatewayInfo)
-app.use('/savings-investments',savingsAndInvestments)
-app.use('/reserved-account', reservedAccountDetails)
-app.use('/keys',forReact)
+app.use('/gateway',gatewayInfo);
+app.use('/savings-investments',savingsAndInvestments);
+app.use('/reserved-account', reservedAccountDetails);
+app.use('/invest', investmentSummary)
+app.use('/keys',forReact);
 module.exports = app;

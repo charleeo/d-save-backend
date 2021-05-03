@@ -52,7 +52,24 @@ const savingsObject= async(params)=>{
     const investItems = new models.InvestmentsDetails(data);
    return await investItems.save()
   }
-  
 }
 
-module.exports = savingsObject
+const investmentRecords=async (data)=>{
+  const userEmail= data.customer.email
+   const investment = await models.investmentRecords.findOne({where:{userEmail:userEmail}});
+   
+  if(!investment){
+    const deposit = data.amountPaid;
+    const withdrawals = 0;
+    depositToInt = parseInt(deposit)
+    const balance = depositToInt - withdrawals;
+    const newInvestment = new models.investmentRecords({balance,withdrawals,depositToInt,userEmail});
+    return await newInvestment.save();
+  }else{
+   const depositBalance = investment.deposit +  parseInt(data.amountPaid);
+   const investmentBalance = depositBalance - investment.withdrawals;
+    return await models.investmentRecords.update({balance:investmentBalance,deposit:depositBalance},{where:{userEmail}})
+  }
+}
+
+module.exports = {savingsObject,investmentRecords}

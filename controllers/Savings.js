@@ -3,7 +3,7 @@ const winston = require('winston')
 const crypto = require('crypto')
 const axios =require('axios')
 const authenticateGateWay=require('../middleware/authenticate_gateway');
-const savingsObject = require('./depsoits')
+const {savingsObject,investmentRecords} = require('./depsoits')
 const {depositHistory,createHash} = require('./depositHostory')
 require('dotenv').config()
 
@@ -30,6 +30,7 @@ if(transactionStatus.data.requestSuccessful===true && transactionStatus.data.res
  const savingHistory = new models.DepositHistory(depositHistory(postData))
  await savingHistory.save();
  await savingsObject(postData);
+ await investmentRecords(postData)
  return res.json({message:"We have received your savings"}) ;
 }
  }else{
