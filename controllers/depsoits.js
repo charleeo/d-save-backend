@@ -64,7 +64,7 @@ const investmentRecords=async (data)=>{
     const withdrawals = 0;
     depositToInt = parseInt(deposit);
     const balance = depositToInt - withdrawals;
-    const newInvestment = new models.InvestmentRecords({balance,withdrawals,depositToInt,userEmail});
+    const newInvestment = new models.InvestmentRecords({balance,withdrawals,deposits:depositToInt,userEmail});
     return await newInvestment.save();
   }else{
    const depositBalance = investment.deposit +  parseInt(data.amountPaid);
