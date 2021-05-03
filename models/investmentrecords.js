@@ -19,9 +19,9 @@ module.exports = (sequelize, DataTypes) => {
   };
   InvestmentRecords.init({
     userEmail: DataTypes.STRING,
-    deposits: DataTypes.STRING,
-    withdrawals: DataTypes.STRING,
-    balance: DataTypes.STRING,
+    deposits: DataTypes.DOUBLE,
+    withdrawals: DataTypes.DOUBLE,
+    balance: DataTypes.DOUBLE,
   }, {
     sequelize,
     modelName: 'InvestmentRecords',
