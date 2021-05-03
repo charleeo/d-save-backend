@@ -67,9 +67,9 @@ const investmentRecords=async (data)=>{
     const newInvestment = new models.InvestmentRecords({balance,withdrawals,deposits:depositToInt,userEmail});
     return await newInvestment.save();
   }else{
-   const depositBalance = investment.deposit +  parseInt(data.amountPaid);
+   const depositBalance = investment.deposits +  parseInt(data.amountPaid);
    const investmentBalance = depositBalance - investment.withdrawals;
-    return await models.InvestmentRecords.update({balance:investmentBalance,deposit:depositBalance},{where:{userEmail}})
+    return await models.InvestmentRecords.update({balance:investmentBalance,deposits:depositBalance},{where:{userEmail}})
   }
 }
 
