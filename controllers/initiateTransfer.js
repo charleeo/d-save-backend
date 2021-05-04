@@ -31,7 +31,7 @@ const transfer =async (req,res)=>{
   const {amount,narration,destinationBankCode,destinationAccountNumber,sourceAccountNumber,currency,userEmail} =req.body
   const data = {amount,reference,narration,destinationBankCode,destinationAccountNumber,sourceAccountNumber,currency,userEmail}
   const balanceCheck= await checkBalance(data);
-  winston.info(`Data balance:${balanceCheck}`)
+  winston.info(`Data balance:${balanceCheck.data}`)
 
   if(balanceCheck.error !=='')return res.status(400).json({error:balanceCheck.error})
  else{ try {
@@ -51,8 +51,8 @@ const transfer =async (req,res)=>{
         }, 
       });
       if(details  && details.data.requestSuccessful===true){
-        const withdrawals= balanceCheck.withdrawals;
-        const balance= balanceCheck.newBalance
+        const withdrawals= balanceCheck.data.withdrawals;
+        const balance= balanceCheck.data.newBalance
         const balHistory= await models.InvestmentRecords.update({withdrawals,balance},{where:{userEmail}});
         console.log(balHistory);
          return res.status(200).json({data:details.data})
