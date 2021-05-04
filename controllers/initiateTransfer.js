@@ -32,7 +32,7 @@ const transfer =async (req,res)=>{
   const {amount,narration,destinationBankCode,destinationAccountNumber,sourceAccountNumber,currency,userEmail} =req.body
   const data = {amount,reference,narration,destinationBankCode,destinationAccountNumber,sourceAccountNumber,currency,userEmail}
   const balanceCheck= await checkBalance(data);
-  const {withdrawals,error,newBalance} = checkBalance
+  const {withdrawals,error,newBalance} = balanceCheck
   if(error !==''){return res.status(400).json({error:error})}
   
   else{ try {
@@ -52,7 +52,7 @@ const transfer =async (req,res)=>{
         }, 
       });
       if(details  && details.data.requestSuccessful===true){
-        const balHistory= await models.InvestmentRecords.update({withdrawals,balance},{where:{userEmail}});
+        const balHistory= await models.InvestmentRecords.update({withdrawals,balance:newBalance},{where:{userEmail}});
         console.log(balHistory);
          return res.status(200).json({data:details.data})
       }else{res.status(400).json({data:'Withdrawals was not successful'})}
