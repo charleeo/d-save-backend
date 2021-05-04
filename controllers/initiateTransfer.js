@@ -2,13 +2,13 @@ const axios = require('axios');
 const auth =require('../middleware/monnify_configs')
 const {randomString} = require('../helpers/random_string');
 const  models  = require('../models/index');
-const winston = require('winston');
 
 const checkBalance= async(data)=>{
   let error=''
   const userEmail = data.userEmail;
   const amount = data.amount
-  const userBalance = await models.InvestmentRecords.findOne({where:{userEmail}})
+  const userBalance = await models.InvestmentRecords.findOne({where:{userEmail}});
+  console.log(userBalance)
   if(!userBalance){
     error= "You don't have any deposit history to withdraw from";
   }
