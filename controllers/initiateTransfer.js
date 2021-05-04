@@ -28,7 +28,7 @@ const checkBalance= async(data,error='')=>{
 
 const transfer =async (req,res)=>{
   const reference = randomString(22)
-  const {amount,narration,destinationBankCode,destinationAccountNumber,sourceAccountNumber,currency} =req.body
+  const {amount,narration,destinationBankCode,destinationAccountNumber,sourceAccountNumber,currency,userEmail} =req.body
   const data = {amount,reference,narration,destinationBankCode,destinationAccountNumber,sourceAccountNumber,currency,userEmail}
   const balanceCheck= checkBalance(data);
   winston.info(balanceCheck)
