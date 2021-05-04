@@ -21,7 +21,8 @@ const checkBalance= async(data,error='')=>{
       //deduct the amount requested from the current balance
      const  newBalance = parseInt(balance)- parseInt(amount);
      const withdrawals = parseInt(balance) + parseInt(amount)
-     return {newBalance,withdrawals}
+     const result= {newBalance,withdrawals,error}
+     return result
     }
   }
 }
@@ -31,7 +32,7 @@ const transfer =async (req,res)=>{
   const {amount,narration,destinationBankCode,destinationAccountNumber,sourceAccountNumber,currency,userEmail} =req.body
   const data = {amount,reference,narration,destinationBankCode,destinationAccountNumber,sourceAccountNumber,currency,userEmail}
   const balanceCheck= await checkBalance(data);
-  winston.info(`Data balance:${balanceCheck.data}`)
+  winston.info(`Data balance:${balanceCheck.newBalance} ${balanceCheck.withdrawals}`)
 
   if(balanceCheck.error !=='')return res.status(400).json({error:balanceCheck.error})
  else{ try {
