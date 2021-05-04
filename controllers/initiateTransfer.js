@@ -4,25 +4,23 @@ const {randomString} = require('../helpers/random_string');
 const  models  = require('../models/index');
 const winston = require('winston');
 
-const checkBalance= async(data,error='')=>{
+const checkBalance= async(data)=>{
+  let error=''
   const userEmail = data.userEmail;
   const amount = data.amount
   const userBalance = await models.InvestmentRecords.findOne({where:{userEmail}})
   if(!userBalance){
     error= "You don't have any deposit history to withdraw from";
-    return error
   }
   else{
     const balance = userBalance.balance;
     if(balance < amount){
       error=`Your current balance of ${balance} is lower than requested amount of ${amount}`;
-      return error
     }else{
       //deduct the amount requested from the current balance
      const  newBalance = parseInt(balance)- parseInt(amount);
      const withdrawals = parseInt(balance) + parseInt(amount)
-     const result= {newBalance,withdrawals,error}
-     return result
+     return {newBalance,withdrawals,error}
     }
   }
 }
