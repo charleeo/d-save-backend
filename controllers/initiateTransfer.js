@@ -57,7 +57,7 @@ const transfer =async (req,res)=>{
       }else{res.status(400).json({data:'Withdrawals was not successful'})}
     } catch (error) {
       console.log(error)
-     return res.status(error.statusCode).json({error:error.message})
+     return res.status(error.status).json({error:error.message})
     }
   }
 }
