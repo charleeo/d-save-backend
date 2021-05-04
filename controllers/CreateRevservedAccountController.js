@@ -50,6 +50,7 @@ const bodyParams ={
    return res.status(201).json({message:"Account created successfully",
    Result:itemsToSave})
   } catch (error) {
+    console.log(error)
     res.status(400).json(error.message)
   }
 }
