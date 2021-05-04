@@ -42,8 +42,8 @@ const bodyParams ={
    /** destructure the callback response from the gateway and include them in the items to save */
 
    const {accounts, status,collectionChannel,reservationReference} = response.data.responseBody;
-   const{bankCode,bankName,accountNumber} = accounts //destructure the accounts information
-   console.log(accounts)
+   const[bankCode,bankName,accountNumber] = accounts[0] //destructure the accounts information
+   console.log(accounts[0].accountNumber)
    const itemsToSave = {
      accountReference,accountName,currencyCode,contractCode,customerBvn,userId:userInfo.id,bankName,bankCode,status, accountNumber,collectionChannel,reservationReference
     }
