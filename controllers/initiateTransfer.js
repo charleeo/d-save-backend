@@ -5,6 +5,7 @@ const  models  = require('../models/index');
 const winston = require('winston');
 
 const checkBalance= async(data,error='')=>{
+  winston.info(data)
   const userEmail = data.userEmail;
   const amount = data.amount
   const userBalance = await models.InvestmentRecords.findOne({where:{userEmail}})
