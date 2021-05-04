@@ -27,10 +27,10 @@ const {
   accountName,customerBvn}=req.body; /** This is from input elements */
   const accountReference = randomString(20)
   const currencyCode="NGN"
-
+  const getAllAvailableBanks=true;
 /** Include the user details in the request body */
 const bodyParams ={
-  accountReference,accountName,currencyCode, contractCode,customerBvn,customerName:userInfo.name, customerEmail:userInfo.email
+  accountReference,accountName,currencyCode, contractCode,customerBvn,customerName:userInfo.name, customerEmail:userInfo.email,getAllAvailableBanks
 }
 
 /** Make axios call to the payment gateway to create the account for the loogin user */
