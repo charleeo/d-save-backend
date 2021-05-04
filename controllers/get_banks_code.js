@@ -12,7 +12,7 @@ async function getBanksCode(req, res){
   const  response= await axios.get( 
     `v1/sdk/transactions/banks`, {},config
    )
-   return res.status(201).json({message:response.data})
+   return res.status(200).json({message:response.data})
   } catch (error) {
     return res.status(400).json(error.message)
   }
