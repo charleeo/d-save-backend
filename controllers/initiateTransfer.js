@@ -14,12 +14,13 @@ const checkBalance= async(data)=>{
     error= "You don't have any deposit history to withdraw from";
     statusCode=404;
     balance= 0;
+    withdrawalsBalance=0;
   }
   else{
-
+    withdrawalsBalance = userBalance.withdrawals;
     balance = userBalance.balance;
   }
-  withdrawalsBalance = userBalance.withdrawals;
+  
   if(balance < amount){
     error=`Your current balance of ${balance} is lower than requested amount of ${amount}`;
     statusCode=400;
