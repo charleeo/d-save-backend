@@ -44,6 +44,7 @@ const bodyParams ={
    const itemsToSave = {
      accountReference,accountName,currencyCode,contractCode,customerBvn,userId:userInfo.id,bankName:accounts.bankName,bankCode:accounts.bankCode,status, accountNumber:accounts.accountNumber,collectionChannel,reservationReference
     }
+    console.log(itemsToSave)
    /** Save the response to my database */
    const postData = new models.reserved_account(itemsToSave)
    await postData.save();
