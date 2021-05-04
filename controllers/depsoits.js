@@ -55,7 +55,6 @@ const savingsObject= async(params)=>{
 }
 
 const investmentRecords=async (data)=>{
-  winston.info(data)
   const userEmail= data.customer.email
    const investment = await models.InvestmentRecords.findOne({where:{userEmail:userEmail}});
    
