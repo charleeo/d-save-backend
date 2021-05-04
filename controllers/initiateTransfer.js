@@ -4,7 +4,7 @@ const {randomString} = require('../helpers/random_string');
 const  models  = require('../models/index');
 
 const checkBalance= async(data)=>{
-  let status=0;
+  let statusCode=0;
   let error=''
   const userEmail = data.userEmail;
   const amount = data.amount
@@ -12,9 +12,13 @@ const checkBalance= async(data)=>{
 
   if(!userBalance){
     error= "You don't have any deposit history to withdraw from";
-    statusCode=404
+    statusCode=404;
+    balance= 0;
   }
-  const balance = userBalance.balance;
+  else{
+
+    balance = userBalance.balance;
+  }
   withdrawalsBalance = userBalance.withdrawals;
   if(balance < amount){
     error=`Your current balance of ${balance} is lower than requested amount of ${amount}`;
@@ -54,9 +58,8 @@ const transfer =async (req,res)=>{
         await models.InvestmentRecords.update({withdrawals,balance:newBalance},{where:{userEmail}});
     
          return res.status(200).json({data:details.data})
-      }else{res.status(400).json({data:'Withdrawals was not successful'})}
+      }else{return res.status(400).json({data:'Withdrawals was not successful'})}
     } catch (error) {
-      console.log(error)
      return res.json({error:error})
     }
 }
