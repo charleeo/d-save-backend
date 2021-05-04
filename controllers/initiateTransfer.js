@@ -50,11 +50,13 @@ const transfer =async (req,res)=>{
         }, 
       });
       if(details  && details.data.requestSuccessful===true){
-        const balHistory= await models.InvestmentRecords.update({withdrawals,balance:newBalance},{where:{userEmail}});
-        console.log(balHistory);
+        console.log("Succcccccccccccccccccccccc")
+        await models.InvestmentRecords.update({withdrawals,balance:newBalance},{where:{userEmail}});
+    
          return res.status(200).json({data:details.data})
       }else{res.status(400).json({data:'Withdrawals was not successful'})}
     } catch (error) {
+      console.log(error)
       res.status(400).json({error:error.message})
     }
   }
