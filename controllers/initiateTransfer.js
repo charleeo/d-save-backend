@@ -30,7 +30,7 @@ const transfer =async (req,res)=>{
   const reference = randomString(22)
   const {amount,narration,destinationBankCode,destinationAccountNumber,sourceAccountNumber,currency,userEmail} =req.body
   const data = {amount,reference,narration,destinationBankCode,destinationAccountNumber,sourceAccountNumber,currency,userEmail}
-  const balanceCheck= checkBalance(data);
+  const balanceCheck= await checkBalance(data);
   winston.info(`Data balance:${balanceCheck}`)
 
   if(balanceCheck.error !=='')return res.status(400).json({error:balanceCheck.error})
