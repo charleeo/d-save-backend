@@ -13,7 +13,8 @@ const savingsAndInvestments = require('./routes/savings_and_Investments');
 const reservedAccountDetails = require("./routes/acount_info");
 const forReact = require('./routes/for_react');
 const transfer = require('./routes/transfer_routes');
-const investmentSummary = require('./routes/investment_summary')
+const investmentSummary = require('./routes/investment_summary');
+const getBanksCode = require('./routes/get_banks_code');
 
 const app = express();
 
@@ -34,6 +35,7 @@ app.use("/images", imageRoute);
 app.use('/gateway',gatewayInfo);
 app.use('/savings-investments',savingsAndInvestments);
 app.use('/reserved-account', reservedAccountDetails);
-app.use('/invest', investmentSummary)
+app.use('/invest', investmentSummary);
+app.use('/banks',getBanksCode)
 app.use('/keys',forReact);
 module.exports = app;

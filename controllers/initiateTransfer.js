@@ -23,11 +23,11 @@ const checkBalance= async(data)=>{
       statusCode=400;
     }
   }
+  //deduct the amount requested from the current balance
+  const  newBalance = parseInt(balance) - parseInt(amount);
+  const withdrawals = parseInt(withdrawalsBalance) + parseInt(amount)  
+  return {newBalance,withdrawals,error,statusCode}
   
-     //deduct the amount requested from the current balance
-     const  newBalance = parseInt(balance) - parseInt(amount);
-     const withdrawals = parseInt(withdrawalsBalance) + parseInt(amount)  
-     return {newBalance,withdrawals,error,statusCode}
 }
 
 const transfer =async (req,res)=>{
@@ -54,7 +54,7 @@ const transfer =async (req,res)=>{
           Authorization: auth(),
         }, 
       });
-      if(details  && details.data.requestSuccessful===true){
+      if(details  && details.data.requestSuccessful===true){//checking response status
         await models.InvestmentRecords.update({withdrawals,balance:newBalance},{where:{userEmail}});
     
          return res.status(200).json({data:details.data})
@@ -63,7 +63,4 @@ const transfer =async (req,res)=>{
      return res.json({error:error})
     }
 }
-
 module.exports= transfer
-
-
