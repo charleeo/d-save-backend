@@ -31,7 +31,7 @@ const transfer =async (req,res)=>{
   const data = {amount,reference,narration,destinationBankCode,destinationAccountNumber,sourceAccountNumber,currency,userEmail}
   const balanceCheck= await checkBalance(data);
   const {withdrawals,error,newBalance} = balanceCheck
-  if(error !==''){return res.status(400).json({error:error})}
+  if(error !==''){return res.json({error:error})}
   
   else{ try {
     const response = await axios({
