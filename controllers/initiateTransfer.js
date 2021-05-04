@@ -4,6 +4,7 @@ const {randomString} = require('../helpers/random_string');
 const  models  = require('../models/index');
 
 const checkBalance= async(data)=>{
+  let status=0;
   let error=''
   const userEmail = data.userEmail;
   const amount = data.amount
@@ -11,16 +12,18 @@ const checkBalance= async(data)=>{
 
   if(!userBalance){
     error= "You don't have any deposit history to withdraw from";
+    statusCode=404
   }
   const balance = userBalance.balance;
   withdrawalsBalance = userBalance.withdrawals;
   if(balance < amount){
     error=`Your current balance of ${balance} is lower than requested amount of ${amount}`;
+    statusCode=400;
   }
      //deduct the amount requested from the current balance
      const  newBalance = parseInt(balance) - parseInt(amount);
      const withdrawals = parseInt(withdrawalsBalance) + parseInt(amount)  
-     return {newBalance,withdrawals,error}
+     return {newBalance,withdrawals,error,statusCode}
 }
 
 const transfer =async (req,res)=>{
@@ -28,11 +31,10 @@ const transfer =async (req,res)=>{
   const {amount,narration,destinationBankCode,destinationAccountNumber,sourceAccountNumber,currency,userEmail} =req.body
   const data = {amount:parseInt(amount),reference,narration,destinationBankCode,destinationAccountNumber,sourceAccountNumber,currency,userEmail}
   const balanceCheck= await checkBalance(data);
-  const {withdrawals,error,newBalance} = balanceCheck
+  const {withdrawals,error,newBalance,statusCode} = balanceCheck
   try {
-  if(error !==''){return res.json({error:error})}
-  
-  else{ 
+  if(error !==''){return res.status(statusCode).json({error:error})}
+
     const response = await axios({
       url: 'v2/disbursements/single',
       method: 'post',
@@ -53,7 +55,6 @@ const transfer =async (req,res)=>{
     
          return res.status(200).json({data:details.data})
       }else{res.status(400).json({data:'Withdrawals was not successful'})}
-    }
     } catch (error) {
       console.log(error)
      return res.json({error:error})
