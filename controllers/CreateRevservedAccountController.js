@@ -48,7 +48,7 @@ const bodyParams ={
      accountReference,accountName,currencyCode,contractCode,customerBvn,userId:userInfo.id,bankName,bankCode,status, accountNumber,collectionChannel,reservationReference
     }
     
-    winston.log(itemsToSave)
+    winston.info(itemsToSave)
    /** Save the response to my database */
    const postData = new models.reserved_account(itemsToSave)
    await postData.save();
