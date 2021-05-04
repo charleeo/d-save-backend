@@ -43,6 +43,8 @@ const bodyParams ={
 
    const {accounts, status,collectionChannel,reservationReference} = response.data.responseBody;
   //  const[bankCode,bankName,accountNumber] = accounts[0] //destructure the accounts information
+  var firstItem = accounts.filter(x => typeof x!==undefined).shift();
+  console.log(firstItem)
    const bankCode = accounts.bankCode[0];
    const accountNumber=accounts.accountNumber[0];
    const bankName = accounts.bankName[0];
