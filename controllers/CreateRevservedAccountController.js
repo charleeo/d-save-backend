@@ -35,7 +35,7 @@ const bodyParams ={
 
 /** Make axios call to the payment gateway to create the account for the loogin user */
   const  response= await axios.post( 
-    `v1/bank-transfer/reserved-accounts`, bodyParams,config
+    `v2/bank-transfer/reserved-accounts`, bodyParams,config
    )
 
    /** destructure the callback response from the gateway and include them in the items to save */
