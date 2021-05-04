@@ -32,10 +32,10 @@ const transfer =async (req,res)=>{
   const {amount,narration,destinationBankCode,destinationAccountNumber,sourceAccountNumber,currency,userEmail} =req.body
   const data = {amount,reference,narration,destinationBankCode,destinationAccountNumber,sourceAccountNumber,currency,userEmail}
   const balanceCheck= await checkBalance(data);
-  winston.info(`Data balance:${balanceCheck.newBalance} ${balanceCheck.withdrawals}`)
-
-  if(balanceCheck.error !=='')return res.status(400).json({error:balanceCheck.error})
- else{ try {
+  const {withdrawals,error,newBalance} = checkBalance
+  if(error !==''){return res.status(400).json({error:error})}
+  
+  else{ try {
     const response = await axios({
       url: 'v2/disbursements/single',
       method: 'post',
@@ -52,8 +52,6 @@ const transfer =async (req,res)=>{
         }, 
       });
       if(details  && details.data.requestSuccessful===true){
-        const withdrawals= balanceCheck.data.withdrawals;
-        const balance= balanceCheck.data.newBalance
         const balHistory= await models.InvestmentRecords.update({withdrawals,balance},{where:{userEmail}});
         console.log(balHistory);
          return res.status(200).json({data:details.data})
