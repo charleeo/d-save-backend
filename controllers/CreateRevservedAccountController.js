@@ -2,7 +2,8 @@ const axios = require('axios')
 const models = require('../models');
 const authenticateGateWay = require('../middleware/authenticate_gateway')
 
-const {randomString}= require('../helpers/random_string')
+const {randomString}= require('../helpers/random_string');
+const winston = require('winston');
 async function createAReserveAccount(req, res){
   try{
   let token = await authenticateGateWay();
@@ -46,6 +47,8 @@ const bodyParams ={
    const itemsToSave = {
      accountReference,accountName,currencyCode,contractCode,customerBvn,userId:userInfo.id,bankName,bankCode,status, accountNumber,collectionChannel,reservationReference
     }
+    
+    winston.log(itemsToSave)
    /** Save the response to my database */
    const postData = new models.reserved_account(itemsToSave)
    await postData.save();
