@@ -15,16 +15,15 @@ const checkBalance= async(data)=>{
     statusCode=404;
     balance= 0;
     withdrawalsBalance=0;
-  }
-  else{
+  }else{
     withdrawalsBalance = userBalance.withdrawals;
     balance = userBalance.balance;
+    if(balance < amount){
+      error=`Your current balance of ${balance} is lower than requested amount of ${amount}`;
+      statusCode=400;
+    }
   }
   
-  if(balance < amount){
-    error=`Your current balance of ${balance} is lower than requested amount of ${amount}`;
-    statusCode=400;
-  }
      //deduct the amount requested from the current balance
      const  newBalance = parseInt(balance) - parseInt(amount);
      const withdrawals = parseInt(withdrawalsBalance) + parseInt(amount)  
