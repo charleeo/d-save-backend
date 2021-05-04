@@ -20,19 +20,18 @@ const checkBalance= async(data,error='')=>{
       //deduct the amount requested from the current balance
      const  newBalance = parseInt(balance)- parseInt(amount);
      const withdrawals = parseInt(balance) + parseInt(amount)
-     //update the investment records table and insert into the withdrawals history table
-    return await models.InvestmentRecords.update({withdrawals,balance:newBalance},{where:{userEmail}});
-
+     return {newBalance,withdrawals}
     }
   }
 }
 
 const transfer =async (req,res)=>{
+  const userEmail= req.body.userEmail;
   const reference = randomString(22)
   const {amount,narration,destinationBankCode,destinationAccountNumber,sourceAccountNumber,currency} =req.body
   const data = {amount,reference,narration,destinationBankCode,destinationAccountNumber,sourceAccountNumber,currency}
-  const checkBalance= checkBalance(data);
-  if(checkBalance.error !=='')return res.status(400).json({error:checkBalance.error})
+  const balanceCheck= checkBalance(data);
+  if(balanceCheck.error !=='')return res.status(400).json({error:balanceCheck.error})
  else{ try {
     const response = await axios({
       url: 'v2/disbursements/single',
@@ -50,8 +49,11 @@ const transfer =async (req,res)=>{
         }, 
       });
       if(details  && details.data.requestSuccessful===true){
-
-      res.status(200).json({data:details.data})
+        const withdrawals= balanceCheck.withdrawals;
+        const balance= balanceCheck.newBalance
+        const balHistory= await models.InvestmentRecords.update({withdrawals,balance},{where:{userEmail}});
+        console.log(balHistory);
+         return res.status(200).json({data:details.data})
       }else{res.status(400).json({data:'Withdrawals was not successful'})}
     } catch (error) {
       res.status(400).json({error:error.message})
