@@ -5,7 +5,6 @@ const  models  = require('../models/index');
 const winston = require('winston');
 
 const checkBalance= async(data,error='')=>{
-  winston.info(data)
   const userEmail = data.userEmail;
   const amount = data.amount
   const userBalance = await models.InvestmentRecords.findOne({where:{userEmail}})
@@ -28,10 +27,9 @@ const checkBalance= async(data,error='')=>{
 }
 
 const transfer =async (req,res)=>{
-  const userEmail= req.body.userEmail;
   const reference = randomString(22)
   const {amount,narration,destinationBankCode,destinationAccountNumber,sourceAccountNumber,currency} =req.body
-  const data = {amount,reference,narration,destinationBankCode,destinationAccountNumber,sourceAccountNumber,currency}
+  const data = {amount,reference,narration,destinationBankCode,destinationAccountNumber,sourceAccountNumber,currency,userEmail}
   const balanceCheck= checkBalance(data);
   winston.info(balanceCheck)
 
