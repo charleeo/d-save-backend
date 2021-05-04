@@ -8,7 +8,7 @@ const checkBalance= async(data)=>{
   const userEmail = data.userEmail;
   const amount = data.amount
   const userBalance = await models.InvestmentRecords.findOne({where:{userEmail}});
-  console.log(userBalance)
+
   if(!userBalance){
     error= "You don't have any deposit history to withdraw from";
   }
@@ -32,9 +32,10 @@ const transfer =async (req,res)=>{
   const data = {amount:parseInt(amount),reference,narration,destinationBankCode,destinationAccountNumber,sourceAccountNumber,currency,userEmail}
   const balanceCheck= await checkBalance(data);
   const {withdrawals,error,newBalance} = balanceCheck
+  try {
   if(error !==''){return res.json({error:error})}
   
-  else{ try {
+  else{ 
     const response = await axios({
       url: 'v2/disbursements/single',
       method: 'post',
@@ -51,16 +52,15 @@ const transfer =async (req,res)=>{
         }, 
       });
       if(details  && details.data.requestSuccessful===true){
-        console.log("Succcccccccccccccccccccccc")
         await models.InvestmentRecords.update({withdrawals,balance:newBalance},{where:{userEmail}});
     
          return res.status(200).json({data:details.data})
       }else{res.status(400).json({data:'Withdrawals was not successful'})}
+    }
     } catch (error) {
       console.log(error)
      return res.json({error:error})
     }
-  }
 }
 
 module.exports= transfer
