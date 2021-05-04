@@ -28,7 +28,7 @@ const checkBalance= async(data)=>{
 const transfer =async (req,res)=>{
   const reference = randomString(22)
   const {amount,narration,destinationBankCode,destinationAccountNumber,sourceAccountNumber,currency,userEmail} =req.body
-  const data = {amount,reference,narration,destinationBankCode,destinationAccountNumber,sourceAccountNumber,currency,userEmail}
+  const data = {amount:parseInt(amount),reference,narration,destinationBankCode,destinationAccountNumber,sourceAccountNumber,currency,userEmail}
   const balanceCheck= await checkBalance(data);
   const {withdrawals,error,newBalance} = balanceCheck
   if(error !==''){return res.json({error:error})}
