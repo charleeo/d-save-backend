@@ -2,6 +2,7 @@ const axios = require('axios');
 const auth =require('../middleware/monnify_configs')
 const {randomString} = require('../helpers/random_string');
 const  models  = require('../models/index');
+const winston = require('winston');
 
 const checkBalance= async(data,error='')=>{
   const userEmail = data.userEmail;
@@ -31,6 +32,8 @@ const transfer =async (req,res)=>{
   const {amount,narration,destinationBankCode,destinationAccountNumber,sourceAccountNumber,currency} =req.body
   const data = {amount,reference,narration,destinationBankCode,destinationAccountNumber,sourceAccountNumber,currency}
   const balanceCheck= checkBalance(data);
+  winston.info(balanceCheck)
+
   if(balanceCheck.error !=='')return res.status(400).json({error:balanceCheck.error})
  else{ try {
     const response = await axios({
