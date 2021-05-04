@@ -43,7 +43,7 @@ const bodyParams ={
 
    const {accounts, status,collectionChannel,reservationReference} = response.data.responseBody;
    const{bankCode,bankName,accountNumber} = accounts //destructure the accounts information
-   console.log(accounts[accountNumber])
+   console.log(accounts)
    const itemsToSave = {
      accountReference,accountName,currencyCode,contractCode,customerBvn,userId:userInfo.id,bankName,bankCode,status, accountNumber,collectionChannel,reservationReference
     }
