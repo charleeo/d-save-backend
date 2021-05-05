@@ -26,13 +26,14 @@ const checkBalance= async(data)=>{
   //deduct the amount requested from the current balance
   const  newBalance = parseInt(balance) - parseInt(amount);
   const withdrawals = parseInt(withdrawalsBalance) + parseInt(amount)  
-  return {newBalance,withdrawals,error,statusCode}
-  
+  return {newBalance,withdrawals,error,statusCode}; 
 }
 
 const transfer =async (req,res)=>{
-  const reference = randomString(22)
-  const {amount,narration,destinationBankCode,destinationAccountNumber,sourceAccountNumber,currency,userEmail} =req.body
+  const reference = randomString(22);
+  const sourceAccountNumber='4353544245';
+  const currency ="NGN";
+  const {amount,narration,destinationBankCode,destinationAccountNumber,userEmail} =req.body
   const data = {amount:parseInt(amount),reference,narration,destinationBankCode,destinationAccountNumber,sourceAccountNumber,currency,userEmail}
   const balanceCheck= await checkBalance(data);
   const {withdrawals,error,newBalance,statusCode} = balanceCheck
