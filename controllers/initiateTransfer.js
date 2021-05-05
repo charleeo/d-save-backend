@@ -58,7 +58,7 @@ const transfer =async (req,res)=>{
       if(details  && details.data.requestSuccessful===true){//checking response status
         await models.InvestmentRecords.update({withdrawals,balance:newBalance},{where:{userEmail}});
     
-         return res.status(200).json({data:details.data})
+         return res.status(200).json({data:details.data.responseMessage})
       }else{
         console.log(details)
         return res.json({data:details.data})
