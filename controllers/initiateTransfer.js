@@ -64,7 +64,7 @@ const transfer =async (req,res)=>{
         return res.json({data:details.data})
       }
     } catch (error) {
-      console.log(error.response)
+      console.log(error.response.responseMessage)
      return res.json({error:error})
     }
 }
