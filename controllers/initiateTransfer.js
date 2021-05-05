@@ -61,8 +61,8 @@ const transfer =async (req,res)=>{
          return res.status(200).json({data:details.data})
       }else{return res.status(400).json({data:'Withdrawals was not successful'})}
     } catch (error) {
-      console.log(error)
-     return res.json({error:error.data.responseMessage})
+      console.log(error.data)
+     return res.json({error:error.response.responseMessage})
     }
 }
 module.exports= transfer
