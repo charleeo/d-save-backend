@@ -1,45 +1,34 @@
 const axios = require('axios');
+const  models  = require('../models/index');
+import checkBalance from './checkBalance';
 const auth =require('../middleware/monnify_configs')
 const {randomString} = require('../helpers/random_string');
-const  models  = require('../models/index');
 
-const checkBalance= async(data)=>{
-  let statusCode=0;
-  let error=''
-  const userEmail = data.userEmail;
-  const amount = data.amount
-  const userBalance = await models.InvestmentRecords.findOne({where:{userEmail}});
 
-  if(!userBalance){
-    error= "You don't have any deposit history to withdraw from";
-    statusCode=404;
-    balance= 0;
-    withdrawalsBalance=0;
-  }else{
-    withdrawalsBalance = userBalance.withdrawals;
-    balance = userBalance.balance;
-    if(balance < amount){
-      error=`Your current balance of ${balance} is lower than requested amount of ${amount}`;
-      statusCode=400;
-    }
-  }
-  //deduct the amount requested from the current balance
-  const  newBalance = parseInt(balance) - parseInt(amount);
-  const withdrawals = parseInt(withdrawalsBalance) + parseInt(amount)  
-  return {newBalance,withdrawals,error,statusCode}; 
-}
+
+https://sandbox.monnify.com/api/v1/disbursements/account/validate?accountNumber=0068687503&bankCode=232
+
 
 const transfer =async (req,res)=>{
+  
   const reference = randomString(22);
   const sourceAccountNumber='4353544245';
   const currency ="NGN";
   const {amount,narration,destinationBankCode,destinationAccountNumber,userEmail} =req.body
   const data = {amount:parseInt(amount),reference,narration,destinationBankCode,destinationAccountNumber,sourceAccountNumber,currency,userEmail}
   const balanceCheck= await checkBalance(data);
-  const {withdrawals,error,newBalance,statusCode} = balanceCheck
+  const {withdrawals,error,newBalance,statusCode} = balanceCheck;
+
   try {
   if(error !==''){return res.status(statusCode).json({error:error})}
 
+  const validateAccountNumber = await axios({
+    url: `v1/disbursements/account/validate?accountNumber=${destinationAccountNumber}&bankCode=${destinationBankCode}`,
+    method:'get',
+  })
+  if(validateAccountNumber.requestSuccessful !==true && validateAccountNumber.responseMessage !=='success'){
+    return res.status(400).json({error:`The account number ${destinationAccountNumber} does not match with the bankcode ${destinationBankCode}. Please try again`})
+  }
     const response = await axios({
       url: 'v2/disbursements/single',
       method: 'post',
@@ -60,11 +49,11 @@ const transfer =async (req,res)=>{
     
          return res.status(200).json({data:details.data})
       }else{
-        console.log(details)
+        
         return res.json({data:details.data})
       }
     } catch (error) {
-      console.log(error.response.data.responseMessage)
+      // console.log(error.response.data.responseMessage) 5000719969
      return res.json({error:error.response.data.responseMessage})
     }
 }
