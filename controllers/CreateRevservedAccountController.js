@@ -46,19 +46,18 @@ const bodyParams ={
   let fAccountObject = accounts.filter(x => typeof x!==undefined).shift();
      
    const {bankCode , accountNumber, bankName }=fAccountObject;
-   console.log(bankCode,bankName,accountNumber)
+   
    const itemsToSave = {
      accountReference,accountName,currencyCode,contractCode,customerBvn,userId:userInfo.id,bankName,bankCode,status, accountNumber,collectionChannel,reservationReference
     }
 
-    winston.info(itemsToSave)
+    
    /** Save the response to my database */
    const postData = new models.reserved_account(itemsToSave)
    await postData.save();
    return res.status(201).json({message:"Account created successfully",
    Result:itemsToSave})
   } catch (error) {
-    console.log(error)
     res.status(400).json(error.message)
   }
 }
