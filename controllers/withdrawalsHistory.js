@@ -23,6 +23,5 @@ async function withdrawalsData(data){
 }
 
 
-module.exports= withdrawAsset
+module.exports= withdrawalsData
 
-// GET: https://sandbox.monnify.com/api/v1/banks
