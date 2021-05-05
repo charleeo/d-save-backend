@@ -63,8 +63,8 @@ const transfer =async (req,res)=>{
         return res.json({data:details.data.responseMessage})
       }
     } catch (error) {
-      console.log(error.data)
-     return res.json({error:error.response.responseMessage})
+      console.log(error)
+     return res.json({error:error})
     }
 }
 module.exports= transfer
