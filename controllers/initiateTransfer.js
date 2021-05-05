@@ -1,12 +1,8 @@
 const axios = require('axios');
 const  models  = require('../models/index');
-import checkBalance from './checkBalance';
+const checkBalance =require('./checkBalance')
 const auth =require('../middleware/monnify_configs')
 const {randomString} = require('../helpers/random_string');
-
-
-
-https://sandbox.monnify.com/api/v1/disbursements/account/validate?accountNumber=0068687503&bankCode=232
 
 
 const transfer =async (req,res)=>{
