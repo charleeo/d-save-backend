@@ -60,7 +60,8 @@ const transfer =async (req,res)=>{
     
          return res.status(200).json({data:details.data})
       }else{
-        return res.json({data:details.data.responseMessage})
+        console.log(details)
+        return res.json({data:details.data})
       }
     } catch (error) {
       console.log(error)
