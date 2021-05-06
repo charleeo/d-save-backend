@@ -6,18 +6,25 @@ const {randomString} = require('../helpers/random_string');
 
 
 const transfer =async (req,res)=>{
-  
   const reference = randomString(22);
   const sourceAccountNumber='4353544245';
   const currency ="NGN";
   const {amount,narration,destinationBankCode,destinationAccountNumber,userEmail} =req.body
   const data = {amount:parseInt(amount),reference,narration,destinationBankCode,destinationAccountNumber,sourceAccountNumber,currency,userEmail}
-  const balanceCheck= await checkBalance(data);
+ 
+  const balanceCheck= await checkBalance(data);//check the available balance before proceeding with the withdrawals
   const {withdrawals,error,newBalance,statusCode} = balanceCheck;
 
   try {
+  if(!amount || !destinationBankCode || !destinationAccountNumber || !narration){
+    return res.status(400).json({error:"Check to make sure all fields are filled"})
+  }
+  if(narration.length < 5)
+  {
+    return res.status(400).json("Payament description can't be less than 5 characters")
+  }
   if(error !==''){return res.status(statusCode).json({error:error})}
-
+//ensure the account details suppplied are valid
   const validateAccountNumber = await axios({
     url: `v1/disbursements/account/validate?accountNumber=${destinationAccountNumber}&bankCode=${destinationBankCode}`,
     method:'get',
