@@ -33,7 +33,7 @@ app.use("/user", userRoute);
 app.use("/comments", commentsRoute);
 app.use("/images", imageRoute);
 app.use('/gateway',gatewayInfo);
-app.use('/savings-investments',savingsAndInvestments);
+app.use('/savings-investments',  savingsAndInvestments);
 app.use('/reserved-account', reservedAccountDetails);
 app.use('/invest', investmentSummary);
 app.use('/banks',getBanksCode)
