@@ -21,7 +21,7 @@ const transfer =async (req,res)=>{
   }
   if(narration.length < 5)
   {
-    return res.status(400).json("Payament description can't be less than 5 characters")
+    return res.status(400).json({error:"Payament description can't be less than 5 characters"})
   }
   if(error !==''){return res.status(statusCode).json({error:error})}
 //ensure the account details suppplied are valid
