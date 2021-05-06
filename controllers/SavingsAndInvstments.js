@@ -30,7 +30,7 @@ const individualInvestments= async(req,res)=>{
 const getInvestmentsSummary = async(req,res)=>{
   const summary = await models.InvestmentRecords.findAll();
   if(summary) return res.status(200).json({message:summary});
-  else return res.status(404).json({message:"No record found"})
+  else return res.status(200).json({message:"No record found"})
 }
 // 5000730073 
 module.exports = 

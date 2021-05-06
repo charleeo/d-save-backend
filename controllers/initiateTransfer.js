@@ -19,6 +19,9 @@ const transfer =async (req,res)=>{
   if(!amount || !destinationBankCode || !destinationAccountNumber || !narration){
     return res.status(400).json({error:"Check to make sure all fields are filled"})
   }
+  if(amount < 500){
+    return res.status(400).json({error:'Minimum amount you can withdraw is 500'})
+  }
   if(narration.length < 5)
   {
     return res.status(400).json({error:"Payament description can't be less than 5 characters"})
