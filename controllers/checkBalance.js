@@ -29,4 +29,5 @@ const checkBalance= async(data)=>{
   return {newBalance,withdrawals,error,statusCode}; 
 }
 
+
 module.exports=checkBalance

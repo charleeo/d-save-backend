@@ -1,4 +1,5 @@
 const axios = require('axios');
+const withDrawInvestment = require('./withdraw_from_investment_model');
 const  models  = require('../models/index');
 const checkBalance =require('./checkBalance');
 const auth =require('../middleware/monnify_configs')
@@ -14,7 +15,10 @@ const transfer =async (req,res)=>{
  
   const balanceCheck= await checkBalance(data);//check the available balance before proceeding with the withdrawals
   const {withdrawals,error,newBalance,statusCode} = balanceCheck;
-
+  const investmentWithdraw = withDrawInvestment(data);
+  const {exception,result} = investmentWithdraw;
+   console.log(result);
+   console.log(exception)
   try {
   if(!amount || !destinationBankCode || !destinationAccountNumber || !narration){
     //make sure they dont submit empty rquests or fields
@@ -28,14 +32,7 @@ const transfer =async (req,res)=>{
     return res.status(400).json({error:"Payament description can't be less than 5 characters"})
   }
   if(error !==''){return res.status(statusCode).json({error:error})}
-//ensure the account details suppplied are valid
-  const validateAccountNumber = await axios({
-    url: `v1/disbursements/account/validate?accountNumber=${destinationAccountNumber}&bankCode=${destinationBankCode}`,
-    method:'get',
-  });
-  // if(validateAccountNumber.requestSuccessful !==true && validateAccountNumber.responseMessage !=='success'){
-  //   return res.status(400).json({error:`The account number ${destinationAccountNumber} does not match with the bankcode ${destinationBankCode}. Please try again`})
-  // }
+  if(exception !==''){return res.status(200).json({error:exception})}
     const response = await axios({
       url: 'v2/disbursements/single',
       method: 'post',
@@ -65,3 +62,5 @@ const transfer =async (req,res)=>{
     }
 }
 module.exports= transfer
+
+
