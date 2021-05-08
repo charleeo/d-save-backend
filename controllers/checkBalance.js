@@ -5,7 +5,10 @@ const checkBalance= async(data)=>{
   let error=''
   const userEmail = data.userEmail;
   const amount = data.amount
-  const userBalance = await models.InvestmentRecords.findOne({where:{userEmail}});
+  const userBalance = await models.InvestmentRecords.findOne({
+    attributes:['withdrawals','deposits','id','balance'],
+    where:{userEmail}
+  });
 
   if(!userBalance){
     error= "You don't have any deposit history to withdraw from";

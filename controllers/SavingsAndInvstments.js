@@ -8,7 +8,6 @@ const savings = async (req,res)=>{
 
 const investments = async (req,res)=>{
   const allInvestments = await models.DepositHistory.findAll();
-  console.log(allInvestments)
   if(allInvestments.length >0)return res.status(200).json({message:allInvestments});
   else return res.status(200).json({message:"No record found"})
 }
@@ -19,7 +18,6 @@ const individualSavings= async(req,res)=>{
  if(individualSaves.length >0)return res.status(200).json({message:individualSaves});
  else return res.status(200).json({message:"No record found for individual savings"})
 }
-
 
 const individualInvestments= async(req,res)=>{
   const email = req.params.email
