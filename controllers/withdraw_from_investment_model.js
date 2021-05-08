@@ -10,7 +10,7 @@ const withDrawInvestment=async(data)=>{
     where:{
       [Op.and]:[
       { id:investmentID},
-      {userEmail:userEmail}
+      {customerEmail:userEmail}
       ]
     }
   })
