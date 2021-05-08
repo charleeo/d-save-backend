@@ -2,15 +2,17 @@ const models = require('../models/index')
 
 const checkBalance= async(data)=>{
   let statusCode=0;
-  const allInvestments = await models.InvestmentRecords.findAll();
-  console.log(allInvestments)
+  // const allInvestments = await models.InvestmentRecords.findAll();
+  // console.log(allInvestments)
   let error=''
   const userEmail = data.userEmail;
-  const amount = data.amount
+  const amount = data.amount;
   const userBalance = await models.InvestmentRecords.findOne({
     attributes:['withdrawals','deposits','id','balance'],
     where:{userEmail}
   });
+
+  console.log(userBalance)
 
   if(!userBalance){
     error= "You don't have any deposit history to withdraw from";
