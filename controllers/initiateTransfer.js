@@ -10,7 +10,7 @@ const transfer =async (req,res)=>{
   const reference = randomString(22);
   const sourceAccountNumber='4353544245';
   const currency ="NGN";
-  const {amount,narration,destinationBankCode,destinationAccountNumber,userEmail} =req.body
+  const {amount,narration,destinationBankCode,destinationAccountNumber,userEmail,investmentID} =req.body;
   const data = {amount:parseInt(amount),reference,narration,destinationBankCode,destinationAccountNumber,sourceAccountNumber,currency,userEmail}
  
   const balanceCheck= await checkBalance(data);//check the available balance before proceeding with the withdrawals
