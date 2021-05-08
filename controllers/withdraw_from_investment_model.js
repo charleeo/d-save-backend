@@ -2,6 +2,7 @@ const models = require('../models/index');
 const {Op} = require('sequelize')
 
 const withDrawInvestment=async(data)=>{
+  console.log(data)
   let exception=''
  const {userEmail,investmentID} = data.body
   const result = await models.Investment.findOne({
