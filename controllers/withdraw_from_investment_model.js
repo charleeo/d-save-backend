@@ -4,7 +4,7 @@ const {Op} = require('sequelize')
 const withDrawInvestment=async(data)=>{
   console.log(data)
   let exception=''
- const {userEmail,investmentID} = data.body
+ const {userEmail,investmentID} = data
   const result = await models.Investment.findOne({
     where:{
       [Op.and]:[
