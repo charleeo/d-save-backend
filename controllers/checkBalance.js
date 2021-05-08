@@ -8,7 +8,7 @@ const checkBalance= async(data)=>{
   const userEmail = data.userEmail;
   const amount = data.amount;
   const userBalance = await models.InvestmentRecords.findOne({
-    where:{userEmail},
+    where:{userEmail}
     // attributes:['withdrawals','deposits','id','balance']
   });
 
