@@ -2,8 +2,6 @@ const models = require('../models/index')
 const winston = require('winston')
 const checkBalance= async(data)=>{
   let statusCode=0;
-  // const allInvestments = await models.InvestmentRecords.findAll();
-  // console.log(allInvestments)
   let error=''
   const userEmail = data.userEmail;
   const amount = data.amount;

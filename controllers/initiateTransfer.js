@@ -18,7 +18,7 @@ const transfer =async (req,res)=>{
   const {withdrawals,error,newBalance,statusCode} = balanceCheck;
   const investmentWithdraw = await withdrawInvestment(data);
   const {exception,result} = investmentWithdraw;
-  console.log(result)
+  console.log(`This is the result object ${result}`)
   try {
   if(!amount || !destinationBankCode || !destinationAccountNumber || !narration){
     //make sure they dont submit empty rquests or fields
