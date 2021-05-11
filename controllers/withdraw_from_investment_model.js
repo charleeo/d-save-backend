@@ -3,6 +3,7 @@ const models = require('../models/index');
 const withDrawInvestment=async(data)=>{
   let exception=''
  const {userEmail,investmentID} = data;
+ console.log(data)
   const result = await models.Investment.findOne({
     where:{
       
