@@ -16,7 +16,15 @@ const withDrawInvestment=async(data)=>{
   }
   return  {result,exception}
 }
-module.exports=withDrawInvestment
+const singleInvestment= async(req,res)=>{
+    const {investmentID,userEmail} = req.params;
+    const data ={investmentID,userEmail}
+    const{exception,result}= await withDrawInvestment(data);
+    if(exception !=='')return res.status(404).json({error:exception});
+    else return res.status(200).json({message:result})
+}
+module.exports={withDrawInvestment,singleInvestment};
+
 
 function name(params) {
   
