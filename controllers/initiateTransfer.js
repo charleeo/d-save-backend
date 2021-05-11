@@ -4,6 +4,7 @@ const  models  = require('../models/index');
 const checkBalance =require('./checkBalance');
 const auth =require('../middleware/monnify_configs')
 const {randomString} = require('../helpers/random_string');
+const winston = require('winston');
 
 
 const transfer =async (req,res)=>{
@@ -40,6 +41,8 @@ const transfer =async (req,res)=>{
       },
       data    
   });
+
+  winston.info(`response of the deposit ${details}`)
   const details = await axios({
       url: `v2/disbursements/single/summary?reference=${response.data.responseBody.reference}`,
       method: 'get',
@@ -47,6 +50,7 @@ const transfer =async (req,res)=>{
           Authorization: auth(),
         }, 
       });
+      winston.info(`Details of the deposit ${details}`)
       if(details  && details.data.requestSuccessful===true){//checking response status
         await models.InvestmentRecords.update({withdrawals,balance:newBalance},{where:{userEmail}});
     
