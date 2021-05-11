@@ -7,8 +7,7 @@ const withDrawInvestment=async(data)=>{
   const result = await models.Investment.findOne({
     where:{
       
-      id:investmentID,
-      customerEmail:userEmail
+      id:investmentID, $and:{customerEmail:userEmail}
       
     }
   })
