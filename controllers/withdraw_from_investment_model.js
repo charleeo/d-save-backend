@@ -17,10 +17,10 @@ const withDrawInvestment=async(data)=>{
   return  {result,exception}
 }
 const singleInvestment= async(req,res)=>{
-    const {investmentID,email} = req.params;
+    const {id,email} = req.params;
     const response = await models.InvestmentsDetails.findOne({
       where: Sequelize.and(      
-      {id:investmentID},
+      {id},
       {customerEmail:email} 
       )
     });
