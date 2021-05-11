@@ -18,7 +18,7 @@ const transfer =async (req,res)=>{
   const {withdrawals,error,newBalance,statusCode} = balanceCheck;
   const investmentWithdraw = await withdrawInvestment(data);
   const {exception,result} = investmentWithdraw;
-  console.log(`This is the result object ${result}`)
+  
   try {
   if(!amount || !destinationBankCode || !destinationAccountNumber || !narration){
     //make sure they dont submit empty rquests or fields
@@ -42,7 +42,6 @@ const transfer =async (req,res)=>{
       data    
   });
 
-  winston.info(`response of the deposit ${details}`)
   const details = await axios({
       url: `v2/disbursements/single/summary?reference=${response.data.responseBody.reference}`,
       method: 'get',
@@ -60,6 +59,7 @@ const transfer =async (req,res)=>{
         return res.json({data:details.data})
       }
     } catch (error) {
+      console.log(error)
       // console.log(error.response.data.responseMessage) 5000719969
      return res.json({error:error.response.data.responseMessage})
     }
