@@ -12,8 +12,6 @@ const checkBalance= async(data)=>{
     // attributes:['withdrawals','deposits','id','balance']
   });
 
-  winston.info({"User Balance:":userBalance})
-
   if(!userBalance){
     error= "You don't have any deposit history to withdraw from";
     statusCode=400;

@@ -2,9 +2,7 @@ const models = require('../models/index');
 const Sequelize = require('sequelize')
 const withDrawInvestment=async(data)=>{
   let exception=''
- const {userEmail,investmentID} = data;
- const all = await models.InvestmentsDetails.findAll();
- console.log(`This is all investment ${JSON.stringify(all)}`)
+ const {userEmail,investmentID} = data; 
   const result = await models.InvestmentsDetails.findOne({
     where: Sequelize.and(      
     {id:investmentID},
@@ -14,7 +12,6 @@ const withDrawInvestment=async(data)=>{
   if(!result){
     exception="The requested resources is not found";
   }
-  console.log(`Result from ivestment ${JSON.stringify(result)}`)
   return  {result,exception}
 }
 module.exports=withDrawInvestment
