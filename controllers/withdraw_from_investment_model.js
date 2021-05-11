@@ -9,7 +9,6 @@ const withDrawInvestment=async(data)=>{
     {customerEmail:userEmail} 
     )
   });
-  console.log(result)
   if(!result){
     exception="The requested resources is not found";
   }else if(parseInt(amount) > parseInt(result.investmentAmount)){
@@ -19,10 +18,14 @@ const withDrawInvestment=async(data)=>{
 }
 const singleInvestment= async(req,res)=>{
     const {investmentID,email} = req.params;
-    const data ={investmentID,email}
-    const{exception,result}= await withDrawInvestment(data);
-    if(exception !=='')return res.status(404).json({error:exception});
-    else return res.status(200).json({message:result})
+    const response = await models.InvestmentsDetails.findOne({
+      where: Sequelize.and(      
+      {id:investmentID},
+      {customerEmail:email} 
+      )
+    });
+    if(!response)return res.status(404).json({error:"No records"});
+    else return res.status(200).json({message:response})
 }
 module.exports={withDrawInvestment,singleInvestment};
 
