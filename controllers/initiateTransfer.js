@@ -49,17 +49,15 @@ const transfer =async (req,res)=>{
           Authorization: auth(),
         }, 
       });
-      winston.info(`Details of the deposit ${details.data}`)
       if(details  && details.data.requestSuccessful===true){//checking response status
         await models.InvestmentRecords.update({withdrawals,balance:newBalance},{where:{userEmail}});
-    
+        await models.InvestmentsDetails.update({status:false},{where:{customerEmail:userEmail}})
          return res.status(200).json({data:details.data})
       }else{
         
-        return res.json({data:details.data})
+        return res.status(200).json({data:details.data})
       }
     } catch (error) {
-      console.log(error)
       // console.log(error.response.data.responseMessage) 5000719969
      return res.json({error:error.response.data.responseMessage})
     }

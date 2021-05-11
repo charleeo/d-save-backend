@@ -28,6 +28,7 @@ module.exports = (sequelize, DataTypes) => {
     transactionReference:DataTypes.STRING,
     paidOn:DataTypes.STRING,
     settlementAmount:DataTypes.DOUBLE,
+    status:DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'InvestmentsDetails',

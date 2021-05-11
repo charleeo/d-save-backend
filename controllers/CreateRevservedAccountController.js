@@ -3,7 +3,6 @@ const models = require('../models');
 const authenticateGateWay = require('../middleware/authenticate_gateway')
 
 const {randomString}= require('../helpers/random_string');
-const winston = require('winston');
 async function createAReserveAccount(req, res){
   try{
   let token = await authenticateGateWay();
