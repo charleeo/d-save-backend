@@ -3,7 +3,8 @@ const Sequelize = require('sequelize')
 const withDrawInvestment=async(data)=>{
   let exception=''
  const {userEmail,investmentID} = data;
- console.log(data)
+ const all = await models.Investment.findAll();
+ console.log(`This is all investment ${all}`)
   const result = await models.Investment.findOne({
     where: Sequelize.and(      
     {id:investmentID},
