@@ -17,8 +17,8 @@ const withDrawInvestment=async(data)=>{
   return  {result,exception}
 }
 const singleInvestment= async(req,res)=>{
-    const {investmentID,userEmail} = req.params;
-    const data ={investmentID,userEmail}
+    const {investmentID,email} = req.params;
+    const data ={investmentID,email}
     const{exception,result}= await withDrawInvestment(data);
     if(exception !=='')return res.status(404).json({error:exception});
     else return res.status(200).json({message:result})
