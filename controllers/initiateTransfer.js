@@ -16,7 +16,7 @@ const transfer =async (req,res)=>{
  
   const balanceCheck= await checkBalance(data);//check the available balance before proceeding with the withdrawals
   const {withdrawals,error,newBalance,statusCode} = balanceCheck;
-  const investmentWithdraw = withdrawInvestment(data);
+  const investmentWithdraw = await withdrawInvestment(data);
   const {exception,result} = investmentWithdraw;
   console.log(result)
   try {
