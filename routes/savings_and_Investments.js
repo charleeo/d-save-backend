@@ -9,7 +9,6 @@ router.get('/all-savings',savings);
 router.get('/all-investments',investments);
 router.get('/individual-savings/:email', checkAuth,individualSavings);
 router.get('/individual-investments/:email', checkAuth,individualInvestments);
-router.get('/single-investment', checkAuth,singleInvestment)
+router.get('/single-investment/:investmentID/:email', checkAuth,singleInvestment)
 module.exports = router;
 
-// savings-investments/single-investment

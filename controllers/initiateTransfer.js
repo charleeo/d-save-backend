@@ -1,5 +1,5 @@
 const axios = require('axios');
-const withdrawInvestment = require('./withdraw_from_investment_model');
+const {withdrawInvestment} = require('./withdraw_from_investment_model');
 const  models  = require('../models/index');
 const checkBalance =require('./checkBalance');
 const auth =require('../middleware/monnify_configs')
