@@ -8,7 +8,8 @@ const withDrawInvestment=async(data)=>{
     {id:investmentID},
     {customerEmail:userEmail} 
     )
-  })
+  });
+  console.log(result)
   if(!result){
     exception="The requested resources is not found";
   }else if(parseInt(amount) > parseInt(result.investmentAmount)){
