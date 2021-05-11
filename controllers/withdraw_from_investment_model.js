@@ -5,7 +5,6 @@ const withDrawInvestment=async(data)=>{
   console.log(data)
   let exception=''
  const {userEmail,investmentID} = data;
- console.log(investmentID)
   const result = await models.Investment.findOne({
     where:{
       [Op.and]:[

@@ -13,9 +13,6 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
 
-
-    
-
   };
   InvestmentRecords.init({
     userEmail: DataTypes.STRING,
