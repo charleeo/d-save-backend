@@ -15,9 +15,7 @@ const transfer =async (req,res)=>{
   const balanceCheck= await checkBalance(data);//check the available balance before proceeding with the withdrawals
   const {withdrawals,error,newBalance,statusCode} = balanceCheck;
   const investmentWithdraw = await withdrawInvestment(data);
-  const {exception,result} = investmentWithdraw;
-  console.log(JSON.stringify(result))
-  
+  const {exception} = investmentWithdraw;
   try {
   if(!amount || !destinationBankCode || !destinationAccountNumber || !narration){
     //make sure they dont submit empty rquests or fields
@@ -50,7 +48,15 @@ const transfer =async (req,res)=>{
       });
       if(details  && details.data.requestSuccessful===true){//checking response status
         await models.InvestmentRecords.update({withdrawals,balance:newBalance},{where:{userEmail}});
-        await models.InvestmentsDetails.update({status:true},{where:{customerEmail:userEmail}})
+        await models.InvestmentsDetails.update(
+          {status:false},
+          {
+            where: Sequelize.and(
+              {id:investmentID},
+              {customerEmail:userEmail} 
+            )}
+          
+          )
          return res.status(200).json({data:details.data})
       }else{
         
