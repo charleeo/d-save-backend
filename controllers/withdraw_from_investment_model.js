@@ -2,7 +2,7 @@ const models = require('../models/index');
 const Sequelize = require('sequelize')
 const withDrawInvestment=async(data)=>{
   let exception=''
- const {userEmail,investmentID} = data; 
+ const {userEmail,investmentID,amount} = data; 
   const result = await models.InvestmentsDetails.findOne({
     where: Sequelize.and(      
     {id:investmentID},
@@ -11,6 +11,8 @@ const withDrawInvestment=async(data)=>{
   })
   if(!result){
     exception="The requested resources is not found";
+  }else if(parseInt(amount) > parseInt(result.investmentAmount)){
+    exception = "You are attempting to withdraw above your current investment in a row"
   }
   return  {result,exception}
 }
