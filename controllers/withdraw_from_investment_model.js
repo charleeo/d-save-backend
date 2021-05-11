@@ -1,15 +1,14 @@
 const models = require('../models/index');
-const {Op} = require('sequelize')
 
 const withDrawInvestment=async(data)=>{
   let exception=''
  const {userEmail,investmentID} = data;
   const result = await models.Investment.findOne({
     where:{
-      [Op.and]:[
-      { id:investmentID},
-      {customerEmail:userEmail}
-      ]
+      
+      id:investmentID,
+      customerEmail:userEmail
+      
     }
   })
   if(!result){
