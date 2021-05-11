@@ -1,5 +1,5 @@
 const models = require('../models/index');
-const Sequelze = require('sequelize')
+const Sequelize = require('sequelize')
 const withDrawInvestment=async(data)=>{
   let exception=''
  const {userEmail,investmentID} = data;
