@@ -49,7 +49,7 @@ const transfer =async (req,res)=>{
           Authorization: auth(),
         }, 
       });
-      winston.info(`Details of the deposit ${details}`)
+      winston.info(`Details of the deposit ${details.data}`)
       if(details  && details.data.requestSuccessful===true){//checking response status
         await models.InvestmentRecords.update({withdrawals,balance:newBalance},{where:{userEmail}});
     
