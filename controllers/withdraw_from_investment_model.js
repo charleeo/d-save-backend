@@ -13,7 +13,7 @@ const withdrawInvestment=async(data)=>{
     exception="The requested resources is not found";
   }
   let totalAmount =parseInt(result.investmentAmount) + parseInt(result.actualInterest)
-  if(parseInt(amount) >= totalAmount){
+  if(parseInt(amount) > totalAmount){
     exception = `You are attempting to withdraw above your current investment of ${totalAmount} on this row`
   }
   return  {result,exception}
