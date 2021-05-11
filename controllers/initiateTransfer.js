@@ -4,9 +4,7 @@ const  models  = require('../models/index');
 const checkBalance =require('./checkBalance');
 const auth =require('../middleware/monnify_configs')
 const {randomString} = require('../helpers/random_string');
-const winston = require('winston');
-
-
+const Sequelize = require('sequelize')
 const transfer =async (req,res)=>{
   const reference = randomString(22);
   const sourceAccountNumber='4353544245';
@@ -18,6 +16,7 @@ const transfer =async (req,res)=>{
   const {withdrawals,error,newBalance,statusCode} = balanceCheck;
   const investmentWithdraw = await withdrawInvestment(data);
   const {exception,result} = investmentWithdraw;
+  console.log(JSON.stringify(result))
   
   try {
   if(!amount || !destinationBankCode || !destinationAccountNumber || !narration){
