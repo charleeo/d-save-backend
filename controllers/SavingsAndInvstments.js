@@ -1,5 +1,5 @@
 const models = require('../models')
-
+const Sequelize = require('sequelize')
 const savings = async (req,res)=>{
   const allSavings = await models.Saving.findAll();
   if(allSavings.length >0)return res.status(200).json({message:allSavings})
@@ -21,7 +21,13 @@ const individualSavings= async(req,res)=>{
 
 const individualInvestments= async(req,res)=>{
   const email = req.params.email
- const individualInvests = await models.InvestmentsDetails.findAll({where:{customerEmail:email}});
+ const individualInvests = await models.InvestmentsDetails.findAll({
+   where:Sequelize.and(
+     {customerEmail:email},
+     {status:true}
+   )
+   
+  });
  if(individualInvests.length >0)return res.status(200).json({message:individualInvests});
  else return res.status(200).json({message:"No record found for individual investment"})
 }
