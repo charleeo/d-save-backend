@@ -11,8 +11,10 @@ const withdrawInvestment=async(data)=>{
   });
   if(!result){
     exception="The requested resources is not found";
-  }else if(parseInt(amount) > parseInt(result.investmentAmount)){
-    exception = `You are attempting to withdraw above your current investment of ${result.investmentAmount} on this row`
+  }
+  let totalAmount =parseInt(result.investmentAmount) + parseInt(result.actualInterest)
+  if(parseInt(amount) >= totalAmount){
+    exception = `You are attempting to withdraw above your current investment of ${totalAmount} on this row`
   }
   return  {result,exception}
 }
@@ -24,7 +26,6 @@ const singleInvestment= async(req,res)=>{
       {customerEmail:email} 
       )
     });
-    console.log(`Ressult heer ${response}`)
     if(!response)return res.status(404).json({error:"No records"});
     else return res.status(200).json({message:response})
 }
