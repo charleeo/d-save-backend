@@ -1,15 +1,14 @@
 const models = require('../models/index');
-
+const Sequelze = require('sequelize')
 const withDrawInvestment=async(data)=>{
   let exception=''
  const {userEmail,investmentID} = data;
  console.log(data)
   const result = await models.Investment.findOne({
-    where:{
-      
-      id:investmentID, $and:{customerEmail:userEmail}
-      
-    }
+    where: Sequelize.and(      
+    {id:investmentID},
+    {customerEmail:userEmail} 
+    )
   })
   if(!result){
     exception="The requested resources is not found";
