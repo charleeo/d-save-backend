@@ -1,5 +1,5 @@
 const axios = require('axios');
-const withdrawInvestment = require('./withdraw_from_investment_model');
+const {withdrawInvestment} = require('./withdraw_from_investment_model');
 const  models  = require('../models/index');
 const checkBalance =require('./checkBalance');
 const auth =require('../middleware/monnify_configs')
@@ -14,7 +14,7 @@ const transfer =async (req,res)=>{
  
   const balanceCheck= await checkBalance(data);//check the available balance before proceeding with the withdrawals
   const {withdrawals,error,newBalance,statusCode} = balanceCheck;
-  const investmentWithdraw = await withdrawInvestment.withdrawInvestment(data);
+  const investmentWithdraw = await withdrawInvestment(data);
   const {exception} = investmentWithdraw;
   try {
   if(!amount || !destinationBankCode || !destinationAccountNumber || !narration){

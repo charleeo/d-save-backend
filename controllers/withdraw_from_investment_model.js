@@ -1,6 +1,6 @@
 const models = require('../models/index');
 const Sequelize = require('sequelize')
-const withDrawInvestment=async(data)=>{
+const withdrawInvestment=async(data)=>{
   let exception=''
  const {userEmail,investmentID,amount} = data; 
   const result = await models.InvestmentsDetails.findOne({
@@ -28,7 +28,7 @@ const singleInvestment= async(req,res)=>{
     if(!response)return res.status(404).json({error:"No records"});
     else return res.status(200).json({message:response})
 }
-module.exports={withDrawInvestment,singleInvestment};
+module.exports={withdrawInvestment,singleInvestment};
 
 
 function name(params) {
