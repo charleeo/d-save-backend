@@ -17,7 +17,7 @@ async function withdrawalHistoryCreate(data){
       destinationBankName,
       createdOn
    }=data;
-   const data= {
+   const postData= {
       userEmail,
       amount, 
       reference,
@@ -34,7 +34,7 @@ async function withdrawalHistoryCreate(data){
       createdOn
    }
    //check if the person has enough funds to withdraw
-   const newWithdrawals= new models.WithdrawalHistory(data)
+   const newWithdrawals= new models.WithdrawalHistory(postData)
    return await newWithdrawals.save()
 }
 
