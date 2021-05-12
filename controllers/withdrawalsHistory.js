@@ -1,6 +1,4 @@
 const models = require("../models")
-const winston = require('winston')
-
 
 async function withdrawalsData(data){
    const {
@@ -19,7 +17,25 @@ async function withdrawalsData(data){
       destinationBankName,
       createdOn
    }=data;
+   const data= {
+      userEmail,
+      amount, 
+      reference,
+      narration,
+      currency, 
+      fee, 
+      status, 
+      transactionDescription, 
+      transactionReference,
+      destinationBankCode, 
+      destinationAccountNumber, 
+      destinationAccountName,
+      destinationBankName,
+      createdOn
+   }
    //check if the person has enough funds to withdraw
+   const newWithdrawals= new models.WithdrawalHistory(data)
+   return await newWithdrawals.save()
 }
 
 

@@ -11,7 +11,6 @@ const transfer =async (req,res)=>{
   const currency ="NGN";
   const {amount,narration,destinationBankCode,destinationAccountNumber,userEmail,investmentID} =req.body;
   const data = {amount:parseInt(amount),reference,narration,destinationBankCode,destinationAccountNumber,sourceAccountNumber,currency,userEmail,investmentID}
- 
   const balanceCheck= await checkBalance(data);//check the available balance before proceeding with the withdrawals
   const {withdrawals,error,newBalance,statusCode} = balanceCheck;
   const investmentWithdraw = await withdrawInvestment(data);
@@ -55,11 +54,9 @@ const transfer =async (req,res)=>{
               {id:investmentID},
               {customerEmail:userEmail} 
             )}
-          
           )
          return res.status(200).json({data:details.data})
       }else{
-        
         return res.status(200).json({data:details.data})
       }
     } catch (error) {
