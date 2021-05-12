@@ -58,7 +58,7 @@ const transfer =async (req,res)=>{
               {customerEmail:userEmail} 
             )}
           );
-         await withdrawalHistoryCreate(details.data)
+         await withdrawalHistoryCreate(details.data.responseBody)
          return res.status(200).json({data:details.data})
       }else{
         return res.status(200).json({data:details.data})
