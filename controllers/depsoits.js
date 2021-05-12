@@ -47,7 +47,6 @@ const savingsObject= async(params)=>{
       data.actualInterest = parseInt((amountPaid) *(data.interestRate/100))
     }
     data.investmentDuration = data.liquidationPeriod= formatTimeStamp(minLiquidationMonths);
-    
     const investItems = new models.InvestmentsDetails(data);
    return await investItems.save()
   }
