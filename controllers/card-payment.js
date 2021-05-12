@@ -11,8 +11,9 @@ async function receiveCardPayment(req,res){
 
     const savingHistory = new models.DepositHistory(depositHistoryOnline(postData))
     await savingHistory.save();
-   const t= await savingsObjectOnline(postData);
-    await investmentRecords(postData)
+    await savingsObjectOnline(postData);
+    await investmentRecords(postData);
+    const t= await models.InvestmentsDetails.findAll()
    console.log(t)
     return res.status(201).json({message:"Your deposit was recieved by us"}) ;
   }
