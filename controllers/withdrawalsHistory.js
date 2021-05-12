@@ -9,4 +9,4 @@ const Sequelize = require('sequelize')
   else return res.status(200).json({message:history})
 }
 
-module.exports={withdrawalHistoryPerPrseon}
+module.exports=withdrawalHistoryPerPrseon
