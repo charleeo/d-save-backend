@@ -15,6 +15,7 @@ const forReact = require('./routes/for_react');
 const transfer = require('./routes/transfer_routes');
 const investmentSummary = require('./routes/investment_summary');
 const getBanksCode = require('./routes/get_banks_code');
+const withdrawalHistories = require('./routes/withdrawalsHistories')
 
 const app = express();
 
@@ -38,4 +39,5 @@ app.use('/reserved-account', reservedAccountDetails);
 app.use('/invest', investmentSummary);
 app.use('/banks',getBanksCode)
 app.use('/keys',forReact);
+app.use('/withdrawals', withdrawalHistories)
 module.exports = app;
