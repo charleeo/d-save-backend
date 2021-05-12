@@ -8,7 +8,6 @@ async function receiveCardPayment(req,res){
   const postData = req.body;
   
   if(postData.transactionStatus==='SUCCESS'){
-    console.log(postData);
     const savingHistory = new models.DepositHistory(depositHistoryOnline(postData))
     await savingHistory.save();
     await savingsObjectOnline(postData);
