@@ -4,6 +4,7 @@ const  models  = require('../models/index');
 const checkBalance =require('./checkBalance');
 const auth =require('../middleware/monnify_configs')
 const {randomString} = require('../helpers/random_string');
+const withdrawalHistoryCreate=require('./withdrawalsHistory');
 const Sequelize = require('sequelize')
 const transfer =async (req,res)=>{
   const reference = randomString(22);
@@ -45,7 +46,8 @@ const transfer =async (req,res)=>{
           Authorization: auth(),
         }, 
       });
-      if(details  && details.data.requestSuccessful===true){//checking response status
+      if(details  && details.data.requestSuccessful===true){
+        //checking response status. if it is successful, then update the neccessary tables
         await models.InvestmentRecords.update({withdrawals,balance:newBalance},{where:{userEmail}});
         await models.InvestmentsDetails.update(
           {status:false},
@@ -54,7 +56,8 @@ const transfer =async (req,res)=>{
               {id:investmentID},
               {customerEmail:userEmail} 
             )}
-          )
+          );
+        await withdrawalHistoryCreate(details)
          return res.status(200).json({data:details.data})
       }else{
         return res.status(200).json({data:details.data})

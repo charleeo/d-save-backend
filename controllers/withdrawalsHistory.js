@@ -1,6 +1,6 @@
 const models = require("../models")
 
-async function withdrawalsData(data){
+async function withdrawalHistoryCreate(data){
    const {
       userEmail,
       amount, 
@@ -39,5 +39,5 @@ async function withdrawalsData(data){
 }
 
 
-module.exports= withdrawalsData
+module.exports= withdrawalHistoryCreate
 
