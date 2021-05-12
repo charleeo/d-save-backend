@@ -7,7 +7,6 @@ const formatTimeStamp=(timeStamp)=>{
 const savingsObjectOnline= async(params)=>{
   const plans={bronze:5000,silver:25000};
    const {transactionHash,customer, transactionReference,paidOn,amountPaid,settlementAmount} =params;
-   console.log(customer.email+"name"+ customer.name)
    let date = new Date();
    let minLiquidationMonths = date.setUTCMonth(date.getUTCMonth()+6);
    let minLiquidationWeeks =  new Date().getTime()+(7*24*60*60*1000);//7 days added to current time/date
@@ -18,8 +17,8 @@ const savingsObjectOnline= async(params)=>{
    let liquidationPeriod;
    let liquidatedDate;
    let investmentCategory;
-
-   let data={investmentDuration,interestRate,expectedInterest,actualInterest, liquidatedDate, liquidationPeriod,cutomerEmail:customer.email,cutomerName:customer.name,investmentAmount:amountPaid, investmentCategory,transactionReference,paidOn,transactionHash,settlementAmount}
+   
+   let data={investmentDuration,interestRate,expectedInterest,actualInterest, liquidatedDate, liquidationPeriod,customerEmail:customer.email,customerName:customer.name,investmentAmount:amountPaid, investmentCategory,transactionReference,paidOn,transactionHash,settlementAmount}
    data.liquidatedDate = formatTimeStamp(minLiquidationMonths)
 
    
