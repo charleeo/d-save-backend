@@ -6,12 +6,14 @@ require('dotenv').config()
 
 async function receiveCardPayment(req,res){
   const postData = req.body;
-  console.log(postData)
+  
   if(postData.transactionStatus==='SUCCESS'){
+
     const savingHistory = new models.DepositHistory(depositHistoryOnline(postData))
     await savingHistory.save();
-    await savingsObjectOnline(postData);
+   const t= await savingsObjectOnline(postData);
     await investmentRecords(postData)
+   console.log(t)
     return res.status(201).json({message:"Your deposit was recieved by us"}) ;
   }
 }
