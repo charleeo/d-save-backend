@@ -47,6 +47,7 @@ const transfer =async (req,res)=>{
         }, 
       });
       if(details  && details.data.requestSuccessful===true){
+        console.log(details.data)
         //checking response status. if it is successful, then update the neccessary tables
         await models.InvestmentRecords.update({withdrawals,balance:newBalance},{where:{userEmail}});
         await models.InvestmentsDetails.update(
