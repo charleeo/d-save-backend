@@ -47,7 +47,6 @@ const transfer =async (req,res)=>{
         }, 
       });
       if(details  && details.data.requestSuccessful===true){
-        console.log(details.data)
         //checking response status. if it is successful, then update the neccessary tables
         await models.InvestmentRecords.update({withdrawals,balance:newBalance},{where:{userEmail}});
         await models.InvestmentsDetails.update(
@@ -58,9 +57,35 @@ const transfer =async (req,res)=>{
               {customerEmail:userEmail} 
             )}
           );
-          const withdrawalsDetail= details.data.responseBody
-          const withdrawalsData= {withdrawalsDetail, userEmail};
-          console.log(withdrawalsData)
+          const {amount,
+            reference,
+            narration,
+            currency,
+            fee,
+            status,
+            transactionDescription,
+            transactionReference,
+            createdOn,
+            sourceAccountNumber,
+            destinationAccountNumber,
+            destinationAccountName,
+            destinationBankCode,
+            destinationBankName}= details.data.responseBody
+            const withdrawalsData= {
+            amount,
+            reference,
+            narration,
+            currency,
+            fee,
+            status,
+            transactionDescription,
+            transactionReference,
+            createdOn,
+            sourceAccountNumber,
+            destinationAccountNumber,
+            destinationAccountName,
+            destinationBankCode,
+            destinationBankName, userEmail};
          await withdrawalHistoryCreate(withdrawalsData)
          return res.status(200).json({data:details.data})
       }else{
@@ -74,3 +99,4 @@ const transfer =async (req,res)=>{
 module.exports= transfer
 
 
+ 
