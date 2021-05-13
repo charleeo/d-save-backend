@@ -50,7 +50,7 @@ const getInvestmentsSummary = async(req,res)=>{
 async function getSavingsWithIDs(){
  const test= await models.Saving.findAll(
    {
-    where: {id: Sequelize.in(24,34)}
+    where: {id: [24,34]}
    }
  )
   console.log(JSON.stringify(test))
