@@ -1,6 +1,6 @@
 const models = require('../models')
 const Sequelize = require('sequelize');
-const {QueryTypes} = require('sequelize');
+
 
 const savings = async (req,res)=>{
   const allSavings = await models.Saving.findAll();
@@ -48,13 +48,14 @@ const getInvestmentsSummary = async(req,res)=>{
 }
 
 async function getSavingsWithIDs(){
- const test= await Sequelize.query(
-    'SELECT * FROM Savings WHERE id IN(:id)',
-    {
-      replacements: { id: [24, 34] },
-      type: QueryTypes.SELECT
+  Saving
+ const test= await models.Saving.findAll(
+   {
+     where: {
+       id:{in:[24,34]}
     }
-  );
+   }
+ )
   console.log(test)
   return test
 }
