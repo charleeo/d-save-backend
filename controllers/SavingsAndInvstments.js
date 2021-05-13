@@ -48,7 +48,6 @@ const getInvestmentsSummary = async(req,res)=>{
 }
 
 async function getSavingsWithIDs(){
-  Saving
  const test= await models.Saving.findAll(
    {
      where: {
