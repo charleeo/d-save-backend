@@ -48,7 +48,7 @@ const getInvestmentsSummary = async(req,res)=>{
 }
 
 async function getSavingsWithIDs(){
- const test= await sequelize.query(
+ const test= await Sequelize.query(
     'SELECT * FROM Savings WHERE id IN(:id)',
     {
       replacements: { id: [24, 34] },
