@@ -50,12 +50,10 @@ const getInvestmentsSummary = async(req,res)=>{
 async function getSavingsWithIDs(){
  const test= await models.Saving.findAll(
    {
-     where: {
-       id:{in:[24,34]}
-    }
+    where: {id: {in: [24,34]}}
    }
  )
-  console.log(test)
+  console.log(JSON.stringify(test))
   return test
 }
 // 5000730073 
