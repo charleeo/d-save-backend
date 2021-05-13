@@ -1,5 +1,6 @@
 const models = require('../models')
-const Sequelize,{QueryTypes} = require('sequelize');
+const Sequelize = require('sequelize');
+const {QueryTypes} = require('sequelize');
 
 const savings = async (req,res)=>{
   const allSavings = await models.Saving.findAll();
