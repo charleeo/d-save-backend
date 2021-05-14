@@ -14,7 +14,7 @@ const withdrawInvestment=async(data)=>{
   }
   else{
     if(result.status ===false){
-      exception="Your are snitching"
+      exception="Your are snitching. Trying to run a double transaction on one ivestment instance"
     }
     let totalAmount =parseInt(result.investmentAmount) + parseInt(result.actualInterest)
     if(parseInt(amount) > totalAmount){
