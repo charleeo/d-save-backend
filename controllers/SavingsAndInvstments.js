@@ -18,10 +18,8 @@ const individualSavings= async(req,res)=>{
  const email = req.params.email
  const individualSaves = await models.Saving.findAll({where:{customerEmail:email}});
  if(individualSaves.length >0){
-   const t=await getSavingsWithIDs()
   return res.status(200).json({
-  
-   message:individualSaves,t:t
+   message:individualSaves
   });
  }
  else return res.status(200).json({message:"No record found"})
@@ -47,14 +45,15 @@ const getInvestmentsSummary = async(req,res)=>{
   else return res.status(200).json({message:"No record found for investment summary"})
 }
 
-async function getSavingsWithIDs(){
- const test= await models.Saving.findAll(
+async function getSavingsWithIDs(req,res){
+  
+ const savingsWithIDs= await models.Saving.findAll(
    {
     where: {id: [24,34]}
    }
  )
-  console.log(JSON.stringify(test))
-  return test
+ if(!savingsWithIDs)return res.status(200)
+  return savingsWithIDs
 }
 // 5000730073 
 module.exports = 
@@ -63,5 +62,6 @@ module.exports =
   investments,
   individualSavings,
   individualInvestments,
-  getInvestmentsSummary
+  getInvestmentsSummary,
+  getSavingsWithIDs
 }

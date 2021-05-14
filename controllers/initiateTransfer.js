@@ -1,12 +1,12 @@
-const axios = require('axios');
-const {withdrawInvestment} = require('./withdraw_from_investment_model');
-const  models  = require('../models/index');
-const checkBalance =require('./checkBalance');
-const auth =require('../middleware/monnify_configs')
-const {randomString} = require('../helpers/random_string');
-const withdrawalHistoryCreate=require('./withdrawalsOperations');
-const Sequelize = require('sequelize')
-const transfer =async (req,res)=>{
+  const axios = require('axios');
+  const {withdrawInvestment} = require('./withdraw_from_investment_model');
+  const  models  = require('../models/index');
+  const checkBalance =require('./checkBalance');
+  const auth =require('../middleware/monnify_configs')
+  const {randomString} = require('../helpers/random_string');
+  const withdrawalHistoryCreate=require('./withdrawalsOperations');
+  const Sequelize = require('sequelize')
+  const transfer =async (req,res)=>{
   const reference = randomString(22);
   const sourceAccountNumber='4353544245';
   const currency ="NGN";
