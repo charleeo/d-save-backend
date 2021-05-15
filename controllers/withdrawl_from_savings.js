@@ -5,7 +5,9 @@ async function getSavingsWithIDs(data){
   let statusCode = 0;
   
   let {investmentID}= data
-   investmentID = investmentID.replace(/^'|'$/g, '');
+  console.log(investmentID)
+   investmentID = investmentID.replace(/['"]+/g, '');
+   console.log(investmentID)
   const savingsWithIDs= await models.Saving.findAll(
    {
     where: {id: [investmentID]}
