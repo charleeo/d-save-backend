@@ -4,7 +4,7 @@ async function getSavingsWithIDs(data){
   let error='';
   let statusCode = 0;
   
-  const {investmentID}= data.body
+  const {investmentID}= data
   const savingsWithIDs= await models.Saving.findAll(
    {
     where: {id: [investmentID]}
