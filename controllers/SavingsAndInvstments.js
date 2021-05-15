@@ -46,14 +46,14 @@ const getInvestmentsSummary = async(req,res)=>{
 }
 
 async function getSavingsWithIDs(req,res){
-  
+  const id= req.body.id
  const savingsWithIDs= await models.Saving.findAll(
    {
-    where: {id: [24,34]}
+    where: {id: [id]}
    }
  )
- if(!savingsWithIDs)return res.status(200)
-  return savingsWithIDs
+ if(!savingsWithIDs)return res.status(404).json({error:'resource not found'})
+  return res.status(200).json({message:savingsWithIDs})
 }
 // 5000730073 
 module.exports = 
