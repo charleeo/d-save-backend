@@ -5,12 +5,19 @@
   const auth =require('../middleware/monnify_configs')
   const {randomString} = require('../helpers/random_string');
   const withdrawalHistoryCreate=require('./withdrawalsOperations');
-  const Sequelize = require('sequelize')
+  const Sequelize = require('sequelize');
+  const getSavingsWithIDs  = require('./withdrawl_from_savings');
   const transfer =async (req,res)=>{
   const reference = randomString(22);
   const sourceAccountNumber='4353544245';
   const currency ="NGN";
-  const {amount,narration,destinationBankCode,destinationAccountNumber,userEmail,investmentID} =req.body;
+  const {amount,narration,destinationBankCode,destinationAccountNumber,userEmail,investmentID,withdrawalCategory} =req.body;
+  if(withdrawalCategory !=='' && withdrawalCategory==='savings-withdrawals')
+  {
+    console.log('it is from the savings side')
+  }else{
+    console.log("It is from investment side ")
+  }
   const data = {amount:parseInt(amount),reference,narration,destinationBankCode,destinationAccountNumber,sourceAccountNumber,currency,userEmail,investmentID}
   const balanceCheck= await checkBalance(data);//check the available balance before proceeding with the withdrawals
   const {withdrawals,error,newBalance,statusCode} = balanceCheck;
