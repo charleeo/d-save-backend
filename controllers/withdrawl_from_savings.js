@@ -1,8 +1,8 @@
 const models = require('../models/index');
 const Sequelize = require('sequelize')
 async function getSavingsWithIDs(data){
-  let error='';
-  let statusCode = 0;
+  let savingsError='';
+  let Code = 0;
   
   let {investmentID}= data
   ids = investmentID.split(',')
@@ -12,14 +12,20 @@ async function getSavingsWithIDs(data){
    }
  )
  if(!savingsWithIDs){
-   error='resource not found';
-   statusCode=404
+   savingsError='resource not found';
+   Code=404
+  }else{
+    savingsWithIDs.map(saves=>{
+      if(saves.status ===false){
+        savingsError = "You are snitching. Trying to withdraw the same fund twice";
+        Code=400;
+      }
+    })
   }
-  console.log(savingsWithIDs)
+  
   return {
-    statusCode,
-    savingsWithIDs,
-    error
+    Code,
+    savingsError
   }
 }
 module.exports=getSavingsWithIDs

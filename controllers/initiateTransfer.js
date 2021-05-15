@@ -33,7 +33,11 @@
   if(error !==''){return res.status(statusCode).json({error:error})}
   /** At this junction, check if the withdrawals request is for investment instance or for the savings instances */
   if(withdrawalCategory !=='' && withdrawalCategory==="savings-withdrawals"){
-    await getSavingsWithIDs(data)
+   const getSavingsWithID = await getSavingsWithIDs(data);
+    const {savingsError,Code} = getSavingsWithID
+    if(savingsError !==''){
+      res.status(Code).json({error:savingsError})
+    }
   }else{
     const investmentWithdraw = await withdrawInvestment(data);
     const {exception} = investmentWithdraw; //
@@ -57,15 +61,24 @@
       });
       if(details  && details.data.requestSuccessful===true){
         //checking response status. if it is successful, then update the neccessary tables
-        await models.InvestmentRecords.update({withdrawals,balance:newBalance},{where:{userEmail}});
-        await models.InvestmentsDetails.update(
-          {status:false},
-          {
-            where: Sequelize.and(
-              {id:investmentID},
-              {customerEmail:userEmail} 
-            )}
-          );
+        await models.InvestmentRecords.update({withdrawals,balance:newBalance},{where:{userEmail}});//update the generalinvestment records table
+        
+        if(withdrawalCategory !=='' && withdrawalCategory==="savings-withdrawals"){
+          await models.Saving.update(
+            {status:false},
+            {where:{id:investmentID.split(',')}}
+            );
+        }
+        else{ //update the investment table
+          await models.InvestmentsDetails.update(
+            {status:false},
+            {
+              where: Sequelize.and(
+                {id:investmentID},
+                {customerEmail:userEmail} 
+              )}
+            );
+        }
           const {amount,
             reference,
             narration,
