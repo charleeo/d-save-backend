@@ -18,7 +18,7 @@ async function getSavingsWithIDs(data){
     savingsWithIDs.map(saves=>{
       if(saves.status ===false){
         savingsError = "You are snitching. Trying to withdraw the same fund twice";
-        Code=400;
+        Code=403;
       }
     })
   }
