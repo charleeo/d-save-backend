@@ -5,10 +5,10 @@ async function getSavingsWithIDs(data){
   let statusCode = 0;
   
   let {investmentID}= data
-  investmentID = [...investmentID]
+  ids = investmentID.split(',')
   const savingsWithIDs= await models.Saving.findAll(
    {
-    where: {id: investmentID}
+    where: {id: ids}
    }
  )
  if(!savingsWithIDs){
