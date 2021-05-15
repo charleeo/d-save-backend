@@ -7,6 +7,7 @@
   const withdrawalHistoryCreate=require('./withdrawalsOperations');
   const Sequelize = require('sequelize');
   const getSavingsWithIDs  = require('./withdrawl_from_savings');
+const winston = require('winston');
   const transfer =async (req,res)=>{
   const reference = randomString(22);
   const sourceAccountNumber='4353544245';
@@ -14,9 +15,9 @@
   const {amount,narration,destinationBankCode,destinationAccountNumber,userEmail,investmentID,withdrawalCategory} =req.body;
   if(withdrawalCategory !=='' && withdrawalCategory==='savings-withdrawals')
   {
-    console.log('it is from the savings side')
+    winston.info('it is from the savings side')
   }else{
-    console.log("It is from investment side ")
+    winston.info("It is from investment side ")
   }
   const data = {amount:parseInt(amount),reference,narration,destinationBankCode,destinationAccountNumber,sourceAccountNumber,currency,userEmail,investmentID}
   const balanceCheck= await checkBalance(data);//check the available balance before proceeding with the withdrawals
