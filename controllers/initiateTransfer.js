@@ -13,13 +13,9 @@ const winston = require('winston');
   const sourceAccountNumber='4353544245';
   const currency ="NGN";
   const {amount,narration,destinationBankCode,destinationAccountNumber,userEmail,investmentID,withdrawalCategory} =req.body;
-  if(withdrawalCategory !=='' && withdrawalCategory==='savings-withdrawals')
-  {
-    winston.info('it is from the savings side')
-  }else{
-    winston.info("It is from investment side ")
-  }
+  
   const data = {amount:parseInt(amount),reference,narration,destinationBankCode,destinationAccountNumber,sourceAccountNumber,currency,userEmail,investmentID}
+  winston.info("This is the data that is coming in "+data)
   const balanceCheck= await checkBalance(data);//check the available balance before proceeding with the withdrawals
   const {withdrawals,error,newBalance,statusCode} = balanceCheck;
   const investmentWithdraw = await withdrawInvestment(data);
