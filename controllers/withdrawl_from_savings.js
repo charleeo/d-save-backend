@@ -4,17 +4,16 @@ async function getSavingsWithIDs(data){
   let error='';
   let statusCode = 0;
   
-  const {id}= data.body
+  const {investmentID}= data.body
   const savingsWithIDs= await models.Saving.findAll(
    {
-    where: {id: [id]}
+    where: {id: [investmentID]}
    }
  )
  if(!savingsWithIDs){
    error='resource not found';
    statusCode=404
   }else{
-    console.log(`This is the record `+savingsWithIDs)
     savingsWithIDs
   }
   return {

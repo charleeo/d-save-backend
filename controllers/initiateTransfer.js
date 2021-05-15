@@ -7,7 +7,7 @@
   const withdrawalHistoryCreate=require('./withdrawalsOperations');
   const Sequelize = require('sequelize');
   const getSavingsWithIDs  = require('./withdrawl_from_savings');
-const winston = require('winston');
+  const winston = require('winston');
   const transfer =async (req,res)=>{
   const reference = randomString(22);
   const sourceAccountNumber='4353544245';
@@ -15,11 +15,9 @@ const winston = require('winston');
   const {amount,narration,destinationBankCode,destinationAccountNumber,userEmail,investmentID,withdrawalCategory} =req.body;
   
   const data = {amount:parseInt(amount),reference,narration,destinationBankCode,destinationAccountNumber,sourceAccountNumber,currency,userEmail,investmentID}
-  winston.info("This is the data that is coming in "+data)
   const balanceCheck= await checkBalance(data);//check the available balance before proceeding with the withdrawals
   const {withdrawals,error,newBalance,statusCode} = balanceCheck;
-  const investmentWithdraw = await withdrawInvestment(data);
-  const {exception} = investmentWithdraw;
+  
   try {
   if(!amount || !destinationBankCode || !destinationAccountNumber || !narration){
     //make sure they dont submit empty rquests or fields
@@ -30,10 +28,17 @@ const winston = require('winston');
   }
   if(narration.length <10)
   {
-    return res.status(400).json({error:"Payament description can't be less than 5 characters"})
+    return res.status(400).json({error:"Payament description can't be less than 10 characters"})
   }
   if(error !==''){return res.status(statusCode).json({error:error})}
-  if(exception !==''){return res.status(200).json({error:exception})}
+  /** At this junction, check if the withdrawals request is for investment instance or for the savings instances */
+  if(withdrawalCategory !=='' && withdrawalCategory==="savings-withdrawals"){
+    await getSavingsWithIDs(data)
+  }else{
+    const investmentWithdraw = await withdrawInvestment(data);
+    const {exception} = investmentWithdraw; //
+    if(exception !==''){return res.status(200).json({error:exception})}
+  }
     const response = await axios({
       url: 'v2/disbursements/single',
       method: 'post',
