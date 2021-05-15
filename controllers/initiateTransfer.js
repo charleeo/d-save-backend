@@ -64,9 +64,11 @@
         await models.InvestmentRecords.update({withdrawals,balance:newBalance},{where:{userEmail}});//update the generalinvestment records table
         
         if(withdrawalCategory !=='' && withdrawalCategory==="savings-withdrawals"){
+          console.log(investmentID)
+          ids = investmentID.split(',')
           await models.Saving.update(
             {status:false},
-            {where:{id:investmentID.split(',')}}
+            {where:{id:ids}}
             );
         }
         else{ //update the investment table
