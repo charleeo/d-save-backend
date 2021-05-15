@@ -53,6 +53,7 @@ async function getSavingsWithIDs(req,res){
    }
  )
  if(!savingsWithIDs)return res.status(404).json({error:'resource not found'})
+ console.log(`This is the record`+savingsWithIDs)
   return res.status(200).json({message:savingsWithIDs})
 }
 // 5000730073 
