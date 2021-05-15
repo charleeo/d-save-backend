@@ -10,7 +10,7 @@ async function getSavingsWithIDs(data){
    console.log(investmentID)
   const savingsWithIDs= await models.Saving.findAll(
    {
-    where: {id: [investmentID]}
+    where: {id: [34,4,14]}
    }
  )
  if(!savingsWithIDs){
