@@ -16,7 +16,13 @@ const investments = async (req,res)=>{
 
 const individualSavings= async(req,res)=>{
  const email = req.params.email
- const individualSaves = await models.Saving.findAll({where:{customerEmail:email}});
+ const individualSaves = await models.Saving.findAll(
+ {where:Sequelize.and(
+    {customerEmail:email},
+    {status:true}
+  )
+ });
+
  if(individualSaves.length >0){
   return res.status(200).json({
    message:individualSaves
