@@ -15,7 +15,7 @@ async function getSavingsWithIDs(data){
    error='resource not found';
    statusCode=404
   }
-  console.log(savingsWithIDs.length)
+  console.log(savingsWithIDs)
   return {
     statusCode,
     savingsWithIDs,
