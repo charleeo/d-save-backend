@@ -9,7 +9,7 @@ async function receiveCardPayment(req,res){
   const postData = req.body;
   
   if(postData.transactionStatus==='SUCCESS'){
-    if(postData.type==='re-investment'){
+    if(postData.type !==undefined && postData.type==='re-investment'){
       winston.info("Yeepppppppppppppppppppiiiiiiiiiiiiiiing")
     }
     const savingHistory = new models.DepositHistory(depositHistoryOnline(postData))
