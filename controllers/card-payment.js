@@ -2,6 +2,7 @@ const models = require("../models")
 const savingsObjectOnline = require('./depsoits_online');
 const {depositHistoryOnline} = require('./depositHostory_online');
 const {investmentRecords} = require('./depsoits');
+const getSavingsWithIDs = require('./withdrawl_from_savings');
 const winston = require("winston");
 require('dotenv').config()
 
@@ -11,7 +12,12 @@ async function receiveCardPayment(req,res){
   if(postData.transactionStatus==='SUCCESS'){
     if(postData.type !==undefined && postData.type =='re-investment'){
       //update the savings table and set the rows whose ids are in the request to false
-      let ids =  postData.investmentIDs
+      let ids =  postData.investmentID
+      const {Code,savingsError} = await getSavingsWithIDs(postData);
+      if(savingsError !==''){
+        return res.status(Code).json({error:savingsError})
+      }
+      
       ids = ids.split(',')
       await models.Saving.update(
         {status:false},
