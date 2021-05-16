@@ -13,6 +13,8 @@ async function receiveCardPayment(req,res){
     await savingsObjectOnline(postData);
     await investmentRecords(postData);
     return res.status(201).json({message:"Your deposit was recieved by us"}) ;
+  }else{
+    return res.status(400).json({error:"There was an error"})
   }
 }
 module.exports= receiveCardPayment
