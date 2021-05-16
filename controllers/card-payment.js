@@ -12,6 +12,7 @@ async function receiveCardPayment(req,res){
     if(postData.type !==undefined && postData.type==='re-investment'){
       winston.info("Yeepppppppppppppppppppiiiiiiiiiiiiiiing")
     }
+    console.log(postData.accountDetails)
     const savingHistory = new models.DepositHistory(depositHistoryOnline(postData))
     await savingHistory.save();
     await savingsObjectOnline(postData);
