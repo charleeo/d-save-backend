@@ -25,7 +25,6 @@ const  transactionStatus= await axios.get(endpoint,config)
 
 if(transactionStatus.data.requestSuccessful===true && transactionStatus.data.responseMessage==='success'){
   // 5000728971 
-
  res.status(200)
  const savingHistory = new models.DepositHistory(depositHistory(postData))
  await savingHistory.save();

@@ -9,12 +9,21 @@ async function receiveCardPayment(req,res){
   const postData = req.body;
   
   if(postData.transactionStatus==='SUCCESS'){
-    if(postData.type !==undefined && postData.type==='re-investment'){
-      winston.info("Yeepppppppppppppppppppiiiiiiiiiiiiiiing")
+    if(postData.type !==undefined && postData.type =='re-investment'){
+      //update the savings table and set the rows whose ids are in the request to false
+      let ids =  postData.investmentIDs
+      ids = ids.split(',')
+      await models.Saving.update(
+        {status:false},
+         {
+           where:{id:ids}
+         }
+         )
+    }else{
+      const savingHistory = new models.DepositHistory(depositHistoryOnline(postData))
+      await savingHistory.save();// create new deposit history if it is not re-investment
     }
-    console.log(postData.accountDetails)
-    const savingHistory = new models.DepositHistory(depositHistoryOnline(postData))
-    await savingHistory.save();
+
     await savingsObjectOnline(postData);
     await investmentRecords(postData);
     return res.status(201).json({message:"Your deposit was recieved by us"}) ;
