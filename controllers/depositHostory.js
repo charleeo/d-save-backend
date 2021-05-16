@@ -20,7 +20,7 @@ const depositHistory = (data)=>{
     accountDetails:data.accountDetails.accountNumber,
     accountPayments:data.accountPayments.accountName,
   }
-  console.log(dataToSave.accountDetails)
+  console.log(`This is the account number ${dataToSave.accountDetails}`)
   return dataToSave;
 }
 
