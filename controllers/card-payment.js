@@ -1,13 +1,17 @@
 const models = require("../models")
 const savingsObjectOnline = require('./depsoits_online');
 const {depositHistoryOnline} = require('./depositHostory_online');
-const {investmentRecords} = require('./depsoits')
+const {investmentRecords} = require('./depsoits');
+const winston = require("winston");
 require('dotenv').config()
 
 async function receiveCardPayment(req,res){
   const postData = req.body;
   
   if(postData.transactionStatus==='SUCCESS'){
+    if(postData.type==='re-investment'){
+      winston.info("Yeepppppppppppppppppppiiiiiiiiiiiiiiing")
+    }
     const savingHistory = new models.DepositHistory(depositHistoryOnline(postData))
     await savingHistory.save();
     await savingsObjectOnline(postData);
