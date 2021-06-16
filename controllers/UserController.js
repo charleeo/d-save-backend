@@ -136,4 +136,9 @@ async function userDetails(req,res){
         return res.status(200).json(user)
     }catch (error) { res.status(500).json({error})  }
 }
-module.exports = {signUp,login,verifyEmail,resendToken,allUser,userDetails,sendPasswordEmail}
+
+const getSomething=(req,res)=>{
+    return res.status(200).json("This is working")
+}
+
+module.exports = {signUp,login,verifyEmail,resendToken,allUser,userDetails,sendPasswordEmail, getSomething}
