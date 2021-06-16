@@ -1,0 +1,9 @@
+/node_modules
+
+package-lock.json
+/pictures/*
+20210223134134-modify_posts_add_uuid.js
+.env
+logfile.log
+uncaughtexceptions.log 
+

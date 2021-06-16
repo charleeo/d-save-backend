@@ -1,0 +1,28 @@
+{
+  "development": {
+    "username": "root",
+    "password": null,
+    "database": "mobile_wallet",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "operatorsAliases": 0
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "operatorsAliases": 0
+  },
+  "production": {
+    "username": "bcc9264b4b5914:516e4c7",
+    "password": "516e4c7d",
+    "database": "heroku_9b0b051dfc40dc9",
+    "host": "us-cdbr-east-03.cleardb.com",
+    "use_env_variable": "DATABASE_URL",
+    "dialect": "mysql",
+    "operatorsAliases": 0
+  }
+}
+
