@@ -7,4 +7,5 @@ package-lock.json
 logfile.log
 uncaughtexceptions.log 
 Procfile
+config/config.json
 
