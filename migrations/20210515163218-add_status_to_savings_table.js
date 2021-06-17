@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    queryInterface.addColumn('savings','status',{
+    queryInterface.addColumn('saving','status',{
       type:Sequelize.BOOLEAN,
       allowNull:false,
       defaultValue:true
@@ -12,7 +12,7 @@ module.exports = {
 
   down: (queryInterface) => {
     return Promise.all([
-      queryInterface.removeColumn('savings', 'status'),
+      queryInterface.removeColumn('saving', 'status'),
     ]);
   },
 };

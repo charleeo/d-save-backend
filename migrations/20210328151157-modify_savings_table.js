@@ -3,20 +3,20 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return Promise.all([
-      queryInterface.addColumn('savings', 'transactionHash', {
+      queryInterface.addColumn('saving', 'transactionHash', {
         type: Sequelize.STRING,
         allowNull: true,
       }),
-      queryInterface.addColumn('savings','settlementAmount',{
+      queryInterface.addColumn('saving','settlementAmount',{
         type:Sequelize.STRING,
         allowNull:true
       }),
   
-      queryInterface.addColumn('savings','transactionReference',{
+      queryInterface.addColumn('saving','transactionReference',{
         type:Sequelize.STRING,
         allowNull:true
       }),
-      queryInterface.addColumn('savings','paidOn',{
+      queryInterface.addColumn('saving','paidOn',{
         type:Sequelize.STRING,
         allowNull:true
       }),
