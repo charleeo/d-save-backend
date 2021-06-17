@@ -3,20 +3,20 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return Promise.all([
-      queryInterface.addColumn('investments', 'transactionHash', {
+      queryInterface.addColumn('Investments', 'transactionHash', {
         type: Sequelize.STRING,
         allowNull: true,
       }),
-      queryInterface.addColumn('investments','settlementAmount',{
+      queryInterface.addColumn('Investments','settlementAmount',{
         type:Sequelize.STRING,
         allowNull:true
       }),
   
-      queryInterface.addColumn('investments','transactionReference',{
+      queryInterface.addColumn('Investments','transactionReference',{
         type:Sequelize.STRING,
         allowNull:true
       }),
-      queryInterface.addColumn('investments','paidOn',{
+      queryInterface.addColumn('Investments','paidOn',{
         type:Sequelize.STRING,
         allowNull:true
       }),
@@ -25,10 +25,10 @@ module.exports = {
 
   down: (queryInterface) => {
     return Promise.all([
-      queryInterface.removeColumn('investments', 'transactionHash'),
-      queryInterface.removeColumn('investments', 'transactionReference'),
-      queryInterface.removeColumn('investments', 'paidOn'),
-      queryInterface.removeColumn('investments', 'settlementAmount'),      
+      queryInterface.removeColumn('Investments', 'transactionHash'),
+      queryInterface.removeColumn('Investments', 'transactionReference'),
+      queryInterface.removeColumn('Investments', 'paidOn'),
+      queryInterface.removeColumn('Investments', 'settlementAmount'),      
     ]);
   },
 };
