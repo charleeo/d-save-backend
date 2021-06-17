@@ -5,7 +5,18 @@ const path = require('path');
 const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config/config.json')[env];
+// const config = require(__dirname + '/../config/config.json')[env];
+
+const config = {
+   "username": "africstac",
+    "password": "africstac",
+    "database": "kobo_kash_db",
+    "host": "localhost",
+    "use_env_variable": "DATABASE_URL",
+    "dialect": "mysql",
+    "operatorsAliases": 0
+}
+
 const db = {};
 
 let sequelize;
