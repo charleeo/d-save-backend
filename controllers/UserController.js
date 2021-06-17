@@ -40,7 +40,7 @@ async function signUp(req, res){
         result:result
     });
     /**Send mail to registered users */
-    const url = `http://127.0.0.1:${port}/user/verify-account/${email}/${token}`
+    const url = `https://kobo-kash.africstac.com/user/verify-account/${email}/${token}`
     await mailObject.sendMail(email,url,subject,text,html)
 }
 
@@ -82,7 +82,7 @@ async function verifyEmail(req,res,next){
   }
   catch(ex)
   {
-    const url = `http://127.0.0.1:${port}/user/resend/${email}`
+    const url = `https://kobo-kash.africstac.com/user/resend/${email}`
     res.status(400).json({Message: "Your token has either expired or you have the wrong token. Please generate new token", URL:url})
   }
 }

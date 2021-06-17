@@ -3,7 +3,7 @@ const {signUp,login,verifyEmail,resendToken,allUser, userDetails,sendPasswordEma
 
 const router = express.Router();
 
-router.get('/',getSomething)
+router.get('/test',getSomething)
 router.post('/register', signUp);
 router.post('/login', login);
 router.get('/verify-account/:email/:token', verifyEmail);
